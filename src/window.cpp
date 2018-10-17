@@ -1,4 +1,5 @@
 #include "window.hpp"
+#include "color.hpp"
 
 #include <GL/glew.h>
 
@@ -17,8 +18,15 @@ Window::Window(unsigned int width, unsigned int height) {
 
 	glewExperimental = GL_TRUE;
 	glewInit();
+}
 
-	glClearColor(0, 0, 0, 1);
-	glClear(GL_COLOR_BUFFER_BIT);
+void Window::Swap()
+{
 	SDL_GL_SwapWindow(window_);
+}
+
+void Window::SetBackground(Color &color)
+{
+	glClearColor((float)color.r / 255, (float)color.g / 255, (float)color.b / 255, (float)color.a / 255);
+	glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 }

@@ -2,6 +2,7 @@
 #define WINDOW_HPP_
 
 #include <SDL.h>
+#include "color.hpp"
 
 class Window {
 private:
@@ -9,6 +10,9 @@ private:
 
 public:
 	Window(unsigned int width, unsigned int height);
+
+	void Swap();
+	void SetBackground(Color &color);
 };
 
 #endif  // WINDOW_HPP_

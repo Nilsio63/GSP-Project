@@ -10,29 +10,22 @@ int Application::Run() {
 		while (SDL_PollEvent(&event)) {
 			if (event.key.type == SDL_KEYDOWN)
 			{
+				Color *color = nullptr;
+
 				if (event.key.keysym.sym == SDLK_w)
-				{
-					window_.SetBackground(Color(255, 255, 255));
-					window_.Swap();
-				}
+					color = &Color(255, 255, 255);
 				else if (event.key.keysym.sym == SDLK_k)
-				{
-					window_.SetBackground(Color(0, 0, 0));
-					window_.Swap();
-				}
+					color = &Color(0, 0, 0);
 				else if (event.key.keysym.sym == SDLK_r)
-				{
-					window_.SetBackground(Color(255, 0, 0));
-					window_.Swap();
-				}
+					color = &Color(255, 0, 0);
 				else if (event.key.keysym.sym == SDLK_g)
-				{
-					window_.SetBackground(Color(0, 255, 0));
-					window_.Swap();
-				}
+					color = &Color(0, 255, 0);
 				else if (event.key.keysym.sym == SDLK_b)
+					color = &Color(0, 0, 255);
+
+				if (color != nullptr)
 				{
-					window_.SetBackground(Color(0, 0, 255));
+					window_.SetBackground(*color);
 					window_.Swap();
 				}
 			}

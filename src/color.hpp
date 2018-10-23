@@ -1,7 +1,8 @@
 #ifndef COLOR_HPP_
 #define COLOR_HPP_
 
-struct Color {
+struct Color
+{
 	unsigned char r;
 	unsigned char g;
 	unsigned char b;

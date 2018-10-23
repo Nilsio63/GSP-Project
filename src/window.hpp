@@ -4,7 +4,8 @@
 #include <SDL.h>
 #include "color.hpp"
 
-class Window {
+class Window
+{
 private:
 	SDL_Window* window_ = nullptr;
 

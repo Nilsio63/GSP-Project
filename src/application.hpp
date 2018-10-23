@@ -3,7 +3,8 @@
 
 #include "window.hpp"
 
-class Application {
+class Application
+{
 private:
 	Window window_;
 

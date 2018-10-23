@@ -3,7 +3,8 @@
 
 #include <GL/glew.h>
 
-Window::Window(unsigned int width, unsigned int height) {
+Window::Window(unsigned int width, unsigned int height)
+{
 	SDL_Init(SDL_INIT_VIDEO);
 
 	window_ =

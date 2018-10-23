@@ -4,10 +4,13 @@
 
 Application::Application() : window_(1024, 768) {}
 
-int Application::Run() {
+int Application::Run()
+{
 	SDL_Event event;
-	while (true) {
-		while (SDL_PollEvent(&event)) {
+	while (true)
+	{
+		while (SDL_PollEvent(&event))
+		{
 			if (event.quit.type == SDL_QUIT)
 				return EXIT_SUCCESS;
 

@@ -15,16 +15,24 @@ int Application::Run() {
 			{
 				Color *color = nullptr;
 
-				if (event.key.keysym.sym == SDLK_w)
+				switch (event.key.keysym.sym)
+				{
+				case SDLK_w:
 					color = &Color(255, 255, 255);
-				else if (event.key.keysym.sym == SDLK_k)
+					break;
+				case SDLK_k:
 					color = &Color(0, 0, 0);
-				else if (event.key.keysym.sym == SDLK_r)
+					break;
+				case SDLK_r:
 					color = &Color(255, 0, 0);
-				else if (event.key.keysym.sym == SDLK_g)
+					break;
+				case SDLK_g:
 					color = &Color(0, 255, 0);
-				else if (event.key.keysym.sym == SDLK_b)
+					break;
+				case SDLK_b:
 					color = &Color(0, 0, 255);
+					break;
+				}
 
 				if (color != nullptr)
 				{

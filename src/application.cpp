@@ -8,6 +8,9 @@ int Application::Run() {
 	SDL_Event event;
 	while (true) {
 		while (SDL_PollEvent(&event)) {
+			if (event.quit.type == SDL_QUIT)
+				return EXIT_SUCCESS;
+
 			if (event.key.type == SDL_KEYDOWN)
 			{
 				Color *color = nullptr;

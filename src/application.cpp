@@ -51,10 +51,7 @@ int Application::Run()
 				}
 
 				if (color != nullptr)
-				{
 					window_.SetBackground(*color);
-					window_.Swap();
-				}
 			}
 
 			window_.Clear();

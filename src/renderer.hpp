@@ -15,13 +15,13 @@ private:
 	Shader fragmentShader_;
 	GLuint programId_;
 
-	std::vector<Geometry> geometries_;
+	std::vector<Geometry *> geometries_;
 public:
 	Renderer();
 	~Renderer();
 
 	void Render();
-	void AddGeometry(Geometry &geometry);
+	void AddGeometry(Geometry *geometry);
 };
 
 #endif  // RENDERER_HPP_

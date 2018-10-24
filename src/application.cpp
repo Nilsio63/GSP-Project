@@ -37,16 +37,16 @@ int Application::Run()
 					color = &Color(0, 0, 255);
 					break;
 				case SDLK_1:
-					renderer_.AddGeometry(Geometry(-0.9f, 0.7f, 0.0f, -0.8f, 0.9f, 0.0f, -0.7f, 0.7f, 0.0f, Color(255, 50, 0)));
+					renderer_.AddGeometry(new Geometry(-0.9f, 0.7f, 0.0f, -0.8f, 0.9f, 0.0f, -0.7f, 0.7f, 0.0f, Color(255, 50, 0)));
 					break;
 				case SDLK_2:
-					renderer_.AddGeometry(Geometry(0.9f, 0.7f, 0.0f, 0.8f, 0.9f, 0.0f, 0.7f, 0.7f, 0.0f, Color(100, 200, 0)));
+					renderer_.AddGeometry(new Geometry(0.9f, 0.7f, 0.0f, 0.8f, 0.9f, 0.0f, 0.7f, 0.7f, 0.0f, Color(100, 200, 0)));
 					break;
 				case SDLK_3:
-					renderer_.AddGeometry(Geometry(-0.9f, -0.7f, 0.0f, -0.8f, -0.9f, 0.0f, -0.7f, -0.7f, 0.0f, Color(255, 255, 50)));
+					renderer_.AddGeometry(new Geometry(-0.9f, -0.7f, 0.0f, -0.8f, -0.9f, 0.0f, -0.7f, -0.7f, 0.0f, Color(255, 255, 50)));
 					break;
 				case SDLK_4:
-					renderer_.AddGeometry(Geometry(0.9f, -0.7f, 0.0f, 0.8f, -0.9f, 0.0f, 0.7f, -0.7f, 0.0f, Color(255, 50, 255)));
+					renderer_.AddGeometry(new Geometry(0.9f, -0.7f, 0.0f, 0.8f, -0.9f, 0.0f, 0.7f, -0.7f, 0.0f, Color(255, 50, 255)));
 					break;
 				}
 

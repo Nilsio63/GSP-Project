@@ -22,11 +22,11 @@ void Renderer::Render()
 
 	for (int i = 0; i < geometries_.size(); i++)
 	{
-		geometries_[i].Render(programId_);
+		geometries_[i]->Render(programId_);
 	}
 }
 
-void Renderer::AddGeometry(Geometry & geometry)
+void Renderer::AddGeometry(Geometry *geometry)
 {
 	geometries_.insert(geometries_.end(), geometry);
 }

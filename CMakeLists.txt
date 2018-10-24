@@ -10,7 +10,13 @@ add_executable(main
   src/application.cpp
   src/application.hpp
   src/color.hpp
+  src/geometry.cpp
+  src/geometry.hpp
   src/main.cpp
+  src/renderer.cpp
+  src/renderer.hpp
+  src/shader.cpp
+  src/shader.hpp
   src/window.cpp
   src/window.hpp
   )

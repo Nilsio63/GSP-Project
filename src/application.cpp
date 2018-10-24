@@ -1,4 +1,5 @@
 #include "application.hpp"
+#include "geometry.hpp"
 
 #include <iostream>
 
@@ -35,6 +36,9 @@ int Application::Run()
 				case SDLK_b:
 					color = &Color(0, 0, 255);
 					break;
+				case SDLK_v:
+					renderer_.AddGeometry(Geometry());
+					break;
 				}
 
 				if (color != nullptr)
@@ -43,7 +47,14 @@ int Application::Run()
 					window_.Swap();
 				}
 			}
+
+			window_.Clear();
+
+			renderer_.Render();
+
+			window_.Swap();
 		}
 	}
+
 	return EXIT_SUCCESS;
 }

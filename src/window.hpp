@@ -12,6 +12,7 @@ private:
 public:
 	Window(unsigned int width, unsigned int height);
 
+	void Clear();
 	void Swap();
 	void SetBackground(Color &color);
 };

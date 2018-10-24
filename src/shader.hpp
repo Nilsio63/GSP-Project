@@ -9,6 +9,7 @@ private:
 	GLuint shaderId_;
 public:
 	Shader(GLenum shaderType);
+	~Shader();
 
 	GLuint GetShaderId() { return shaderId_; }
 };

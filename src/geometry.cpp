@@ -17,6 +17,12 @@ Geometry::Geometry(float x1, float y1, float z1, float x2, float y2, float z2, f
 	glVertexAttribPointer(0, 3, GL_FLOAT, GL_FALSE, 0, nullptr);
 }
 
+Geometry::~Geometry()
+{
+	glDeleteBuffers(1, &bufferId_);
+	glDeleteVertexArrays(1, &arrayId_);
+}
+
 void Geometry::Render(int programId)
 {
 	GLint loc = glGetUniformLocation(programId, "geometry_color");

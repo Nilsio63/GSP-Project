@@ -18,6 +18,7 @@ private:
 	std::vector<Geometry> geometries_;
 public:
 	Renderer();
+	~Renderer();
 
 	void Render();
 	void AddGeometry(Geometry &geometry);

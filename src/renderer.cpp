@@ -11,6 +11,11 @@ Renderer::Renderer() : vertexShader_(GL_VERTEX_SHADER), fragmentShader_(GL_FRAGM
 	glLinkProgram(programId_);
 }
 
+Renderer::~Renderer()
+{
+	glDeleteProgram(programId_);
+}
+
 void Renderer::Render()
 {
 	glUseProgram(programId_);

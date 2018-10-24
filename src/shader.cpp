@@ -30,3 +30,8 @@ Shader::Shader(GLenum shaderType)
 	glShaderSource(shaderId_, 1, &code, nullptr);
 	glCompileShader(shaderId_);
 }
+
+Shader::~Shader()
+{
+	glDeleteShader(shaderId_);
+}

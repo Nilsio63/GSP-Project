@@ -12,8 +12,9 @@ const std::string vertexShaderCode = "#version 330 core\n"
 
 const std::string fragmentShaderCode = "#version 330 core\n"
 	"layout(location = 0) out vec3 color;\n"
+	"uniform vec3 geometry_color;\n"
 	"void main() {\n"
-	"color = vec3(0.443, 0.694, 0.153);\n"
+	"color = geometry_color;\n"
 	"}";
 
 Shader::Shader(GLenum shaderType)
@@ -21,13 +22,9 @@ Shader::Shader(GLenum shaderType)
 	GLchar *code = nullptr;
 
 	if (shaderType == GL_VERTEX_SHADER)
-	{
 		code = (GLchar *)vertexShaderCode.data();
-	}
 	else
-	{
 		code = (GLchar *)fragmentShaderCode.data();
-	}
 
 	shaderId_ = glCreateShader(shaderType);
 	glShaderSource(shaderId_, 1, &code, nullptr);

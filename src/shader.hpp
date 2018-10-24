@@ -13,5 +13,4 @@ public:
 	GLuint GetShaderId() { return shaderId_; }
 };
 
-
 #endif  // SHADER_HPP_

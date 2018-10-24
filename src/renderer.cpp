@@ -1,3 +1,4 @@
+#include "color.hpp"
 #include "renderer.hpp"
 
 #include <GL/glew.h>
@@ -16,7 +17,7 @@ void Renderer::Render()
 
 	for (int i = 0; i < geometries_.size(); i++)
 	{
-		geometries_[i].Render();
+		geometries_[i].Render(programId_);
 	}
 }
 

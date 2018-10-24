@@ -7,7 +7,14 @@ Geometry::Geometry(float x1, float y1, float z1, float x2, float y2, float z2, f
 	data_ = new float[9]{ x1, y1, z1, x2, y2, z2, x3, y3, z3 };
 
 	glGenVertexArrays(1, &arrayId_);
+	glBindVertexArray(arrayId_);
+
 	glGenBuffers(1, &bufferId_);
+	glBindBuffer(GL_ARRAY_BUFFER, bufferId_);
+	glBufferData(GL_ARRAY_BUFFER, 36, data_, GL_STATIC_DRAW);
+
+	glEnableVertexAttribArray(0);
+	glVertexAttribPointer(0, 3, GL_FLOAT, GL_FALSE, 0, nullptr);
 }
 
 void Geometry::Render(int programId)
@@ -16,11 +23,6 @@ void Geometry::Render(int programId)
 	glUniform3f(loc, (float)color_.r / 255, (float)color_.g / 255, (float)color_.b / 255);
 
 	glBindVertexArray(arrayId_);
-	glBindBuffer(GL_ARRAY_BUFFER, bufferId_);
-	glBufferData(GL_ARRAY_BUFFER, 36, data_, GL_STATIC_DRAW);
-
-	glEnableVertexAttribArray(0);
-	glVertexAttribPointer(0, 3, GL_FLOAT, GL_FALSE, 0, nullptr);
 
 	glDrawArrays(GL_TRIANGLES, 0, 3);
 }

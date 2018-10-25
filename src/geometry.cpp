@@ -2,7 +2,7 @@
 
 #include <GL/glew.h>
 
-Geometry::Geometry(float x1, float y1, float z1, float x2, float y2, float z2, float x3, float y3, float z3, Color c) : color_(c)
+Geometry::Geometry(Color c) : color_(c)
 {
 	glGenVertexArrays(1, &arrayId_);
 	glGenBuffers(1, &bufferId_);
@@ -13,8 +13,6 @@ Geometry::Geometry(float x1, float y1, float z1, float x2, float y2, float z2, f
 
 	glEnableVertexAttribArray(0);
 	glVertexAttribPointer(0, 3, GL_FLOAT, GL_FALSE, 0, nullptr);
-
-	AddTriangle(Triangle(Point(x1, y1, z1), Point(x2, y2, z2), Point(x3, y3, z3)));
 }
 
 Geometry::~Geometry()
@@ -25,12 +23,15 @@ Geometry::~Geometry()
 
 void Geometry::Render(int programId)
 {
+	if (triangles_.empty())
+		return;
+
 	GLint loc = glGetUniformLocation(programId, "geometry_color");
 	glUniform3f(loc, (float)color_.r / 255, (float)color_.g / 255, (float)color_.b / 255);
 
 	glBindVertexArray(arrayId_);
 
-	glDrawArrays(GL_TRIANGLES, 0, 3 * triangles_.size());
+	glDrawArrays(GL_TRIANGLES, 0, 3 * (int)triangles_.size());
 }
 
 void Geometry::AddTriangle(Triangle &triangle)

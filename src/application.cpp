@@ -8,6 +8,19 @@ Application::Application() : window_(1024, 768) {}
 int Application::Run()
 {
 	SDL_Event event;
+
+	Geometry *g1 = new Geometry(Color(255, 50, 0));
+	Geometry *g2 = new Geometry(Color(100, 200, 0));
+	Geometry *g3 = new Geometry(Color(255, 255, 50));
+	Geometry *g4 = new Geometry(Color(255, 50, 255));
+
+	renderer_.AddGeometry(g1);
+	renderer_.AddGeometry(g2);
+	renderer_.AddGeometry(g3);
+	renderer_.AddGeometry(g4);
+
+	float factor = 0.75f;
+
 	while (true)
 	{
 		while (SDL_PollEvent(&event))
@@ -37,16 +50,20 @@ int Application::Run()
 					color = &Color(0, 0, 255);
 					break;
 				case SDLK_1:
-					renderer_.AddGeometry(new Geometry(-0.9f, 0.7f, 0.0f, -0.8f, 0.9f, 0.0f, -0.7f, 0.7f, 0.0f, Color(255, 50, 0)));
+					factor += 0.25f;
+					g1->AddTriangle(Triangle(Point(-0.9f / factor, 0.7f / factor, 0.0f), Point(-0.8f / factor, 0.9f / factor, 0.0f), Point(-0.7f / factor, 0.7f / factor, 0.0f)));
 					break;
 				case SDLK_2:
-					renderer_.AddGeometry(new Geometry(0.9f, 0.7f, 0.0f, 0.8f, 0.9f, 0.0f, 0.7f, 0.7f, 0.0f, Color(100, 200, 0)));
+					factor += 0.5f;
+					g2->AddTriangle(Triangle(Point(0.9f / factor, 0.7f / factor, 0.0f), Point(0.8f / factor, 0.9f / factor, 0.0f), Point(0.7f / factor, 0.7f / factor, 0.0f)));
 					break;
 				case SDLK_3:
-					renderer_.AddGeometry(new Geometry(-0.9f, -0.7f, 0.0f, -0.8f, -0.9f, 0.0f, -0.7f, -0.7f, 0.0f, Color(255, 255, 50)));
+					factor += 0.5f;
+					g3->AddTriangle(Triangle(Point(-0.9f / factor, -0.7f / factor, 0.0f), Point(-0.8f / factor, -0.9f / factor, 0.0f), Point(-0.7f / factor, -0.7f / factor, 0.0f)));
 					break;
 				case SDLK_4:
-					renderer_.AddGeometry(new Geometry(0.9f, -0.7f, 0.0f, 0.8f, -0.9f, 0.0f, 0.7f, -0.7f, 0.0f, Color(255, 50, 255)));
+					factor += 0.5f;
+					g4->AddTriangle(Triangle(Point(0.9f / factor, -0.7f / factor, 0.0f), Point(0.8f / factor, -0.9f / factor, 0.0f), Point(0.7f / factor, -0.7f / factor, 0.0f)));
 					break;
 				}
 

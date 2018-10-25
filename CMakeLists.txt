@@ -13,10 +13,12 @@ add_executable(main
   src/geometry.cpp
   src/geometry.hpp
   src/main.cpp
+  src/point.hpp
   src/renderer.cpp
   src/renderer.hpp
   src/shader.cpp
   src/shader.hpp
+  src/triangle.hpp
   src/window.cpp
   src/window.hpp
   )

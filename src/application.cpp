@@ -53,6 +53,9 @@ int Application::Run()
 				case SDLK_b:
 					color = &Color(0, 0, 255);
 					break;
+				case SDLK_1:
+					g1->Rotate(10);
+					break;
 				}
 
 				if (color != nullptr)

@@ -7,6 +7,7 @@
 #include "triangle.hpp"
 
 #include <GL/glew.h>
+#include <glm/mat4x4.hpp>
 
 class Geometry
 {
@@ -15,6 +16,7 @@ private:
 	GLuint bufferId_;
 
 	std::vector<Triangle> triangles_;
+	glm::mat4 transformationMatrix;
 	Color color_;
 public:
 	Geometry(Color c);
@@ -22,6 +24,7 @@ public:
 
 	void Render(int programId);
 	void AddTriangle(Triangle &triangle);
+	void Rotate(int degree);
 };
 
 #endif  // GEOMETRY_HPP_

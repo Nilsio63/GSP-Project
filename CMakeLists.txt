@@ -20,6 +20,9 @@ add_executable(main
   src/triangle.hpp
   src/window.cpp
   src/window.hpp
+
+  src/FragmentShaderCode.glsl
+  src/VertexShaderCode.glsl
   )
 
 find_package(GLEW REQUIRED)

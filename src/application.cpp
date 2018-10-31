@@ -53,8 +53,29 @@ int Application::Run()
 				case SDLK_b:
 					color = &Color(0, 0, 255);
 					break;
-				case SDLK_1:
-					g1->Rotate(10);
+				case SDLK_LEFT:
+					if (event.key.keysym.mod & KMOD_SHIFT)
+						g1->Translate(glm::vec3(-0.1f, 0.0f, 0.0f));
+					else
+						g1->Rotate(10, glm::vec3(0.0f, 1.0f, 0.0f));
+					break;
+				case SDLK_RIGHT:
+					if (event.key.keysym.mod & KMOD_SHIFT)
+						g1->Translate(glm::vec3(0.1f, 0.0f, 0.0f));
+					else
+						g1->Rotate(-10, glm::vec3(0.0f, 1.0f, 0.0f));
+					break;
+				case SDLK_UP:
+					if (event.key.keysym.mod & KMOD_SHIFT)
+						g1->Translate(glm::vec3(0.0f, 0.1f, 0.0f));
+					else
+						g1->Rotate(-10, glm::vec3(1.0f, 0.0f, 0.0f));
+					break;
+				case SDLK_DOWN:
+					if (event.key.keysym.mod & KMOD_SHIFT)
+						g1->Translate(glm::vec3(0.0f, -0.1f, 0.0f));
+					else
+						g1->Rotate(-10, glm::vec3(-1.0f, 0.0f, 0.0f));
 					break;
 				}
 

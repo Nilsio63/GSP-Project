@@ -24,7 +24,9 @@ public:
 
 	void Render(int programId);
 	void AddTriangle(Triangle &triangle);
-	void Rotate(int degree);
+
+	void Rotate(int degree, glm::vec3 rotationAxis);
+	void Translate(glm::vec3 offset);
 };
 
 #endif  // GEOMETRY_HPP_

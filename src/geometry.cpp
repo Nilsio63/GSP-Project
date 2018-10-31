@@ -12,7 +12,8 @@ Geometry::Geometry(Color c) : color_(c)
 	glBindBuffer(GL_ARRAY_BUFFER, bufferId_);
 
 	glEnableVertexAttribArray(0);
-	glVertexAttribPointer(0, 3, GL_FLOAT, GL_FALSE, 0, nullptr);
+	glVertexAttribPointer(0, 3, GL_FLOAT, GL_FALSE, 6 * sizeof(float), nullptr);
+	glVertexAttribPointer(1, 3, GL_FLOAT, GL_FALSE, 6 * sizeof(float), (void *)(3 * sizeof(float)));
 }
 
 Geometry::~Geometry()

@@ -3,6 +3,8 @@
 
 #include <iostream>
 
+#include <glm/vec3.hpp>
+
 Application::Application() : window_(1024, 768) {}
 
 int Application::Run()
@@ -10,16 +12,18 @@ int Application::Run()
 	SDL_Event event;
 
 	Geometry *g1 = new Geometry(Color(255, 50, 0));
-	Geometry *g2 = new Geometry(Color(100, 200, 0));
-	Geometry *g3 = new Geometry(Color(255, 255, 50));
-	Geometry *g4 = new Geometry(Color(255, 50, 255));
 
 	renderer_.AddGeometry(g1);
-	renderer_.AddGeometry(g2);
-	renderer_.AddGeometry(g3);
-	renderer_.AddGeometry(g4);
 
-	float factor = 0.75f;
+	glm::vec3 p0(-0.6f, -0.6f, 0.39f);
+	glm::vec3 p1(0.6f, -0.6f, 0.39f);
+	glm::vec3 p2(0.0f, -0.6f, -0.78f);
+	glm::vec3 p3(0.0f, 0.6f, 0.0f);
+
+	g1->AddTriangle(Triangle(p0, p1, p3));
+	g1->AddTriangle(Triangle(p1, p2, p3));
+	g1->AddTriangle(Triangle(p2, p3, p0));
+	g1->AddTriangle(Triangle(p0, p1, p2));
 
 	while (true)
 	{
@@ -48,22 +52,6 @@ int Application::Run()
 					break;
 				case SDLK_b:
 					color = &Color(0, 0, 255);
-					break;
-				case SDLK_1:
-					factor += 0.25f;
-					g1->AddTriangle(Triangle(Point(-0.9f / factor, 0.7f / factor, 0.0f), Point(-0.8f / factor, 0.9f / factor, 0.0f), Point(-0.7f / factor, 0.7f / factor, 0.0f)));
-					break;
-				case SDLK_2:
-					factor += 0.5f;
-					g2->AddTriangle(Triangle(Point(0.9f / factor, 0.7f / factor, 0.0f), Point(0.8f / factor, 0.9f / factor, 0.0f), Point(0.7f / factor, 0.7f / factor, 0.0f)));
-					break;
-				case SDLK_3:
-					factor += 0.5f;
-					g3->AddTriangle(Triangle(Point(-0.9f / factor, -0.7f / factor, 0.0f), Point(-0.8f / factor, -0.9f / factor, 0.0f), Point(-0.7f / factor, -0.7f / factor, 0.0f)));
-					break;
-				case SDLK_4:
-					factor += 0.5f;
-					g4->AddTriangle(Triangle(Point(0.9f / factor, -0.7f / factor, 0.0f), Point(0.8f / factor, -0.9f / factor, 0.0f), Point(0.7f / factor, -0.7f / factor, 0.0f)));
 					break;
 				}
 

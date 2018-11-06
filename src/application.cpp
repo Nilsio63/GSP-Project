@@ -12,6 +12,7 @@ int Application::Run()
 	SDL_Event event;
 
 	bool bAutoRotate = false;
+	float speed = 0.25f;
 
 	Geometry *g1 = new Geometry(Color(255, 0, 0));
 
@@ -40,6 +41,21 @@ int Application::Run()
 
 				switch (event.key.keysym.sym)
 				{
+				case SDLK_1:
+					speed = 0.25f;
+					break;
+				case SDLK_2:
+					speed = 0.5f;
+					break;
+				case SDLK_3:
+					speed = 1.0f;
+					break;
+				case SDLK_4:
+					speed = 2.0f;
+					break;
+				case SDLK_5:
+					speed = 10.0f;
+					break;
 				case SDLK_w:
 					color = &Color(255, 255, 255);
 					break;
@@ -90,7 +106,7 @@ int Application::Run()
 		}
 
 		if (bAutoRotate)
-			g1->Rotate(0.25f, glm::vec3(0.0f, 1.0f, 0.0f));
+			g1->Rotate(speed, glm::vec3(0.0f, 1.0f, 0.0f));
 
 		window_.Clear();
 

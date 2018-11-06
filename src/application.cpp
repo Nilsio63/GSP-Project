@@ -11,6 +11,8 @@ int Application::Run()
 {
 	SDL_Event event;
 
+	bool bAutoRotate = false;
+
 	Geometry *g1 = new Geometry(Color(255, 0, 0));
 
 	renderer_.AddGeometry(g1);
@@ -53,6 +55,9 @@ int Application::Run()
 				case SDLK_b:
 					color = &Color(0, 0, 255);
 					break;
+				case SDLK_a:
+					bAutoRotate = !bAutoRotate;
+					break;
 				case SDLK_LEFT:
 					if (event.key.keysym.mod & KMOD_SHIFT)
 						g1->Translate(glm::vec3(-0.1f, 0.0f, 0.0f));
@@ -82,13 +87,16 @@ int Application::Run()
 				if (color != nullptr)
 					window_.SetBackground(*color);
 			}
-
-			window_.Clear();
-
-			renderer_.Render();
-
-			window_.Swap();
 		}
+
+		if (bAutoRotate)
+			g1->Rotate(0.25f, glm::vec3(0.0f, 1.0f, 0.0f));
+
+		window_.Clear();
+
+		renderer_.Render();
+
+		window_.Swap();
 	}
 
 	return EXIT_SUCCESS;

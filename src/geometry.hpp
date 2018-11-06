@@ -25,7 +25,7 @@ public:
 	void Render(int programId);
 	void AddTriangle(Triangle &triangle);
 
-	void Rotate(int degree, glm::vec3 rotationAxis);
+	void Rotate(float degree, glm::vec3 rotationAxis);
 	void Translate(glm::vec3 offset);
 };
 

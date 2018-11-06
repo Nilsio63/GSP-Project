@@ -57,7 +57,7 @@ void Geometry::AddTriangle(Triangle &triangle)
 	glBufferData(GL_ARRAY_BUFFER, triangles_.size() * sizeof(Triangle), triangles_.data(), GL_STATIC_DRAW);
 }
 
-void Geometry::Rotate(int degree, glm::vec3 rotationAxis)
+void Geometry::Rotate(float degree, glm::vec3 rotationAxis)
 {
 	transformationMatrix = glm::rotate(transformationMatrix, degree / 360.0f, rotationAxis);
 }

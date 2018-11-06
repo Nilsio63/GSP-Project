@@ -17,6 +17,8 @@ Window::Window(unsigned int width, unsigned int height)
 	SDL_GL_SetAttribute(SDL_GL_DOUBLEBUFFER, 1);
 	SDL_GL_CreateContext(window_);
 
+	glEnable(GL_DEPTH_TEST);
+
 	glewExperimental = GL_TRUE;
 	glewInit();
 }

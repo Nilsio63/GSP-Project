@@ -11,7 +11,7 @@ int Application::Run()
 {
 	SDL_Event event;
 
-	Geometry *g1 = new Geometry(Color(255, 50, 0));
+	Geometry *g1 = new Geometry(Color(255, 0, 0));
 
 	renderer_.AddGeometry(g1);
 

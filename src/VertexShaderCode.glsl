@@ -9,5 +9,5 @@ out vec3 vertex_normal_worldspace;
 void main()
 {
 	gl_Position = transformation_matrix * vec4(vertex_position, 1.0f);
-	vertex_normal_worldspace = (inverse(transpose(transformation_matrix)) * vec4(vertex_position, 1.0)).xyz;
+	vertex_normal_worldspace = (inverse(transpose(transformation_matrix)) * vec4(vertex_position, 1.0f)).xyz;
 };

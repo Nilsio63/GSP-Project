@@ -8,6 +8,6 @@ uniform vec3 geometry_color;
 void main()
 {
 	float nz = vertex_normal_worldspace.z;
-	float factor = 0.5 + 0.5 * abs(nz);
+	float factor = 1.0f - 0.5f * abs(nz + 1.0f);
 	color = factor * geometry_color;
 };

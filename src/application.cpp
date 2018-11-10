@@ -11,8 +11,8 @@ int Application::Run()
 {
 	SDL_Event event;
 
-	bool bAutoRotate = false;
-	float speed = 0.25f;
+	float rotationSpeedX = 0;
+	float rotationSpeedY = 0;
 
 	Geometry *g1 = new Geometry(Color(255, 0, 0));
 
@@ -41,62 +41,33 @@ int Application::Run()
 
 				switch (event.key.keysym.sym)
 				{
-				case SDLK_1:
-					speed = 0.25f;
-					break;
-				case SDLK_2:
-					speed = 0.5f;
-					break;
-				case SDLK_3:
-					speed = 1.0f;
-					break;
-				case SDLK_4:
-					speed = 2.0f;
-					break;
-				case SDLK_5:
-					speed = 10.0f;
-					break;
 				case SDLK_w:
-					color = &Color(255, 255, 255);
-					break;
-				case SDLK_k:
-					color = &Color(0, 0, 0);
-					break;
-				case SDLK_r:
-					color = &Color(255, 0, 0);
-					break;
-				case SDLK_g:
-					color = &Color(0, 255, 0);
-					break;
-				case SDLK_b:
-					color = &Color(0, 0, 255);
+					g1->Translate(glm::vec3(0.0f, 0.1f, 0.0f));
 					break;
 				case SDLK_a:
-					bAutoRotate = !bAutoRotate;
+					g1->Translate(glm::vec3(-0.1f, 0.0f, 0.0f));
+					break;
+				case SDLK_s:
+					g1->Translate(glm::vec3(0.0f, -0.1f, 0.0f));
+					break;
+				case SDLK_d:
+					g1->Translate(glm::vec3(0.1f, 0.0f, 0.0f));
 					break;
 				case SDLK_LEFT:
-					if (event.key.keysym.mod & KMOD_SHIFT)
-						g1->Translate(glm::vec3(-0.1f, 0.0f, 0.0f));
-					else
-						g1->Rotate(10, glm::vec3(0.0f, 1.0f, 0.0f));
+					rotationSpeedY += 0.25f;
 					break;
 				case SDLK_RIGHT:
-					if (event.key.keysym.mod & KMOD_SHIFT)
-						g1->Translate(glm::vec3(0.1f, 0.0f, 0.0f));
-					else
-						g1->Rotate(-10, glm::vec3(0.0f, 1.0f, 0.0f));
+					rotationSpeedY -= 0.25f;
 					break;
 				case SDLK_UP:
-					if (event.key.keysym.mod & KMOD_SHIFT)
-						g1->Translate(glm::vec3(0.0f, 0.1f, 0.0f));
-					else
-						g1->Rotate(-10, glm::vec3(1.0f, 0.0f, 0.0f));
+					rotationSpeedX -= 0.25f;
 					break;
 				case SDLK_DOWN:
-					if (event.key.keysym.mod & KMOD_SHIFT)
-						g1->Translate(glm::vec3(0.0f, -0.1f, 0.0f));
-					else
-						g1->Rotate(-10, glm::vec3(-1.0f, 0.0f, 0.0f));
+					rotationSpeedX += 0.25f;
+					break;
+				case SDLK_r:
+					rotationSpeedX = 0;
+					rotationSpeedY = 0;
 					break;
 				}
 
@@ -105,8 +76,10 @@ int Application::Run()
 			}
 		}
 
-		if (bAutoRotate)
-			g1->Rotate(speed, glm::vec3(0.0f, 1.0f, 0.0f));
+		if (rotationSpeedX != 0)
+			g1->Rotate(rotationSpeedX, glm::vec3(1, 0, 0));
+		if (rotationSpeedY != 0)
+			g1->Rotate(rotationSpeedY, glm::vec3(0, 1, 0));
 
 		window_.Clear();
 

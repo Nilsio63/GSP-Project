@@ -9,6 +9,8 @@ set(CMAKE_MODULE_PATH
 add_executable(main
   src/application.cpp
   src/application.hpp
+  src/camera.cpp
+  src/camera.hpp
   src/color.hpp
   src/geometry.cpp
   src/geometry.hpp

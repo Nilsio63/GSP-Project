@@ -4,10 +4,12 @@ layout(location = 0) in vec3 vertex_position;
 layout(location = 1) in vec3 vertex_normal;
 
 uniform mat4 transformation_matrix;
+uniform mat4 projection_matrix;
+uniform mat4 view_matrix;
 out vec3 vertex_normal_worldspace;
 
 void main()
 {
-	gl_Position = transformation_matrix * vec4(vertex_position, 1.0f);
+	gl_Position = projection_matrix * view_matrix * transformation_matrix * vec4(vertex_position, 1.0f);
 	vertex_normal_worldspace = (inverse(transpose(transformation_matrix)) * vec4(vertex_normal, 0.0f)).xyz;
 };

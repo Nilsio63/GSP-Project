@@ -14,6 +14,8 @@ int Application::Run()
 	float rotationSpeedX = 0;
 	float rotationSpeedY = 0;
 
+	float camSpeed = 0.05f;
+
 	Geometry *g1 = new Geometry(Color(255, 0, 0));
 
 	renderer_.AddGeometry(g1);
@@ -41,6 +43,18 @@ int Application::Run()
 
 				switch (event.key.keysym.sym)
 				{
+				case SDLK_KP_8:
+					renderer_.GetCamera()->Move(8);
+					break;
+				case SDLK_KP_4:
+					renderer_.GetCamera()->Move(4);
+					break;
+				case SDLK_KP_2:
+					renderer_.GetCamera()->Move(2);
+					break;
+				case SDLK_KP_6:
+					renderer_.GetCamera()->Move(6);
+					break;
 				case SDLK_w:
 					g1->Translate(glm::vec3(0.0f, 0.1f, 0.0f));
 					break;

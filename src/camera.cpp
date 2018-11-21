@@ -13,7 +13,7 @@ void Camera::Recalculate()
 	view = glm::lookAt(position, target, cameraUp);
 }
 
-Camera::Camera(glm::vec3 pos, glm::vec3 targ) : yaw(0), pitch(0)
+Camera::Camera(glm::vec3 pos, glm::vec3 targ)
 {
 	projection = glm::perspective(glm::radians(45.0f), (float)1024 / 768, 0.1f, 100.0f);
 
@@ -55,28 +55,23 @@ void Camera::Rotate(int x, int y)
 	Recalculate();
 }
 
-void Camera::Move(int x)
+void Camera::Move(float sideways, float forward)
 {
+	if (sideways == 0 && forward == 0)
+		return;
+
 	float camSpeed = 20.0 * deltaTime;
 
-	switch (x)
+	if (sideways != 0)
 	{
-	case 8:
-		position -= camSpeed * direction;
-		target -= camSpeed * direction;
-		break;
-	case 2:
-		position += camSpeed * direction;
-		target += camSpeed * direction;
-		break;
-	case 4:
-		position -= cameraRight * camSpeed;
-		target -= cameraRight * camSpeed;
-		break;
-	case 6:
-		position += cameraRight * camSpeed;
-		target += cameraRight * camSpeed;
-		break;
+		position += cameraRight * camSpeed * sideways;
+		target += cameraRight * camSpeed * sideways;
+	}
+
+	if (forward != 0)
+	{
+		position += (-direction) * camSpeed * forward;
+		target += (-direction) * camSpeed * forward;
 	}
 
 	Recalculate();

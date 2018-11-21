@@ -17,7 +17,6 @@ void Renderer::Render()
 {
 	glUseProgram(programId_);
 
-	//camera_.Rotate(10);
 	camera_.ApplyCamera(programId_);
 
 	for (int i = 0; i < geometries_.size(); i++)

@@ -1,13 +1,13 @@
 #ifndef GEOMETRY_HPP_
 #define GEOMETRY_HPP_
 
-#include <vector>
-
 #include "color.hpp"
 #include "triangle.hpp"
 
+#include <vector>
+
 #include <GL/glew.h>
-#include <glm/mat4x4.hpp>
+#include <glm/glm.hpp>
 
 class Geometry
 {

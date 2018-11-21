@@ -2,8 +2,7 @@
 #define CAMERA_HPP_
 
 #include <GL/glew.h>
-#include <glm/vec3.hpp>
-#include <glm/mat4x4.hpp>
+#include <glm/glm.hpp>
 
 class Camera
 {

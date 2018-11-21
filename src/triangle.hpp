@@ -1,10 +1,7 @@
 #ifndef TRIANGLE_HPP_
 #define TRIANGLE_HPP_
 
-#include <math.h>
-
-#include <glm/vec3.hpp>
-#include <glm/geometric.hpp>
+#include <glm/glm.hpp>
 
 struct Triangle
 {

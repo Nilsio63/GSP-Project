@@ -1,5 +1,4 @@
 #include "window.hpp"
-#include "color.hpp"
 
 #include <GL/glew.h>
 

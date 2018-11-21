@@ -1,9 +1,4 @@
 #include "application.hpp"
-#include "geometry.hpp"
-
-#include <iostream>
-
-#include <glm/vec3.hpp>
 
 Application::Application() : window_(1024, 768) {}
 

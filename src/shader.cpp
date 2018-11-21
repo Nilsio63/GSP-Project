@@ -1,9 +1,8 @@
 #include "shader.hpp"
-#include <string>
+
 #include <fstream>
 #include <streambuf>
-
-#include <GL/glew.h>
+#include <string>
 
 std::string ReadCodeFromFile(const char *fileName)
 {

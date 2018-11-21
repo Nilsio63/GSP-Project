@@ -1,8 +1,9 @@
 #ifndef WINDOW_HPP_
 #define WINDOW_HPP_
 
-#include <SDL.h>
 #include "color.hpp"
+
+#include <SDL.h>
 
 class Window
 {

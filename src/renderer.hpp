@@ -1,11 +1,11 @@
 #ifndef RENDERER_HPP_
 #define RENDERER_HPP_
 
-#include <vector>
-
 #include "camera.hpp"
 #include "geometry.hpp"
 #include "shader.hpp"
+
+#include <vector>
 
 #include <GL/glew.h>
 

@@ -1,7 +1,5 @@
 #include "geometry.hpp"
 
-#include <GL/glew.h>
-#include <glm/mat4x4.hpp>
 #include <glm/gtc/matrix_transform.hpp>
 
 Geometry::Geometry(Color c) : color_(c)

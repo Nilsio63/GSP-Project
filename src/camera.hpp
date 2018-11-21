@@ -2,8 +2,7 @@
 #define CAMERA_HPP_
 
 #include <GL/glew.h>
-#include <glm/vec3.hpp>
-#include <glm/mat4x4.hpp>
+#include <glm/glm.hpp>
 
 class Camera
 {
@@ -19,8 +18,8 @@ private:
 	float deltaTime = 0.0f;
 	float lastFrame = 0.0f;
 
-	float pitch;
-	float yaw;
+	float pitch = 0.0f;
+	float yaw = 0.0f;
 
 	void Recalculate();
 public:
@@ -28,7 +27,7 @@ public:
 
 	void ApplyCamera(int programId);
 	void Rotate(int x, int y);
-	void Move(int x);
+	void Move(float sideways, float forward);
 };
 
 #endif  // CAMERA_HPP_

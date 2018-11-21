@@ -1,8 +1,4 @@
-#include "color.hpp"
 #include "renderer.hpp"
-
-#include <GL/glew.h>
-#include <SDL_timer.h>
 
 Renderer::Renderer() : vertexShader_(GL_VERTEX_SHADER), fragmentShader_(GL_FRAGMENT_SHADER), camera_(glm::vec3(0, 0, -3), glm::vec3(0, 0, 0))
 {
@@ -21,7 +17,6 @@ void Renderer::Render()
 {
 	glUseProgram(programId_);
 
-	//camera_.Rotate(10);
 	camera_.ApplyCamera(programId_);
 
 	for (int i = 0; i < geometries_.size(); i++)

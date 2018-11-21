@@ -1,9 +1,4 @@
 #include "application.hpp"
-#include "geometry.hpp"
-
-#include <iostream>
-
-#include <glm/vec3.hpp>
 
 Application::Application() : window_(1024, 768) {}
 
@@ -53,16 +48,16 @@ int Application::Run()
 				switch (event.key.keysym.sym)
 				{
 				case SDLK_KP_8:
-					renderer_.GetCamera()->Move(8);
+					renderer_.GetCamera()->Move(0, 1);
 					break;
 				case SDLK_KP_4:
-					renderer_.GetCamera()->Move(4);
+					renderer_.GetCamera()->Move(-1, 0);
 					break;
 				case SDLK_KP_2:
-					renderer_.GetCamera()->Move(2);
+					renderer_.GetCamera()->Move(0, -1);
 					break;
 				case SDLK_KP_6:
-					renderer_.GetCamera()->Move(6);
+					renderer_.GetCamera()->Move(1, 0);
 					break;
 				case SDLK_w:
 					g1->Translate(glm::vec3(0.0f, 0.1f, 0.0f));

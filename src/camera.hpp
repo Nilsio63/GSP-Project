@@ -19,12 +19,15 @@ private:
 	float deltaTime = 0.0f;
 	float lastFrame = 0.0f;
 
+	float pitch;
+	float yaw;
+
 	void Recalculate();
 public:
 	Camera(glm::vec3 pos, glm::vec3 targ);
 
 	void ApplyCamera(int programId);
-	void Rotate(float radius);
+	void Rotate(int x, int y);
 	void Move(int x);
 };
 

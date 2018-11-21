@@ -37,7 +37,16 @@ int Application::Run()
 			if (event.quit.type == SDL_QUIT)
 				return EXIT_SUCCESS;
 
-			if (event.key.type == SDL_KEYDOWN)
+			if (event.key.type == SDL_MOUSEMOTION)
+			{
+				int x;
+				int y;
+
+				SDL_GetRelativeMouseState(&x, &y);
+
+				renderer_.GetCamera()->Rotate(x, y);
+			}
+			else if (event.key.type == SDL_KEYDOWN)
 			{
 				Color *color = nullptr;
 

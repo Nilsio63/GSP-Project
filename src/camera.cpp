@@ -15,9 +15,8 @@ void Camera::Recalculate()
 	view = glm::lookAt(position, target, cameraUp);
 }
 
-Camera::Camera(glm::vec3 pos, glm::vec3 targ)
+Camera::Camera(glm::vec3 pos, glm::vec3 targ) : yaw(0), pitch(0)
 {
-	view = glm::mat4();
 	projection = glm::perspective(glm::radians(45.0f), (float)1024 / 768, 0.1f, 100.0f);
 
 	position = pos;
@@ -39,12 +38,23 @@ void Camera::ApplyCamera(int programId)
 	glUniformMatrix4fv(loc, 1, GL_FALSE, &projection[0][0]);
 }
 
-void Camera::Rotate(float radius)
+void Camera::Rotate(int x, int y)
 {
-	float camX = sin((float)SDL_GetTicks() / 1000) * radius;
-	float camZ = cos((float)SDL_GetTicks() / 1000) * radius;
+	float sensitivity = 0.5f;
 
-	view = glm::lookAt(glm::vec3(camX, 0, camZ), glm::vec3(0, 0, 0), glm::vec3(0, 1, 0));
+	float xOff = (float)x * sensitivity;
+	float yOff = (float)y * sensitivity;
+
+	yaw += xOff;
+	pitch += yOff;
+
+	glm::vec3 front;
+	front.x = cos(glm::radians(yaw)) * cos(glm::radians(pitch));
+	front.y = sin(glm::radians(pitch));
+	front.z = sin(glm::radians(yaw)) * cos(glm::radians(pitch));
+	target = glm::normalize(front);
+
+	Recalculate();
 }
 
 void Camera::Move(int x)

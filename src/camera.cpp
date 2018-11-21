@@ -10,7 +10,7 @@ void Camera::Recalculate()
 	cameraRight = glm::normalize(glm::cross(glm::vec3(0, 1, 0), direction));
 	cameraUp = glm::cross(direction, cameraRight);
 
-	view = glm::lookAt(position, target, cameraUp);
+	view = glm::lookAt(position, position + target, cameraUp);
 }
 
 Camera::Camera(glm::vec3 pos, glm::vec3 targ)
@@ -38,7 +38,7 @@ void Camera::ApplyCamera(int programId)
 
 void Camera::Rotate(int x, int y)
 {
-	float sensitivity = 0.5f;
+	float sensitivity = 0.2f;;
 
 	float xOff = (float)x * sensitivity;
 	float yOff = (float)y * sensitivity;

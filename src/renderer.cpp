@@ -1,6 +1,6 @@
 #include "renderer.hpp"
 
-Renderer::Renderer() : vertexShader_(GL_VERTEX_SHADER), fragmentShader_(GL_FRAGMENT_SHADER), camera_(glm::vec3(0, 0, -3), glm::vec3(0, 0, 0))
+Renderer::Renderer() : vertexShader_(GL_VERTEX_SHADER), fragmentShader_(GL_FRAGMENT_SHADER), camera_(glm::vec3(0, 0, -3), glm::vec3(0, 0, 1))
 {
 	programId_ = glCreateProgram();
 	glAttachShader(programId_, vertexShader_.GetShaderId());

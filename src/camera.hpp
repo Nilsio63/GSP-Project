@@ -19,7 +19,7 @@ private:
 	float lastFrame = 0.0f;
 
 	float pitch = 0.0f;
-	float yaw = 0.0f;
+	float yaw = 90.0f;
 
 	void Recalculate();
 public:

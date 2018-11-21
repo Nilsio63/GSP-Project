@@ -39,7 +39,7 @@ int Application::Run()
 
 				SDL_GetRelativeMouseState(&x, &y);
 
-				renderer_.GetCamera()->Rotate(x, y);
+				renderer_.GetCamera()->Rotate(x, -y);
 			}
 			else if (event.key.type == SDL_KEYDOWN)
 			{

@@ -49,8 +49,6 @@ int Application::Run()
 	float rotationSpeedX = 0;
 	float rotationSpeedY = 0;
 
-	bool mouseEnabled = true;
-
 	Geometry *g1 = new Geometry(Color(255, 0, 0));
 
 	renderer_.AddGeometry(g1);
@@ -74,15 +72,6 @@ int Application::Run()
 			if (event.quit.type == SDL_QUIT)
 				return EXIT_SUCCESS;
 
-			if (event.key.keysym.sym == SDLK_LCTRL
-				|| event.key.keysym.sym == SDLK_RCTRL)
-			{
-				if (event.key.type == SDL_KEYDOWN)
-					mouseEnabled = false;
-				else if (event.key.type == SDL_KEYUP)
-					mouseEnabled = true;
-			}
-
 			if (event.key.type == SDL_MOUSEMOTION)
 			{
 				int x;
@@ -90,7 +79,7 @@ int Application::Run()
 
 				SDL_GetRelativeMouseState(&x, &y);
 
-				if (mouseEnabled)
+				if (!SDL_GetKeyboardState(nullptr)[SDL_SCANCODE_LCTRL] && !SDL_GetKeyboardState(nullptr)[SDL_SCANCODE_RCTRL])
 					renderer_.GetCamera()->Rotate(x, -y);
 			}
 			else if (event.key.type == SDL_KEYDOWN)

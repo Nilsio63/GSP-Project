@@ -1,5 +1,45 @@
 #include "application.hpp"
 
+void CreateChess(Renderer *r)
+{
+	Geometry *g1 = new Geometry(Color(255, 255, 255));
+	Geometry *g2 = new Geometry(Color(0, 0, 0));
+
+	bool useG1 = true;
+
+	float offsetX = 50;
+	float offsetZ = 50;
+
+	for (int i = 0; i < 100; i++)
+	{
+		for (int j = 0; j < 100; j++)
+		{
+			glm::vec3 p1 = glm::vec3(i - offsetX, -2, j - offsetZ);
+			glm::vec3 p2 = glm::vec3(i - offsetX + 1, -2, j - offsetZ);
+			glm::vec3 p3 = glm::vec3(i - offsetX, -2, j - offsetZ + 1);
+			glm::vec3 p4 = glm::vec3(i - offsetX + 1, -2, j - offsetZ + 1);
+
+			if (useG1)
+			{
+				g1->AddTriangle(Triangle(p1, p2, p3));
+				g1->AddTriangle(Triangle(p2, p3, p4));
+			}
+			else
+			{
+				g2->AddTriangle(Triangle(p1, p2, p3));
+				g2->AddTriangle(Triangle(p2, p3, p4));
+			}
+
+			useG1 = !useG1;
+		}
+
+		useG1 = !useG1;
+	}
+
+	r->AddGeometry(g1);
+	r->AddGeometry(g2);
+}
+
 Application::Application() : window_(1024, 768) {}
 
 int Application::Run()
@@ -24,6 +64,8 @@ int Application::Run()
 	g1->AddTriangle(Triangle(p1, p2, p3));
 	g1->AddTriangle(Triangle(p2, p3, p0));
 	g1->AddTriangle(Triangle(p0, p1, p2));
+
+	CreateChess(&renderer_);
 
 	while (true)
 	{

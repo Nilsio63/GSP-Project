@@ -72,7 +72,7 @@ void Geometry::Render(int programId)
 
 	glBindVertexArray(arrayId_);
 
-	glDrawArrays(GL_TRIANGLES, 0, (sizeof(Triangle) / sizeof(glm::vec3)) * (int)triangles_.size());
+	glDrawArrays(GL_TRIANGLES, 0, 3 * (int)triangles_.size());
 }
 
 void Geometry::AddTriangle(Triangle &triangle)

@@ -2,8 +2,8 @@
 
 void CreateChess(Renderer *r)
 {
-	Geometry *g1 = new Geometry(Color(255, 255, 255));
-	Geometry *g2 = new Geometry(Color(0, 0, 0));
+	Geometry *g1 = new Geometry("");
+	Geometry *g2 = new Geometry("");
 
 	bool useG1 = true;
 
@@ -49,7 +49,7 @@ int Application::Run()
 	float rotationSpeedX = 0;
 	float rotationSpeedY = 0;
 
-	Geometry *g1 = new Geometry(Color(255, 0, 0));
+	Geometry *g1 = new Geometry("../img/random_shit.png");
 
 	renderer_.AddGeometry(g1);
 

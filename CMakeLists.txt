@@ -19,13 +19,18 @@ add_executable(main
   src/renderer.hpp
   src/shader.cpp
   src/shader.hpp
+  src/stb_image.hpp
   src/triangle.hpp
   src/triangle.cpp
   src/window.cpp
   src/window.hpp
 
+  src/stb_image.h
+
   src/FragmentShaderCode.glsl
   src/VertexShaderCode.glsl
+
+  img/random_shit.png
   )
 
 find_package(GLEW REQUIRED)

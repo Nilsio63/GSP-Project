@@ -1,5 +1,22 @@
 #include "renderer.hpp"
 
+#include <iostream>
+
+void LogShader(int shaderId, char *shaderName)
+{
+	char *buffer = new char[1024];
+	int l;
+
+	glGetShaderInfoLog(shaderId, 1024, &l, buffer);
+
+	if (l > 0)
+	{
+		buffer[l] = 0;
+
+		std::cout << shaderName << ": " << buffer << std::endl;
+	}
+}
+
 Renderer::Renderer() : vertexShader_(GL_VERTEX_SHADER), fragmentShader_(GL_FRAGMENT_SHADER), camera_(glm::vec3(0, 0, -3), glm::vec3(0, 0, 1))
 {
 	programId_ = glCreateProgram();
@@ -23,6 +40,9 @@ void Renderer::Render()
 	{
 		geometries_[i]->Render(programId_);
 	}
+
+	LogShader(vertexShader_.GetShaderId(), "Vertex Shader");
+	LogShader(fragmentShader_.GetShaderId(), "Fragment Shader");
 }
 
 void Renderer::AddGeometry(Geometry *geometry)

@@ -1,8 +1,11 @@
 #include "geometry.hpp"
+#include "stb_image.hpp"
+
+#include <iostream>
 
 #include <glm/gtc/matrix_transform.hpp>
 
-Geometry::Geometry(Color c) : color_(c)
+Geometry::Geometry(char *textureFileName)
 {
 	transformationMatrix = glm::mat4();
 	transformationMatrix[0][0] = 1.0f;
@@ -18,9 +21,35 @@ Geometry::Geometry(Color c) : color_(c)
 	glBindBuffer(GL_ARRAY_BUFFER, bufferId_);
 
 	glEnableVertexAttribArray(0);
-	glVertexAttribPointer(0, 3, GL_FLOAT, GL_FALSE, 6 * sizeof(float), nullptr);
+	glVertexAttribPointer(0, 3, GL_FLOAT, GL_FALSE, 8 * sizeof(float), nullptr);
 	glEnableVertexAttribArray(1);
-	glVertexAttribPointer(1, 3, GL_FLOAT, GL_FALSE, 6 * sizeof(float), (void *)(3 * sizeof(float)));
+	glVertexAttribPointer(1, 3, GL_FLOAT, GL_FALSE, 8 * sizeof(float), (void *)(3 * sizeof(float)));
+	glEnableVertexAttribArray(2);
+	glVertexAttribPointer(2, 2, GL_FLOAT, GL_FALSE, 8 * sizeof(float), (void *)(6 * sizeof(float)));
+
+	glGenTextures(1, &textureId_);
+	glBindTexture(GL_TEXTURE_2D, textureId_);
+
+	// set the texture wrapping parameters
+	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, GL_REPEAT);	// set texture wrapping to GL_REPEAT (default wrapping method)
+	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_T, GL_REPEAT);
+	// set texture filtering parameters
+	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_LINEAR);
+	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_LINEAR);
+
+	int width, height, nrChannels;
+	unsigned char *data = stbi_load(textureFileName, &width, &height, &nrChannels, 0);
+
+	if (data)
+	{
+		glTexImage2D(GL_TEXTURE_2D, 0, GL_RGB, width, height, 0, GL_RGB, GL_UNSIGNED_BYTE, data);
+		glGenerateMipmap(GL_TEXTURE_2D);
+	}
+	else
+	{
+		std::cout << "Failed to load texture" << std::endl;
+	}
+	stbi_image_free(data);
 }
 
 Geometry::~Geometry()
@@ -34,11 +63,12 @@ void Geometry::Render(int programId)
 	if (triangles_.empty())
 		return;
 
-	GLint loc = glGetUniformLocation(programId, "geometry_color");
-	glUniform3f(loc, (float)color_.r / 255, (float)color_.g / 255, (float)color_.b / 255);
+	glUniformMatrix4fv(glGetUniformLocation(programId, "transformation_matrix"), 1, GL_FALSE, &transformationMatrix[0][0]);
 
-	loc = glGetUniformLocation(programId, "transformation_matrix");
-	glUniformMatrix4fv(loc, 1, GL_FALSE, &transformationMatrix[0][0]);
+	glUniform1i(glGetUniformLocation(programId, "ourTexture"), 0);
+
+	glActiveTexture(GL_TEXTURE0);
+	glBindTexture(GL_TEXTURE_2D, textureId_);
 
 	glBindVertexArray(arrayId_);
 

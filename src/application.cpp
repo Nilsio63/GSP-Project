@@ -11,7 +11,7 @@ int Application::Run()
 
 	bool mouseEnabled = true;
 
-	Geometry *g1 = new Geometry(Color(255, 0, 0));
+	Geometry *g1 = new Geometry(Color(255, 0, 0), "../img/random_shit.png");
 
 	renderer_.AddGeometry(g1);
 

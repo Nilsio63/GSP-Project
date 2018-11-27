@@ -14,12 +14,13 @@ class Geometry
 private:
 	GLuint arrayId_;
 	GLuint bufferId_;
+	GLuint textureId_;
 
 	std::vector<Triangle> triangles_;
 	glm::mat4 transformationMatrix;
 	Color color_;
 public:
-	Geometry(Color c);
+	Geometry(Color c, char *textureFileName);
 	~Geometry();
 
 	void Render(int programId);

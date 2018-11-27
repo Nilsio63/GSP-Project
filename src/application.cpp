@@ -1,8 +1,25 @@
 #include "application.hpp"
 
-void CreateChess(Renderer *r)
+Geometry *CreateTetraeder()
 {
-	Geometry *g1 = new Geometry("../img/chess_board.png");
+	Geometry *tetraeder = new Geometry("../img/random_shit.png");
+
+	glm::vec3 p0(-0.6f, -0.6f, 0.39f);
+	glm::vec3 p1(0.6f, -0.6f, 0.39f);
+	glm::vec3 p2(0.0f, -0.6f, -0.78f);
+	glm::vec3 p3(0.0f, 0.6f, 0.0f);
+
+	tetraeder->AddTriangle(Triangle(p0, p1, p2));
+	tetraeder->AddTriangle(Triangle(p0, p1, p3));
+	tetraeder->AddTriangle(Triangle(p1, p2, p3));
+	tetraeder->AddTriangle(Triangle(p0, p2, p3));
+
+	return tetraeder;
+}
+
+Geometry *CreateChess()
+{
+	Geometry *chessBoard = new Geometry("../img/chess_board.png");
 
 	glm::vec3 p1 = glm::vec3(-25, -3, -25);
 	glm::vec3 p2 = glm::vec3(25, -3, -25);
@@ -20,10 +37,10 @@ void CreateChess(Renderer *r)
 	t2.t2 = glm::vec2(0, 1);
 	t2.t3 = glm::vec2(1, 1);
 
-	g1->AddTriangle(t1);
-	g1->AddTriangle(t2);
+	chessBoard->AddTriangle(t1);
+	chessBoard->AddTriangle(t2);
 
-	r->AddGeometry(g1);
+	return chessBoard;
 }
 
 Application::Application() : window_(1024, 768) {}
@@ -35,21 +52,11 @@ int Application::Run()
 	float rotationSpeedX = 0;
 	float rotationSpeedY = 0;
 
-	Geometry *g1 = new Geometry("../img/random_shit.png");
+	Geometry *tetraeder = CreateTetraeder();
 
-	renderer_.AddGeometry(g1);
+	renderer_.AddGeometry(tetraeder);
 
-	glm::vec3 p0(-0.6f, -0.6f, 0.39f);
-	glm::vec3 p1(0.6f, -0.6f, 0.39f);
-	glm::vec3 p2(0.0f, -0.6f, -0.78f);
-	glm::vec3 p3(0.0f, 0.6f, 0.0f);
-
-	g1->AddTriangle(Triangle(p0, p1, p2));
-	g1->AddTriangle(Triangle(p0, p1, p3));
-	g1->AddTriangle(Triangle(p1, p2, p3));
-	g1->AddTriangle(Triangle(p0, p2, p3));
-
-	CreateChess(&renderer_);
+	renderer_.AddGeometry(CreateChess());
 
 	while (true)
 	{
@@ -87,16 +94,16 @@ int Application::Run()
 					renderer_.GetCamera()->Move(1, 0);
 					break;
 				case SDLK_w:
-					g1->Translate(glm::vec3(0.0f, 0.1f, 0.0f));
+					tetraeder->Translate(glm::vec3(0.0f, 0.1f, 0.0f));
 					break;
 				case SDLK_a:
-					g1->Translate(glm::vec3(-0.1f, 0.0f, 0.0f));
+					tetraeder->Translate(glm::vec3(-0.1f, 0.0f, 0.0f));
 					break;
 				case SDLK_s:
-					g1->Translate(glm::vec3(0.0f, -0.1f, 0.0f));
+					tetraeder->Translate(glm::vec3(0.0f, -0.1f, 0.0f));
 					break;
 				case SDLK_d:
-					g1->Translate(glm::vec3(0.1f, 0.0f, 0.0f));
+					tetraeder->Translate(glm::vec3(0.1f, 0.0f, 0.0f));
 					break;
 				case SDLK_LEFT:
 					rotationSpeedY += 0.25f;
@@ -122,9 +129,9 @@ int Application::Run()
 		}
 
 		if (rotationSpeedX != 0)
-			g1->Rotate(rotationSpeedX, glm::vec3(1, 0, 0));
+			tetraeder->Rotate(rotationSpeedX, glm::vec3(1, 0, 0));
 		if (rotationSpeedY != 0)
-			g1->Rotate(rotationSpeedY, glm::vec3(0, 1, 0));
+			tetraeder->Rotate(rotationSpeedY, glm::vec3(0, 1, 0));
 
 		window_.Clear();
 

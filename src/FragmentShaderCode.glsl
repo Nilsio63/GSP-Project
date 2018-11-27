@@ -1,13 +1,15 @@
 #version 330 core
 
-layout(location = 0) out vec3 color;
+layout(location = 0) out vec4 color;
 
 in vec3 vertex_normal_worldspace;
-uniform vec3 geometry_color;
+in vec2 texture_coordinates;
+
+uniform sampler2D ourTexture;
 
 void main()
 {
 	float nz = vertex_normal_worldspace.z;
 	float factor = 0.5 + 0.5 * abs(nz);
-	color = factor * geometry_color;
+	color = factor * texture(ourTexture, texture_coordinates);
 };

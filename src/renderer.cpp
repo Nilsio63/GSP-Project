@@ -15,6 +15,8 @@ void LogShader(int shaderId, char *shaderName)
 
 		std::cout << shaderName << ": " << buffer << std::endl;
 	}
+
+	delete(buffer);
 }
 
 Renderer::Renderer() : vertexShader_(GL_VERTEX_SHADER), fragmentShader_(GL_FRAGMENT_SHADER), camera_(glm::vec3(0, 0, -3), glm::vec3(0, 0, 1))

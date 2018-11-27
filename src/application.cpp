@@ -4,13 +4,24 @@ void CreateChess(Renderer *r)
 {
 	Geometry *g1 = new Geometry("../img/chess_board.png");
 
-	glm::vec3 p1 = glm::vec3(-30, -3, -30);
-	glm::vec3 p2 = glm::vec3(50, -3, -30);
-	glm::vec3 p3 = glm::vec3(-30, -3, 50);
+	glm::vec3 p1 = glm::vec3(-50, -3, -50);
+	glm::vec3 p2 = glm::vec3(50, -3, -50);
+	glm::vec3 p3 = glm::vec3(-50, -3, 50);
 	glm::vec3 p4 = glm::vec3(50, -3, 50);
 
-	g1->AddTriangle(Triangle(p1, p2, p3));
-	g1->AddTriangle(Triangle(p2, p3, p4));
+	Triangle t1(p1, p2, p3);
+	Triangle t2(p2, p3, p4);
+
+	t1.t1 = glm::vec2(-1, -1);
+	t1.t2 = glm::vec2(1, -1);
+	t1.t3 = glm::vec2(-1, 1);
+
+	t2.t1 = glm::vec2(1, -1);
+	t2.t2 = glm::vec2(-1, 1);
+	t2.t3 = glm::vec2(1, 1);
+
+	g1->AddTriangle(t1);
+	g1->AddTriangle(t2);
 
 	r->AddGeometry(g1);
 }

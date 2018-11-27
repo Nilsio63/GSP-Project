@@ -19,7 +19,9 @@ void LogShader(int shaderId, char *shaderName)
 	delete(buffer);
 }
 
-Renderer::Renderer() : vertexShader_(GL_VERTEX_SHADER), fragmentShader_(GL_FRAGMENT_SHADER), camera_(glm::vec3(0, 0, -3), glm::vec3(0, 0, 1))
+Renderer::Renderer(Color ambientColor) : vertexShader_(GL_VERTEX_SHADER), fragmentShader_(GL_FRAGMENT_SHADER),
+	camera_(glm::vec3(0, 0, -3), glm::vec3(0, 0, 1)),
+	ambientColor_(ambientColor), ambientStrength_(0.1)
 {
 	programId_ = glCreateProgram();
 	glAttachShader(programId_, vertexShader_.GetShaderId());
@@ -35,6 +37,9 @@ Renderer::~Renderer()
 void Renderer::Render()
 {
 	glUseProgram(programId_);
+
+	glUniform1f(glGetUniformLocation(programId_, "ambientStrength"), ambientStrength_);
+	glUniform3f(glGetUniformLocation(programId_, "ambientColor"), (float)ambientColor_.r / 255, (float)ambientColor_.g / 255, (float)ambientColor_.b / 255);
 
 	camera_.ApplyCamera(programId_);
 

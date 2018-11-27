@@ -43,7 +43,7 @@ Geometry *CreateChess()
 	return chessBoard;
 }
 
-Application::Application() : window_(1024, 768) {}
+Application::Application() : window_(1024, 768), renderer_(Color(255, 255, 255)) {}
 
 int Application::Run()
 {

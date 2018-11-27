@@ -2,6 +2,7 @@
 #define RENDERER_HPP_
 
 #include "camera.hpp"
+#include "color.hpp"
 #include "geometry.hpp"
 #include "shader.hpp"
 
@@ -18,8 +19,11 @@ private:
 	GLuint programId_;
 
 	std::vector<Geometry *> geometries_;
+
+	Color ambientColor_;
+	float ambientStrength_;
 public:
-	Renderer();
+	Renderer(Color ambientColor);
 	~Renderer();
 
 	Camera *GetCamera() { return &camera_; }

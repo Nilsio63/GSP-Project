@@ -18,9 +18,8 @@ private:
 
 	std::vector<Triangle> triangles_;
 	glm::mat4 transformationMatrix;
-	Color color_;
 public:
-	Geometry(Color c, char *textureFileName);
+	Geometry(char *textureFileName);
 	~Geometry();
 
 	void Render(int programId);

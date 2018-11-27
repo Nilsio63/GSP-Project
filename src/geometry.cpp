@@ -5,7 +5,7 @@
 
 #include <glm/gtc/matrix_transform.hpp>
 
-Geometry::Geometry(Color c, char *textureFileName) : color_(c)
+Geometry::Geometry(char *textureFileName)
 {
 	transformationMatrix = glm::mat4();
 	transformationMatrix[0][0] = 1.0f;
@@ -63,14 +63,9 @@ void Geometry::Render(int programId)
 	if (triangles_.empty())
 		return;
 
-	GLint loc = glGetUniformLocation(programId, "geometry_color");
-	glUniform3f(loc, (float)color_.r / 255, (float)color_.g / 255, (float)color_.b / 255);
+	glUniformMatrix4fv(glGetUniformLocation(programId, "transformation_matrix"), 1, GL_FALSE, &transformationMatrix[0][0]);
 
-	loc = glGetUniformLocation(programId, "transformation_matrix");
-	glUniformMatrix4fv(loc, 1, GL_FALSE, &transformationMatrix[0][0]);
-
-	loc = glGetUniformLocation(programId, "ourTexture");
-	glUniform1i(loc, 0);
+	glUniform1i(glGetUniformLocation(programId, "ourTexture"), 0);
 
 	glActiveTexture(GL_TEXTURE0);
 	glBindTexture(GL_TEXTURE_2D, textureId_);

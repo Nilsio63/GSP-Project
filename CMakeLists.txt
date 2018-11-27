@@ -30,6 +30,7 @@ add_executable(main
   src/FragmentShaderCode.glsl
   src/VertexShaderCode.glsl
 
+  img/chess_board.png
   img/random_shit.png
   )
 

@@ -2,42 +2,17 @@
 
 void CreateChess(Renderer *r)
 {
-	Geometry *g1 = new Geometry("");
-	Geometry *g2 = new Geometry("");
+	Geometry *g1 = new Geometry("../img/chess_board.png");
 
-	bool useG1 = true;
+	glm::vec3 p1 = glm::vec3(-30, -3, -30);
+	glm::vec3 p2 = glm::vec3(50, -3, -30);
+	glm::vec3 p3 = glm::vec3(-30, -3, 50);
+	glm::vec3 p4 = glm::vec3(50, -3, 50);
 
-	float offsetX = 50;
-	float offsetZ = 50;
-
-	for (int i = 0; i < 100; i++)
-	{
-		for (int j = 0; j < 100; j++)
-		{
-			glm::vec3 p1 = glm::vec3(i - offsetX, -2, j - offsetZ);
-			glm::vec3 p2 = glm::vec3(i - offsetX + 1, -2, j - offsetZ);
-			glm::vec3 p3 = glm::vec3(i - offsetX, -2, j - offsetZ + 1);
-			glm::vec3 p4 = glm::vec3(i - offsetX + 1, -2, j - offsetZ + 1);
-
-			if (useG1)
-			{
-				g1->AddTriangle(Triangle(p1, p2, p3));
-				g1->AddTriangle(Triangle(p2, p3, p4));
-			}
-			else
-			{
-				g2->AddTriangle(Triangle(p1, p2, p3));
-				g2->AddTriangle(Triangle(p2, p3, p4));
-			}
-
-			useG1 = !useG1;
-		}
-
-		useG1 = !useG1;
-	}
+	g1->AddTriangle(Triangle(p1, p2, p3));
+	g1->AddTriangle(Triangle(p2, p3, p4));
 
 	r->AddGeometry(g1);
-	r->AddGeometry(g2);
 }
 
 Application::Application() : window_(1024, 768) {}

@@ -29,6 +29,8 @@ add_executable(main
 
   src/FragmentShaderCode.glsl
   src/VertexShaderCode.glsl
+
+  img/random_shit.png
   )
 
 find_package(GLEW REQUIRED)

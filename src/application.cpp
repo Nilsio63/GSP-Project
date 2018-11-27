@@ -4,20 +4,20 @@ void CreateChess(Renderer *r)
 {
 	Geometry *g1 = new Geometry("../img/chess_board.png");
 
-	glm::vec3 p1 = glm::vec3(-50, -3, -50);
-	glm::vec3 p2 = glm::vec3(50, -3, -50);
-	glm::vec3 p3 = glm::vec3(-50, -3, 50);
-	glm::vec3 p4 = glm::vec3(50, -3, 50);
+	glm::vec3 p1 = glm::vec3(-25, -3, -25);
+	glm::vec3 p2 = glm::vec3(25, -3, -25);
+	glm::vec3 p3 = glm::vec3(-25, -3, 25);
+	glm::vec3 p4 = glm::vec3(25, -3, 25);
 
 	Triangle t1(p1, p2, p3);
 	Triangle t2(p2, p3, p4);
 
-	t1.t1 = glm::vec2(-1, -1);
-	t1.t2 = glm::vec2(1, -1);
-	t1.t3 = glm::vec2(-1, 1);
+	t1.t1 = glm::vec2(0, 0);
+	t1.t2 = glm::vec2(1, 0);
+	t1.t3 = glm::vec2(0, 1);
 
-	t2.t1 = glm::vec2(1, -1);
-	t2.t2 = glm::vec2(-1, 1);
+	t2.t1 = glm::vec2(1, 0);
+	t2.t2 = glm::vec2(0, 1);
 	t2.t3 = glm::vec2(1, 1);
 
 	g1->AddTriangle(t1);
@@ -44,10 +44,10 @@ int Application::Run()
 	glm::vec3 p2(0.0f, -0.6f, -0.78f);
 	glm::vec3 p3(0.0f, 0.6f, 0.0f);
 
+	g1->AddTriangle(Triangle(p0, p1, p2));
 	g1->AddTriangle(Triangle(p0, p1, p3));
 	g1->AddTriangle(Triangle(p1, p2, p3));
-	g1->AddTriangle(Triangle(p2, p3, p0));
-	g1->AddTriangle(Triangle(p0, p1, p2));
+	g1->AddTriangle(Triangle(p0, p2, p3));
 
 	CreateChess(&renderer_);
 

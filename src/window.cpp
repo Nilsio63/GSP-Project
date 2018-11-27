@@ -21,7 +21,7 @@ Window::Window(unsigned int width, unsigned int height)
 	glewExperimental = GL_TRUE;
 	glewInit();
 
-	SetBackground(Color());
+	SetBackground(Color(50, 50, 50));
 }
 
 void Window::Clear()

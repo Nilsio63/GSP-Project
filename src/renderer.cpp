@@ -41,8 +41,13 @@ void Renderer::Render()
 	glUniform1f(glGetUniformLocation(programId_, "ambientStrength"), ambientStrength_);
 	glUniform3f(glGetUniformLocation(programId_, "ambientColor"), (float)ambientColor_.r / 255, (float)ambientColor_.g / 255, (float)ambientColor_.b / 255);
 
-	glUniform3f(glGetUniformLocation(programId_, "lightPos"), 10, 10, 10);
-	glUniform3f(glGetUniformLocation(programId_, "lightColor"), 0.9f, 0.9f, 0.5f);
+	glUniform3f(glGetUniformLocation(programId_, "pointLight.position"), 10, 10, 10);
+	glUniform3f(glGetUniformLocation(programId_, "pointLight.ambient"), 0.2f, 0.2f, 0.2f);
+	glUniform3f(glGetUniformLocation(programId_, "pointLight.diffuse"), 0.5f, 0.5f, 0.5f);
+	glUniform3f(glGetUniformLocation(programId_, "pointLight.specular"), 1.0f, 1.0f, 1.0f);
+	glUniform1f(glGetUniformLocation(programId_, "pointLight.constant"), 1.0f);
+	glUniform1f(glGetUniformLocation(programId_, "pointLight.linear"), 0.045f);
+	glUniform1f(glGetUniformLocation(programId_, "pointLight.quadratic"), 0.0075f);
 
 	camera_.ApplyCamera(programId_);
 

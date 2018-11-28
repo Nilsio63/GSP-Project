@@ -22,6 +22,22 @@ struct PointLight
     vec3 specular;
 };
 
+struct SpotLight
+{
+    vec3 position;
+    vec3 direction;
+    float cutOff;
+    float outerCutOff;
+
+    float constant;
+    float linear;
+    float quadratic;
+
+    vec3 ambient;
+    vec3 diffuse;
+    vec3 specular;       
+};
+
 layout(location = 0) out vec4 color;
 
 in vec3 fragment_pos;
@@ -32,6 +48,7 @@ uniform sampler2D ourTexture;
 
 uniform DirLight dirLight;
 uniform PointLight pointLight;
+uniform SpotLight spotLight;
 uniform vec3 camera_pos;
 
 vec3 CalcDirLight(DirLight light, vec3 norm, vec3 view)
@@ -78,6 +95,33 @@ vec3 CalcPointLight(PointLight light, vec3 norm, vec3 view)
 	return (ambient + diffuse + specular);
 }
 
+vec3 CalcSpotLight(SpotLight light, vec3 norm, vec3 view)
+{
+    vec3 lightDir = normalize(light.position - fragment_pos);
+
+    float diff = max(dot(norm, lightDir), 0.0);
+
+    vec3 reflectDir = reflect(-lightDir, norm);
+    float spec = pow(max(dot(view, reflectDir), 0.0), 2);
+
+    float distance = length(light.position - fragment_pos);
+    float attenuation = 1.0 / (light.constant + light.linear * distance + light.quadratic * (distance * distance));    
+
+    float theta = dot(lightDir, normalize(-light.direction)); 
+    float epsilon = light.cutOff - light.outerCutOff;
+    float intensity = clamp((theta - light.outerCutOff) / epsilon, 0.0, 1.0);
+
+    vec3 ambient = light.ambient;
+    vec3 diffuse = light.diffuse * diff;
+    vec3 specular = light.specular * spec;
+
+    ambient *= attenuation * intensity;
+    diffuse *= attenuation * intensity;
+    specular *= attenuation * intensity;
+
+    return (ambient + diffuse + specular);
+}
+
 void main()
 {
 	vec3 norm = normalize(vertex_normal_worldspace);
@@ -85,6 +129,7 @@ void main()
 
 	vec3 lightColor = CalcDirLight(dirLight, norm, view);
 	lightColor += CalcPointLight(pointLight, norm, view);
+	lightColor += CalcSpotLight(spotLight, norm, view);
 
 	// Complete
 	color = texture(ourTexture, texture_coordinates) * vec4(lightColor, 1);

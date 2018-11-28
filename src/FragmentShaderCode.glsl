@@ -23,8 +23,12 @@ void main()
 	vec3 diffuse = diff * lightColor;
 
 	vec3 view = normalize(camera_pos - fragment_pos);
+
 	vec3 r = -lightDir + 2 * (dot(norm, lightDir)) * norm;
-	vec3 specular = lightColor * pow(max(dot(view, r), 0), 50);
+	vec3 specular = lightColor * pow(max(dot(view, r), 0), 2);
+
+	//vec3 h = normalize(view + lightDir);
+	//vec3 specular = lightColor * pow(max(dot(view, h), 0), 2);
 
 	color = texture(ourTexture, texture_coordinates) * vec4((ambientStrength * ambientColor + diffuse + specular), 1);
 	//color = vec4(vertex_normal_worldspace, 1);

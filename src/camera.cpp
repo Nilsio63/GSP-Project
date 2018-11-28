@@ -5,10 +5,14 @@
 
 void Camera::Recalculate()
 {
-	direction = glm::normalize(position - target);
+	glm::vec3 front;
+	front.x = cos(glm::radians(yaw)) * cos(glm::radians(pitch));
+	front.y = sin(glm::radians(pitch));
+	front.z = sin(glm::radians(yaw)) * cos(glm::radians(pitch));
+	target = glm::normalize(front);
 
-	cameraRight = glm::normalize(glm::cross(glm::vec3(0, 1, 0), direction));
-	cameraUp = glm::cross(direction, cameraRight);
+	cameraRight = glm::normalize(glm::cross(target, glm::vec3(0, 1, 0)));
+	cameraUp = glm::cross(cameraRight, target);
 
 	view = glm::lookAt(position, position + target, cameraUp);
 }
@@ -68,18 +72,16 @@ void Camera::Move(float sideways, float forward)
 	if (sideways == 0 && forward == 0)
 		return;
 
-	float camSpeed = 20.0f * deltaTime;
+	float camSpeed = 60.0f * deltaTime;
 
 	if (sideways != 0)
 	{
 		position += cameraRight * camSpeed * sideways;
-		target += cameraRight * camSpeed * sideways;
 	}
 
 	if (forward != 0)
 	{
-		position += (-direction) * camSpeed * forward;
-		target += (-direction) * camSpeed * forward;
+		position += target * camSpeed * forward;
 	}
 
 	Recalculate();

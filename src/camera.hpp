@@ -9,7 +9,6 @@ class Camera
 private:
 	glm::vec3 position; // e
 	glm::vec3 target; // c
-	glm::vec3 direction; // b
 	glm::vec3 cameraUp; // u
 	glm::vec3 cameraRight; // s
 	glm::mat4 view;

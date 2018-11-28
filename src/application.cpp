@@ -9,10 +9,10 @@ Geometry *CreateTetraeder()
 	glm::vec3 p2(0.0f, -0.6f, -0.78f);
 	glm::vec3 p3(0.0f, 0.6f, 0.0f);
 
-	tetraeder->AddTriangle(Triangle(p0, p1, p2));
+	tetraeder->AddTriangle(Triangle(p1, p0, p2));
 	tetraeder->AddTriangle(Triangle(p0, p1, p3));
 	tetraeder->AddTriangle(Triangle(p1, p2, p3));
-	tetraeder->AddTriangle(Triangle(p0, p2, p3));
+	tetraeder->AddTriangle(Triangle(p2, p0, p3));
 
 	return tetraeder;
 }
@@ -26,11 +26,11 @@ Geometry *CreateChess()
 	glm::vec3 p3 = glm::vec3(-25, -3, 25);
 	glm::vec3 p4 = glm::vec3(25, -3, 25);
 
-	Triangle t1(p1, p2, p3);
+	Triangle t1(p2, p1, p3);
 	Triangle t2(p2, p3, p4);
 
-	t1.t1 = glm::vec2(0, 0);
-	t1.t2 = glm::vec2(1, 0);
+	t1.t2 = glm::vec2(0, 0);
+	t1.t1 = glm::vec2(1, 0);
 	t1.t3 = glm::vec2(0, 1);
 
 	t2.t1 = glm::vec2(1, 0);
@@ -43,7 +43,24 @@ Geometry *CreateChess()
 	return chessBoard;
 }
 
-Application::Application() : window_(1024, 768) {}
+Geometry *CreateLight()
+{
+	Geometry *tetraeder = new Geometry("../img/random_shit.png");
+
+	glm::vec3 p0(9, 9, 9);
+	glm::vec3 p1(11, 9, 9);
+	glm::vec3 p2(11, 11, 9);
+	glm::vec3 p3(11, 11, 11);
+
+	tetraeder->AddTriangle(Triangle(p0, p1, p2));
+	tetraeder->AddTriangle(Triangle(p0, p1, p3));
+	tetraeder->AddTriangle(Triangle(p1, p2, p3));
+	tetraeder->AddTriangle(Triangle(p0, p2, p3));
+
+	return tetraeder;
+}
+
+Application::Application() : window_(1024, 768), renderer_(Color(255, 255, 255)) {}
 
 int Application::Run()
 {
@@ -57,6 +74,8 @@ int Application::Run()
 	renderer_.AddGeometry(tetraeder);
 
 	renderer_.AddGeometry(CreateChess());
+
+	renderer_.AddGeometry(CreateLight());
 
 	while (true)
 	{

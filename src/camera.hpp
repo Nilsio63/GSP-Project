@@ -25,6 +25,9 @@ private:
 public:
 	Camera(glm::vec3 pos, glm::vec3 targ);
 
+	glm::vec3 GetPosition() { return position; }
+	glm::vec3 GetTarget() { return target; }
+
 	void ApplyCamera(int programId);
 	void Rotate(int x, int y);
 	void Move(float sideways, float forward);

@@ -1,6 +1,16 @@
 #version 330 core
 
-struct PointLight {
+struct DirLight
+{
+    vec3 direction;
+	
+    vec3 ambient;
+    vec3 diffuse;
+    vec3 specular;
+};
+
+struct PointLight
+{
     vec3 position;
     
     float constant;
@@ -20,12 +30,27 @@ in vec2 texture_coordinates;
 
 uniform sampler2D ourTexture;
 
+uniform DirLight dirLight;
 uniform PointLight pointLight;
 uniform vec3 camera_pos;
 
-void main()
+vec3 CalcDirLight(DirLight light, vec3 norm, vec3 view)
 {
-	vec3 norm = normalize(vertex_normal_worldspace);
+    vec3 lightDir = normalize(-light.direction);
+
+    float diff = max(dot(norm, lightDir), 0.0);
+
+    vec3 reflectDir = reflect(-lightDir, norm);
+    float spec = pow(max(dot(view, reflectDir), 0.0), 2);
+
+    vec3 ambient = light.ambient;
+    vec3 diffuse = light.diffuse * diff;
+    vec3 specular = light.specular * spec;
+    return (ambient + diffuse + specular);
+}
+
+vec3 CalcPointLight(PointLight light, vec3 norm, vec3 view)
+{
 	vec3 lightDir = normalize(pointLight.position - fragment_pos);
 
 	// Ambient
@@ -34,9 +59,6 @@ void main()
 	// Diffuse
 	float diff = max(dot(norm, lightDir), 0.0f);
 	vec3 diffuse = diff * pointLight.diffuse;
-
-	// Specular
-	vec3 view = normalize(camera_pos - fragment_pos);
 
 	vec3 r = -lightDir + 2 * (dot(norm, lightDir)) * norm;
 	vec3 specular = pointLight.specular * pow(max(dot(view, r), 0), 2);
@@ -53,6 +75,18 @@ void main()
 	specular *= attenuation;
 
 	// Complete
-	color = texture(ourTexture, texture_coordinates) * vec4((ambient + diffuse + specular), 1);
+	return (ambient + diffuse + specular);
+}
+
+void main()
+{
+	vec3 norm = normalize(vertex_normal_worldspace);
+	vec3 view = normalize(camera_pos - fragment_pos);
+
+	vec3 lightColor = CalcDirLight(dirLight, norm, view);
+	lightColor += CalcPointLight(pointLight, norm, view);
+
+	// Complete
+	color = texture(ourTexture, texture_coordinates) * vec4(lightColor, 1);
 	//color = vec4(vertex_normal_worldspace, 1);
 };

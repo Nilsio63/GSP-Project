@@ -34,6 +34,9 @@ void Camera::ApplyCamera(int programId)
 
 	loc = glGetUniformLocation(programId, "projection_matrix");
 	glUniformMatrix4fv(loc, 1, GL_FALSE, &projection[0][0]);
+
+	loc = glGetUniformLocation(programId, "camera_pos");
+	glUniform3f(loc, position.x, position.y, position.z);
 }
 
 void Camera::Rotate(int x, int y)

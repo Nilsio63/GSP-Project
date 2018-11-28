@@ -12,6 +12,7 @@ uniform float ambientStrength;
 uniform vec3 ambientColor;
 uniform vec3 lightPos;
 uniform vec3 lightColor;
+uniform vec3 camera_pos;
 
 void main()
 {
@@ -21,6 +22,10 @@ void main()
 	float diff = max(dot(norm, lightDir), 0.0f);
 	vec3 diffuse = diff * lightColor;
 
-	color = texture(ourTexture, texture_coordinates) * vec4((ambientStrength * ambientColor + diffuse), 1);
+	vec3 view = normalize(camera_pos - fragment_pos);
+	vec3 r = -lightDir + 2 * (dot(norm, lightDir)) * norm;
+	vec3 specular = lightColor * pow(max(dot(view, r), 0), 50);
+
+	color = texture(ourTexture, texture_coordinates) * vec4((ambientStrength * ambientColor + diffuse + specular), 1);
 	//color = vec4(vertex_normal_worldspace, 1);
 };

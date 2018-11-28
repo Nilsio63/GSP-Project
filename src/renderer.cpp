@@ -42,7 +42,7 @@ void Renderer::Render()
 	glUniform3f(glGetUniformLocation(programId_, "ambientColor"), (float)ambientColor_.r / 255, (float)ambientColor_.g / 255, (float)ambientColor_.b / 255);
 
 	glUniform3f(glGetUniformLocation(programId_, "lightPos"), 10, 10, 10);
-	glUniform3f(glGetUniformLocation(programId_, "lightColor"), 0, 0.5f, 0.3f);
+	glUniform3f(glGetUniformLocation(programId_, "lightColor"), 0.9f, 0.9f, 0.5f);
 
 	camera_.ApplyCamera(programId_);
 

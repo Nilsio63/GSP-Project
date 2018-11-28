@@ -47,9 +47,9 @@ Geometry *CreateLight()
 {
 	Geometry *tetraeder = new Geometry("../img/random_shit.png");
 
-	glm::vec3 p0(10, 10, 10);
-	glm::vec3 p1(11, 10, 10);
-	glm::vec3 p2(11, 11, 10);
+	glm::vec3 p0(9, 9, 9);
+	glm::vec3 p1(11, 9, 9);
+	glm::vec3 p2(11, 11, 9);
 	glm::vec3 p3(11, 11, 11);
 
 	tetraeder->AddTriangle(Triangle(p0, p1, p2));

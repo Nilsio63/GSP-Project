@@ -58,12 +58,6 @@ void Camera::Rotate(int x, int y)
 	else if (pitch < -89)
 		pitch = -89;
 
-	glm::vec3 front;
-	front.x = cos(glm::radians(yaw)) * cos(glm::radians(pitch));
-	front.y = sin(glm::radians(pitch));
-	front.z = sin(glm::radians(yaw)) * cos(glm::radians(pitch));
-	target = glm::normalize(front);
-
 	Recalculate();
 }
 

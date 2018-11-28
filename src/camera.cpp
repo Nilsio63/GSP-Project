@@ -72,7 +72,7 @@ void Camera::Move(float sideways, float forward)
 	if (sideways == 0 && forward == 0)
 		return;
 
-	float camSpeed = 20.0f * deltaTime;
+	float camSpeed = 60.0f * deltaTime;
 
 	if (sideways != 0)
 	{

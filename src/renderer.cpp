@@ -41,6 +41,9 @@ void Renderer::Render()
 	glUniform1f(glGetUniformLocation(programId_, "ambientStrength"), ambientStrength_);
 	glUniform3f(glGetUniformLocation(programId_, "ambientColor"), (float)ambientColor_.r / 255, (float)ambientColor_.g / 255, (float)ambientColor_.b / 255);
 
+	glUniform3f(glGetUniformLocation(programId_, "lightPos"), 10, 10, 10);
+	glUniform3f(glGetUniformLocation(programId_, "lightColor"), 0, 0.5f, 0.3f);
+
 	camera_.ApplyCamera(programId_);
 
 	for (int i = 0; i < geometries_.size(); i++)

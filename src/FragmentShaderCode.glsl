@@ -40,16 +40,17 @@ struct SpotLight
 
 layout(location = 0) out vec4 color;
 
-in vec3 fragment_pos;
-in vec3 vertex_normal_worldspace;
-in vec2 texture_coordinates;
+in vec3 transformedPos;
+in vec3 transformedNormal;
+in vec2 textureCoord;
 
-uniform sampler2D ourTexture;
+uniform sampler2D objectTexture;
 
 uniform DirLight dirLight;
 uniform PointLight pointLight;
 uniform SpotLight spotLight;
-uniform vec3 camera_pos;
+
+uniform vec3 cameraPos;
 
 vec3 CalcDirLight(DirLight light, vec3 norm, vec3 view)
 {
@@ -68,7 +69,7 @@ vec3 CalcDirLight(DirLight light, vec3 norm, vec3 view)
 
 vec3 CalcPointLight(PointLight light, vec3 norm, vec3 view)
 {
-	vec3 lightDir = normalize(pointLight.position - fragment_pos);
+	vec3 lightDir = normalize(pointLight.position - transformedPos);
 
 	// Ambient
 	vec3 ambient = pointLight.ambient;
@@ -84,7 +85,7 @@ vec3 CalcPointLight(PointLight light, vec3 norm, vec3 view)
 	//vec3 specular = pointLight.specular * pow(max(dot(view, h), 0), 2);
 
 	// Attenuation
-	float distance = length(pointLight.position - fragment_pos);
+	float distance = length(pointLight.position - transformedPos);
 	float attenuation = 1.0f / (pointLight.constant + pointLight.linear * distance + pointLight.quadratic * (distance * distance));
 
 	ambient *= attenuation;
@@ -97,14 +98,14 @@ vec3 CalcPointLight(PointLight light, vec3 norm, vec3 view)
 
 vec3 CalcSpotLight(SpotLight light, vec3 norm, vec3 view)
 {
-    vec3 lightDir = normalize(light.position - fragment_pos);
+    vec3 lightDir = normalize(light.position - transformedPos);
 
     float diff = max(dot(norm, lightDir), 0.0);
 
     vec3 reflectDir = reflect(-lightDir, norm);
     float spec = pow(max(dot(view, reflectDir), 0.0), 2);
 
-    float distance = length(light.position - fragment_pos);
+    float distance = length(light.position - transformedPos);
     float attenuation = 1.0 / (light.constant + light.linear * distance + light.quadratic * (distance * distance));    
 
     float theta = dot(lightDir, normalize(-light.direction)); 
@@ -124,14 +125,14 @@ vec3 CalcSpotLight(SpotLight light, vec3 norm, vec3 view)
 
 void main()
 {
-	vec3 norm = normalize(vertex_normal_worldspace);
-	vec3 view = normalize(camera_pos - fragment_pos);
+	vec3 norm = normalize(transformedNormal);
+	vec3 view = normalize(cameraPos - transformedPos);
 
 	vec3 lightColor = CalcDirLight(dirLight, norm, view);
 	lightColor += CalcPointLight(pointLight, norm, view);
 	lightColor += CalcSpotLight(spotLight, norm, view);
 
 	// Complete
-	color = texture(ourTexture, texture_coordinates) * vec4(lightColor, 1);
-	//color = vec4(vertex_normal_worldspace, 1);
+	color = texture(objectTexture, textureCoord) * vec4(lightColor, 1);
+	//color = vec4(transformedNormal, 1);
 };

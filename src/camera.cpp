@@ -33,14 +33,9 @@ void Camera::ApplyCamera(int programId)
 	deltaTime = currentFrame - lastFrame;
 	lastFrame = currentFrame;
 
-	GLint loc = glGetUniformLocation(programId, "view_matrix");
-	glUniformMatrix4fv(loc, 1, GL_FALSE, &view[0][0]);
-
-	loc = glGetUniformLocation(programId, "projection_matrix");
-	glUniformMatrix4fv(loc, 1, GL_FALSE, &projection[0][0]);
-
-	loc = glGetUniformLocation(programId, "camera_pos");
-	glUniform3f(loc, position.x, position.y, position.z);
+	glUniformMatrix4fv(glGetUniformLocation(programId, "viewMatrix"), 1, GL_FALSE, &view[0][0]);
+	glUniformMatrix4fv(glGetUniformLocation(programId, "projectionMatrix"), 1, GL_FALSE, &projection[0][0]);
+	glUniform3f(glGetUniformLocation(programId, "cameraPos"), position.x, position.y, position.z);
 }
 
 void Camera::Rotate(int x, int y)
@@ -57,12 +52,6 @@ void Camera::Rotate(int x, int y)
 		pitch = 89;
 	else if (pitch < -89)
 		pitch = -89;
-
-	glm::vec3 front;
-	front.x = cos(glm::radians(yaw)) * cos(glm::radians(pitch));
-	front.y = sin(glm::radians(pitch));
-	front.z = sin(glm::radians(yaw)) * cos(glm::radians(pitch));
-	target = glm::normalize(front);
 
 	Recalculate();
 }

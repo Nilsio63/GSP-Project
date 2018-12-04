@@ -40,7 +40,7 @@ struct SpotLight
 
 layout(location = 0) out vec4 color;
 
-in vec3 fragment_pos;
+in vec3 fragmentPos;
 in vec3 vertex_normal_worldspace;
 in vec2 texture_coordinates;
 
@@ -68,7 +68,7 @@ vec3 CalcDirLight(DirLight light, vec3 norm, vec3 view)
 
 vec3 CalcPointLight(PointLight light, vec3 norm, vec3 view)
 {
-	vec3 lightDir = normalize(pointLight.position - fragment_pos);
+	vec3 lightDir = normalize(pointLight.position - fragmentPos);
 
 	// Ambient
 	vec3 ambient = pointLight.ambient;
@@ -84,7 +84,7 @@ vec3 CalcPointLight(PointLight light, vec3 norm, vec3 view)
 	//vec3 specular = pointLight.specular * pow(max(dot(view, h), 0), 2);
 
 	// Attenuation
-	float distance = length(pointLight.position - fragment_pos);
+	float distance = length(pointLight.position - fragmentPos);
 	float attenuation = 1.0f / (pointLight.constant + pointLight.linear * distance + pointLight.quadratic * (distance * distance));
 
 	ambient *= attenuation;
@@ -97,14 +97,14 @@ vec3 CalcPointLight(PointLight light, vec3 norm, vec3 view)
 
 vec3 CalcSpotLight(SpotLight light, vec3 norm, vec3 view)
 {
-    vec3 lightDir = normalize(light.position - fragment_pos);
+    vec3 lightDir = normalize(light.position - fragmentPos);
 
     float diff = max(dot(norm, lightDir), 0.0);
 
     vec3 reflectDir = reflect(-lightDir, norm);
     float spec = pow(max(dot(view, reflectDir), 0.0), 2);
 
-    float distance = length(light.position - fragment_pos);
+    float distance = length(light.position - fragmentPos);
     float attenuation = 1.0 / (light.constant + light.linear * distance + light.quadratic * (distance * distance));    
 
     float theta = dot(lightDir, normalize(-light.direction)); 
@@ -125,7 +125,7 @@ vec3 CalcSpotLight(SpotLight light, vec3 norm, vec3 view)
 void main()
 {
 	vec3 norm = normalize(vertex_normal_worldspace);
-	vec3 view = normalize(cameraPos - fragment_pos);
+	vec3 view = normalize(cameraPos - fragmentPos);
 
 	vec3 lightColor = CalcDirLight(dirLight, norm, view);
 	lightColor += CalcPointLight(pointLight, norm, view);

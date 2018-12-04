@@ -42,7 +42,7 @@ layout(location = 0) out vec4 color;
 
 in vec3 fragmentPos;
 in vec3 transformedNormal;
-in vec2 texture_coordinates;
+in vec2 textureCoord;
 
 uniform sampler2D ourTexture;
 
@@ -132,6 +132,6 @@ void main()
 	lightColor += CalcSpotLight(spotLight, norm, view);
 
 	// Complete
-	color = texture(ourTexture, texture_coordinates) * vec4(lightColor, 1);
+	color = texture(ourTexture, textureCoord) * vec4(lightColor, 1);
 	//color = vec4(transformedNormal, 1);
 };

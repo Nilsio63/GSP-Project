@@ -10,7 +10,7 @@ uniform mat4 view_matrix;
 
 out vec3 fragmentPos;
 out vec3 transformedNormal;
-out vec2 texture_coordinates;
+out vec2 textureCoord;
 
 void main()
 {
@@ -19,5 +19,5 @@ void main()
 	transformedNormal = (inverse(transpose(transformation_matrix)) * vec4(vertex_normal, 0.0f)).xyz;
 	//transformedNormal = vertex_normal;
 
-	texture_coordinates = texture_position;
+	textureCoord = texture_position;
 };

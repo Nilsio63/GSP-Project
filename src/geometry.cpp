@@ -64,7 +64,6 @@ void Geometry::Render(int programId)
 		return;
 
 	glUniformMatrix4fv(glGetUniformLocation(programId, "transformationMatrix"), 1, GL_FALSE, &transformationMatrix[0][0]);
-
 	glUniform1i(glGetUniformLocation(programId, "ourTexture"), 0);
 
 	glActiveTexture(GL_TEXTURE0);

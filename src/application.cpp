@@ -104,19 +104,15 @@ int Application::Run()
 				{
 				case SDLK_KP_8:
 					movement.y = 1;
-					//renderer_.GetCamera()->Move(0, 1);
 					break;
 				case SDLK_KP_4:
 					movement.x = -1;
-					//renderer_.GetCamera()->Move(-1, 0);
 					break;
 				case SDLK_KP_2:
 					movement.y = -1;
-					//renderer_.GetCamera()->Move(0, -1);
 					break;
 				case SDLK_KP_6:
 					movement.x = 1;
-					//renderer_.GetCamera()->Move(1, 0);
 					break;
 				case SDLK_w:
 					tetraeder->Translate(glm::vec3(0.0f, 0.1f, 0.0f));

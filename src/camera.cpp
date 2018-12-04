@@ -36,7 +36,7 @@ void Camera::ApplyCamera(int programId)
 	GLint loc = glGetUniformLocation(programId, "view_matrix");
 	glUniformMatrix4fv(loc, 1, GL_FALSE, &view[0][0]);
 
-	loc = glGetUniformLocation(programId, "projection_matrix");
+	loc = glGetUniformLocation(programId, "projectionMatrix");
 	glUniformMatrix4fv(loc, 1, GL_FALSE, &projection[0][0]);
 
 	loc = glGetUniformLocation(programId, "cameraPos");

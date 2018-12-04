@@ -49,6 +49,7 @@ uniform sampler2D ourTexture;
 uniform DirLight dirLight;
 uniform PointLight pointLight;
 uniform SpotLight spotLight;
+
 uniform vec3 cameraPos;
 
 vec3 CalcDirLight(DirLight light, vec3 norm, vec3 view)

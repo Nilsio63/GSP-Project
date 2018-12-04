@@ -66,9 +66,6 @@ int Application::Run()
 {
 	SDL_Event event;
 
-	float rotationSpeedX = 0;
-	float rotationSpeedY = 0;
-
 	Geometry *tetraeder = CreateTetraeder();
 
 	renderer_.AddGeometry(tetraeder);
@@ -76,6 +73,11 @@ int Application::Run()
 	renderer_.AddGeometry(CreateChess());
 
 	renderer_.AddGeometry(CreateLight());
+
+	glm::vec2 cameraMovement = glm::vec2();
+
+	glm::vec2 tetraederMovement = glm::vec2();
+	glm::vec2 tetraederRotation = glm::vec2();
 
 	while (true)
 	{
@@ -100,57 +102,80 @@ int Application::Run()
 
 				switch (event.key.keysym.sym)
 				{
-				case SDLK_KP_8:
-					renderer_.GetCamera()->Move(0, 1);
-					break;
-				case SDLK_KP_4:
-					renderer_.GetCamera()->Move(-1, 0);
-					break;
-				case SDLK_KP_2:
-					renderer_.GetCamera()->Move(0, -1);
-					break;
-				case SDLK_KP_6:
-					renderer_.GetCamera()->Move(1, 0);
-					break;
 				case SDLK_w:
-					tetraeder->Translate(glm::vec3(0.0f, 0.1f, 0.0f));
+					cameraMovement.y = 1;
 					break;
 				case SDLK_a:
-					tetraeder->Translate(glm::vec3(-0.1f, 0.0f, 0.0f));
+					cameraMovement.x = -1;
 					break;
 				case SDLK_s:
-					tetraeder->Translate(glm::vec3(0.0f, -0.1f, 0.0f));
+					cameraMovement.y = -1;
 					break;
 				case SDLK_d:
-					tetraeder->Translate(glm::vec3(0.1f, 0.0f, 0.0f));
+					cameraMovement.x = 1;
+					break;
+				case SDLK_KP_8:
+					tetraederMovement.y = 0.02f;
+					break;
+				case SDLK_KP_4:
+					tetraederMovement.x = -0.02f;
+					break;
+				case SDLK_KP_2:
+					tetraederMovement.y = -0.02f;
+					break;
+				case SDLK_KP_6:
+					tetraederMovement.x = 0.02f;
 					break;
 				case SDLK_LEFT:
-					rotationSpeedY += 0.25f;
+					tetraederRotation.y += 0.25f;
 					break;
 				case SDLK_RIGHT:
-					rotationSpeedY -= 0.25f;
+					tetraederRotation.y -= 0.25f;
 					break;
 				case SDLK_UP:
-					rotationSpeedX -= 0.25f;
+					tetraederRotation.x -= 0.25f;
 					break;
 				case SDLK_DOWN:
-					rotationSpeedX += 0.25f;
+					tetraederRotation.x += 0.25f;
 					break;
 				case SDLK_r:
-					rotationSpeedX = 0;
-					rotationSpeedY = 0;
+					tetraederRotation.x = 0;
+					tetraederRotation.y = 0;
 					break;
 				}
 
 				if (color != nullptr)
 					window_.SetBackground(*color);
 			}
+			else if (event.key.type == SDL_KEYUP)
+			{
+				switch (event.key.keysym.sym)
+				{
+				case SDLK_w:
+				case SDLK_s:
+					cameraMovement.y = 0;
+					break;
+				case SDLK_a:
+				case SDLK_d:
+					cameraMovement.x = 0;
+					break;
+				case SDLK_KP_8:
+				case SDLK_KP_2:
+					tetraederMovement.y = 0;
+					break;
+				case SDLK_KP_4:
+				case SDLK_KP_6:
+					tetraederMovement.x = 0;
+					break;
+				}
+			}
 		}
 
-		if (rotationSpeedX != 0)
-			tetraeder->Rotate(rotationSpeedX, glm::vec3(1, 0, 0));
-		if (rotationSpeedY != 0)
-			tetraeder->Rotate(rotationSpeedY, glm::vec3(0, 1, 0));
+		renderer_.GetCamera()->Move(cameraMovement.x, cameraMovement.y);
+
+		tetraeder->Translate(glm::vec3(tetraederMovement, 0));
+		tetraeder->Rotate(tetraederRotation.x, glm::vec3(1, 0, 0));
+		tetraeder->Rotate(tetraederRotation.y, glm::vec3(0, 1, 0));
 
 		window_.Clear();
 

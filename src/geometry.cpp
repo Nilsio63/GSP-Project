@@ -87,10 +87,16 @@ void Geometry::AddTriangle(Triangle &triangle)
 
 void Geometry::Rotate(float degree, glm::vec3 rotationAxis)
 {
+	if (degree == 0)
+		return;
+
 	transformationMatrix = glm::rotate(transformationMatrix, degree / 360.0f, rotationAxis);
 }
 
 void Geometry::Translate(glm::vec3 offset)
 {
+	if (offset.x == 0 && offset.y == 0 && offset.z == 0)
+		return;
+
 	transformationMatrix = glm::translate(transformationMatrix, offset);
 }

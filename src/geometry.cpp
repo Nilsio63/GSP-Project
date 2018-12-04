@@ -63,7 +63,7 @@ void Geometry::Render(int programId)
 	if (triangles_.empty())
 		return;
 
-	glUniformMatrix4fv(glGetUniformLocation(programId, "transformation_matrix"), 1, GL_FALSE, &transformationMatrix[0][0]);
+	glUniformMatrix4fv(glGetUniformLocation(programId, "transformationMatrix"), 1, GL_FALSE, &transformationMatrix[0][0]);
 
 	glUniform1i(glGetUniformLocation(programId, "ourTexture"), 0);
 

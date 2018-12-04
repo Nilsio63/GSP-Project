@@ -49,7 +49,7 @@ uniform sampler2D ourTexture;
 uniform DirLight dirLight;
 uniform PointLight pointLight;
 uniform SpotLight spotLight;
-uniform vec3 camera_pos;
+uniform vec3 cameraPos;
 
 vec3 CalcDirLight(DirLight light, vec3 norm, vec3 view)
 {
@@ -125,7 +125,7 @@ vec3 CalcSpotLight(SpotLight light, vec3 norm, vec3 view)
 void main()
 {
 	vec3 norm = normalize(vertex_normal_worldspace);
-	vec3 view = normalize(camera_pos - fragment_pos);
+	vec3 view = normalize(cameraPos - fragment_pos);
 
 	vec3 lightColor = CalcDirLight(dirLight, norm, view);
 	lightColor += CalcPointLight(pointLight, norm, view);

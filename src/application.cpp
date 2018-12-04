@@ -76,6 +76,7 @@ int Application::Run()
 
 	glm::vec2 cameraMovement = glm::vec2();
 
+	glm::vec2 tetraederMovement = glm::vec2();
 	glm::vec2 tetraederRotation = glm::vec2();
 
 	while (true)
@@ -114,16 +115,16 @@ int Application::Run()
 					cameraMovement.x = 1;
 					break;
 				case SDLK_KP_8:
-					tetraeder->Translate(glm::vec3(0.0f, 0.1f, 0.0f));
+					tetraederMovement.y = 0.02f;
 					break;
 				case SDLK_KP_4:
-					tetraeder->Translate(glm::vec3(-0.1f, 0.0f, 0.0f));
+					tetraederMovement.x = -0.02f;
 					break;
 				case SDLK_KP_2:
-					tetraeder->Translate(glm::vec3(0.0f, -0.1f, 0.0f));
+					tetraederMovement.y = -0.02f;
 					break;
 				case SDLK_KP_6:
-					tetraeder->Translate(glm::vec3(0.1f, 0.0f, 0.0f));
+					tetraederMovement.x = 0.02f;
 					break;
 				case SDLK_LEFT:
 					tetraederRotation.y += 0.25f;
@@ -158,17 +159,23 @@ int Application::Run()
 				case SDLK_d:
 					cameraMovement.x = 0;
 					break;
+				case SDLK_KP_8:
+				case SDLK_KP_2:
+					tetraederMovement.y = 0;
+					break;
+				case SDLK_KP_4:
+				case SDLK_KP_6:
+					tetraederMovement.x = 0;
+					break;
 				}
 			}
 		}
 
-		if (cameraMovement.x != 0 || cameraMovement.y != 0)
-			renderer_.GetCamera()->Move(cameraMovement.x, cameraMovement.y);
+		renderer_.GetCamera()->Move(cameraMovement.x, cameraMovement.y);
 
-		if (tetraederRotation.x != 0)
-			tetraeder->Rotate(tetraederRotation.x, glm::vec3(1, 0, 0));
-		if (tetraederRotation.y != 0)
-			tetraeder->Rotate(tetraederRotation.y, glm::vec3(0, 1, 0));
+		tetraeder->Translate(glm::vec3(tetraederMovement, 0));
+		tetraeder->Rotate(tetraederRotation.x, glm::vec3(1, 0, 0));
+		tetraeder->Rotate(tetraederRotation.y, glm::vec3(0, 1, 0));
 
 		window_.Clear();
 

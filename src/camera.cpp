@@ -33,7 +33,7 @@ void Camera::ApplyCamera(int programId)
 	deltaTime = currentFrame - lastFrame;
 	lastFrame = currentFrame;
 
-	GLint loc = glGetUniformLocation(programId, "view_matrix");
+	GLint loc = glGetUniformLocation(programId, "viewMatrix");
 	glUniformMatrix4fv(loc, 1, GL_FALSE, &view[0][0]);
 
 	loc = glGetUniformLocation(programId, "projectionMatrix");

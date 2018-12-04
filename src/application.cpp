@@ -66,9 +66,6 @@ int Application::Run()
 {
 	SDL_Event event;
 
-	float rotationSpeedX = 0;
-	float rotationSpeedY = 0;
-
 	Geometry *tetraeder = CreateTetraeder();
 
 	renderer_.AddGeometry(tetraeder);
@@ -77,7 +74,9 @@ int Application::Run()
 
 	renderer_.AddGeometry(CreateLight());
 
-	glm::vec2 movement = glm::vec2();
+	glm::vec2 cameraMovement = glm::vec2();
+
+	glm::vec2 tetraederRotation = glm::vec2();
 
 	while (true)
 	{
@@ -103,16 +102,16 @@ int Application::Run()
 				switch (event.key.keysym.sym)
 				{
 				case SDLK_w:
-					movement.y = 1;
+					cameraMovement.y = 1;
 					break;
 				case SDLK_a:
-					movement.x = -1;
+					cameraMovement.x = -1;
 					break;
 				case SDLK_s:
-					movement.y = -1;
+					cameraMovement.y = -1;
 					break;
 				case SDLK_d:
-					movement.x = 1;
+					cameraMovement.x = 1;
 					break;
 				case SDLK_KP_8:
 					tetraeder->Translate(glm::vec3(0.0f, 0.1f, 0.0f));
@@ -127,20 +126,20 @@ int Application::Run()
 					tetraeder->Translate(glm::vec3(0.1f, 0.0f, 0.0f));
 					break;
 				case SDLK_LEFT:
-					rotationSpeedY += 0.25f;
+					tetraederRotation.y += 0.25f;
 					break;
 				case SDLK_RIGHT:
-					rotationSpeedY -= 0.25f;
+					tetraederRotation.y -= 0.25f;
 					break;
 				case SDLK_UP:
-					rotationSpeedX -= 0.25f;
+					tetraederRotation.x -= 0.25f;
 					break;
 				case SDLK_DOWN:
-					rotationSpeedX += 0.25f;
+					tetraederRotation.x += 0.25f;
 					break;
 				case SDLK_r:
-					rotationSpeedX = 0;
-					rotationSpeedY = 0;
+					tetraederRotation.x = 0;
+					tetraederRotation.y = 0;
 					break;
 				}
 
@@ -153,23 +152,23 @@ int Application::Run()
 				{
 				case SDLK_w:
 				case SDLK_s:
-					movement.y = 0;
+					cameraMovement.y = 0;
 					break;
 				case SDLK_a:
 				case SDLK_d:
-					movement.x = 0;
+					cameraMovement.x = 0;
 					break;
 				}
 			}
 		}
 
-		if (movement.x != 0 || movement.y != 0)
-			renderer_.GetCamera()->Move(movement.x, movement.y);
+		if (cameraMovement.x != 0 || cameraMovement.y != 0)
+			renderer_.GetCamera()->Move(cameraMovement.x, cameraMovement.y);
 
-		if (rotationSpeedX != 0)
-			tetraeder->Rotate(rotationSpeedX, glm::vec3(1, 0, 0));
-		if (rotationSpeedY != 0)
-			tetraeder->Rotate(rotationSpeedY, glm::vec3(0, 1, 0));
+		if (tetraederRotation.x != 0)
+			tetraeder->Rotate(tetraederRotation.x, glm::vec3(1, 0, 0));
+		if (tetraederRotation.y != 0)
+			tetraeder->Rotate(tetraederRotation.y, glm::vec3(0, 1, 0));
 
 		window_.Clear();
 

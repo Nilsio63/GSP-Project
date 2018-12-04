@@ -102,28 +102,28 @@ int Application::Run()
 
 				switch (event.key.keysym.sym)
 				{
-				case SDLK_KP_8:
+				case SDLK_w:
 					movement.y = 1;
 					break;
-				case SDLK_KP_4:
+				case SDLK_a:
 					movement.x = -1;
 					break;
-				case SDLK_KP_2:
+				case SDLK_s:
 					movement.y = -1;
 					break;
-				case SDLK_KP_6:
+				case SDLK_d:
 					movement.x = 1;
 					break;
-				case SDLK_w:
+				case SDLK_KP_8:
 					tetraeder->Translate(glm::vec3(0.0f, 0.1f, 0.0f));
 					break;
-				case SDLK_a:
+				case SDLK_KP_4:
 					tetraeder->Translate(glm::vec3(-0.1f, 0.0f, 0.0f));
 					break;
-				case SDLK_s:
+				case SDLK_KP_2:
 					tetraeder->Translate(glm::vec3(0.0f, -0.1f, 0.0f));
 					break;
-				case SDLK_d:
+				case SDLK_KP_6:
 					tetraeder->Translate(glm::vec3(0.1f, 0.0f, 0.0f));
 					break;
 				case SDLK_LEFT:
@@ -151,12 +151,12 @@ int Application::Run()
 			{
 				switch (event.key.keysym.sym)
 				{
-				case SDLK_KP_8:
-				case SDLK_KP_2:
+				case SDLK_w:
+				case SDLK_s:
 					movement.y = 0;
 					break;
-				case SDLK_KP_4:
-				case SDLK_KP_6:
+				case SDLK_a:
+				case SDLK_d:
 					movement.x = 0;
 					break;
 				}

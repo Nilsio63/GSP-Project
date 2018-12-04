@@ -41,7 +41,7 @@ struct SpotLight
 layout(location = 0) out vec4 color;
 
 in vec3 fragmentPos;
-in vec3 vertex_normal_worldspace;
+in vec3 transformedNormal;
 in vec2 texture_coordinates;
 
 uniform sampler2D ourTexture;
@@ -124,7 +124,7 @@ vec3 CalcSpotLight(SpotLight light, vec3 norm, vec3 view)
 
 void main()
 {
-	vec3 norm = normalize(vertex_normal_worldspace);
+	vec3 norm = normalize(transformedNormal);
 	vec3 view = normalize(cameraPos - fragmentPos);
 
 	vec3 lightColor = CalcDirLight(dirLight, norm, view);
@@ -133,5 +133,5 @@ void main()
 
 	// Complete
 	color = texture(ourTexture, texture_coordinates) * vec4(lightColor, 1);
-	//color = vec4(vertex_normal_worldspace, 1);
+	//color = vec4(transformedNormal, 1);
 };

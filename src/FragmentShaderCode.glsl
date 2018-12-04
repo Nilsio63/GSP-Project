@@ -44,7 +44,7 @@ in vec3 transformedPos;
 in vec3 transformedNormal;
 in vec2 textureCoord;
 
-uniform sampler2D ourTexture;
+uniform sampler2D objectTexture;
 
 uniform DirLight dirLight;
 uniform PointLight pointLight;
@@ -133,6 +133,6 @@ void main()
 	lightColor += CalcSpotLight(spotLight, norm, view);
 
 	// Complete
-	color = texture(ourTexture, textureCoord) * vec4(lightColor, 1);
+	color = texture(objectTexture, textureCoord) * vec4(lightColor, 1);
 	//color = vec4(transformedNormal, 1);
 };

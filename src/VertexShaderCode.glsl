@@ -8,14 +8,14 @@ uniform mat4 transformation_matrix;
 uniform mat4 projection_matrix;
 uniform mat4 view_matrix;
 
-out vec3 fragmentPos;
+out vec3 transformedPos;
 out vec3 transformedNormal;
 out vec2 textureCoord;
 
 void main()
 {
 	gl_Position = projection_matrix * view_matrix * transformation_matrix * vec4(vertex_position, 1.0f);
-	fragmentPos = (transformation_matrix * vec4(vertex_position, 1.0f)).xyz;
+	transformedPos = (transformation_matrix * vec4(vertex_position, 1.0f)).xyz;
 	transformedNormal = (inverse(transpose(transformation_matrix)) * vec4(vertex_normal, 0.0f)).xyz;
 	//transformedNormal = vertex_normal;
 

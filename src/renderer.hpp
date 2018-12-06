@@ -13,6 +13,7 @@
 class Renderer
 {
 private:
+	bool flashLightOn = true;
 	Camera camera_;
 	Shader vertexShader_;
 	Shader fragmentShader_;
@@ -27,6 +28,7 @@ public:
 	~Renderer();
 
 	Camera *GetCamera() { return &camera_; }
+	void ToggleFlashLight() { flashLightOn = !flashLightOn; }
 	void Render();
 	void AddGeometry(Geometry *geometry);
 };

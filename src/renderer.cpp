@@ -50,20 +50,32 @@ void Renderer::Render()
 	glUniform3f(glGetUniformLocation(programId_, "pointLight.ambient"), 0.1f, 0.0f, 0.0f);
 	glUniform3f(glGetUniformLocation(programId_, "pointLight.diffuse"), 0.5f, 0.0f, 0.0f);
 	glUniform3f(glGetUniformLocation(programId_, "pointLight.specular"), 0.75f, 0.0f, 0.0f);
-	glUniform1f(glGetUniformLocation(programId_, "pointLight.constant"), 1.0f);
-	glUniform1f(glGetUniformLocation(programId_, "pointLight.linear"), 0.045f);
-	glUniform1f(glGetUniformLocation(programId_, "pointLight.quadratic"), 0.0075f);
+	glUniform1f(glGetUniformLocation(programId_, "pointLight.constant"), 0.1f);
+	glUniform1f(glGetUniformLocation(programId_, "pointLight.linear"), 0.0045f);
+	glUniform1f(glGetUniformLocation(programId_, "pointLight.quadratic"), 0.00075f);
 
-	glUniform3f(glGetUniformLocation(programId_, "spotLight.position"), camera_.GetPosition().x - 0.25f, camera_.GetPosition().y, camera_.GetPosition().z);
-	glUniform3f(glGetUniformLocation(programId_, "spotLight.direction"), camera_.GetTarget().x, camera_.GetTarget().y, camera_.GetTarget().z);
-	glUniform1f(glGetUniformLocation(programId_, "spotLight.cutOff"), glm::cos(glm::radians(12.5f)));
-	glUniform1f(glGetUniformLocation(programId_, "spotLight.outerCutOff"), glm::cos(glm::radians(15.0f)));
-	glUniform3f(glGetUniformLocation(programId_, "spotLight.ambient"), 0.1f, 0.1f, 0.1f);
-	glUniform3f(glGetUniformLocation(programId_, "spotLight.diffuse"), 0.5f, 0.5f, 0.5f);
-	glUniform3f(glGetUniformLocation(programId_, "spotLight.specular"), 1.0f, 1.0f, 1.0f);
-	glUniform1f(glGetUniformLocation(programId_, "spotLight.constant"), 1.0f);
-	glUniform1f(glGetUniformLocation(programId_, "spotLight.linear"), 0.0045f);
-	glUniform1f(glGetUniformLocation(programId_, "spotLight.quadratic"), 0.00075f);
+	if (flashLightOn)
+	{
+		glUniform3f(glGetUniformLocation(programId_, "spotLight.position"), camera_.GetPosition().x - 0.5f, camera_.GetPosition().y, camera_.GetPosition().z);
+		glUniform3f(glGetUniformLocation(programId_, "spotLight.direction"), camera_.GetTarget().x, camera_.GetTarget().y, camera_.GetTarget().z);
+		glUniform1f(glGetUniformLocation(programId_, "spotLight.cutOff"), glm::cos(glm::radians(12.5f)));
+		glUniform1f(glGetUniformLocation(programId_, "spotLight.outerCutOff"), glm::cos(glm::radians(15.0f)));
+		glUniform3f(glGetUniformLocation(programId_, "spotLight.ambient"), 0.1f, 0.1f, 0.1f);
+		glUniform3f(glGetUniformLocation(programId_, "spotLight.diffuse"), 0.5f, 0.5f, 0.5f);
+		glUniform3f(glGetUniformLocation(programId_, "spotLight.specular"), 1.0f, 1.0f, 1.0f);
+		glUniform1f(glGetUniformLocation(programId_, "spotLight.constant"), 1.0f);
+		glUniform1f(glGetUniformLocation(programId_, "spotLight.linear"), 0.0045f);
+		glUniform1f(glGetUniformLocation(programId_, "spotLight.quadratic"), 0.00075f);
+	}
+	else
+	{
+		glUniform3f(glGetUniformLocation(programId_, "spotLight.ambient"), 0, 0, 0);
+		glUniform3f(glGetUniformLocation(programId_, "spotLight.diffuse"), 0, 0, 0);
+		glUniform3f(glGetUniformLocation(programId_, "spotLight.specular"), 0, 0, 0);
+		glUniform1f(glGetUniformLocation(programId_, "spotLight.constant"), 1);
+		glUniform1f(glGetUniformLocation(programId_, "spotLight.linear"), 1);
+		glUniform1f(glGetUniformLocation(programId_, "spotLight.quadratic"), 1);
+	}
 
 	camera_.ApplyCamera(programId_);
 

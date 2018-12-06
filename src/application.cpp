@@ -102,6 +102,9 @@ int Application::Run()
 
 				switch (event.key.keysym.sym)
 				{
+				case SDLK_t:
+					renderer_.ToggleFlashLight();
+					break;
 				case SDLK_w:
 					cameraMovement.y = 1;
 					break;

@@ -38,13 +38,16 @@ find_package(GLEW REQUIRED)
 find_package(GLM REQUIRED)
 find_package(OpenGL REQUIRED)
 find_package(SDL2 REQUIRED)
+find_package(ASSIMP REQUIRED)
 
 target_include_directories(main
   PUBLIC ${GLM_INCLUDE_DIR}
   PUBLIC ${SDL2_INCLUDE_DIR}
+  PUBLIC ${ASSIMP_INCLUDE_DIR}
   )
 target_link_libraries(main
   PUBLIC ${OPENGL_LIBRARY}
   PUBLIC ${SDL2_LIBRARY} ${SDL2MAIN_LIBRARY}
   PUBLIC GLEW::GLEW
+  PUBLIC ${ASSIMP_INCLUDE_DIR}
   )

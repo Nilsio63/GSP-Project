@@ -79,16 +79,16 @@ void Renderer::Render()
 
 	camera_.ApplyCamera(programId_);
 
-	for (int i = 0; i < geometries_.size(); i++)
+	for (int i = 0; i < models_.size(); i++)
 	{
-		geometries_[i]->Render(programId_);
+		models_[i]->Render(programId_);
 	}
 
 	LogShader(vertexShader_.GetShaderId(), "Vertex Shader");
 	LogShader(fragmentShader_.GetShaderId(), "Fragment Shader");
 }
 
-void Renderer::AddGeometry(Geometry *geometry)
+void Renderer::AddModel(Model *model)
 {
-	geometries_.insert(geometries_.end(), geometry);
+	models_.insert(models_.end(), model);
 }

@@ -12,11 +12,11 @@ add_executable(main
   src/camera.cpp
   src/camera.hpp
   src/color.hpp
-  src/geometry.cpp
-  src/geometry.hpp
   src/main.cpp
   src/mesh.cpp
   src/mesh.hpp
+  src/model.cpp
+  src/model.hpp
   src/renderer.cpp
   src/renderer.hpp
   src/shader.cpp
@@ -54,5 +54,4 @@ target_link_libraries(main
   PUBLIC ${SDL2_LIBRARY} ${SDL2MAIN_LIBRARY}
   PUBLIC GLEW::GLEW
   PUBLIC ${ASSIMP_LIBRARY_RELEASE}
-
   )

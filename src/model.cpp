@@ -1,11 +1,11 @@
-#include "geometry.hpp"
+#include "model.hpp"
 #include "stb_image.hpp"
 
 #include <iostream>
 
 #include <glm/gtc/matrix_transform.hpp>
 
-Geometry::Geometry(char *textureFileName)
+Model::Model(char *textureFileName)
 {
 	transformationMatrix = glm::mat4();
 	transformationMatrix[0][0] = 1.0f;
@@ -52,13 +52,13 @@ Geometry::Geometry(char *textureFileName)
 	stbi_image_free(data);
 }
 
-Geometry::~Geometry()
+Model::~Model()
 {
 	glDeleteBuffers(1, &bufferId_);
 	glDeleteVertexArrays(1, &arrayId_);
 }
 
-void Geometry::Render(int programId)
+void Model::Render(int programId)
 {
 	if (triangles_.empty())
 		return;
@@ -74,7 +74,7 @@ void Geometry::Render(int programId)
 	glDrawArrays(GL_TRIANGLES, 0, 3 * (int)triangles_.size());
 }
 
-void Geometry::AddTriangle(Triangle &triangle)
+void Model::AddTriangle(Triangle &triangle)
 {
 	triangles_.insert(triangles_.end(), triangle);
 
@@ -84,7 +84,7 @@ void Geometry::AddTriangle(Triangle &triangle)
 	glBufferData(GL_ARRAY_BUFFER, triangles_.size() * sizeof(Triangle), triangles_.data(), GL_STATIC_DRAW);
 }
 
-void Geometry::Rotate(float degree, glm::vec3 rotationAxis)
+void Model::Rotate(float degree, glm::vec3 rotationAxis)
 {
 	if (degree == 0)
 		return;
@@ -92,7 +92,7 @@ void Geometry::Rotate(float degree, glm::vec3 rotationAxis)
 	transformationMatrix = glm::rotate(transformationMatrix, degree / 360.0f, rotationAxis);
 }
 
-void Geometry::Translate(glm::vec3 offset)
+void Model::Translate(glm::vec3 offset)
 {
 	if (offset.x == 0 && offset.y == 0 && offset.z == 0)
 		return;

@@ -1,5 +1,5 @@
-#ifndef GEOMETRY_HPP_
-#define GEOMETRY_HPP_
+#ifndef MODEL_HPP_
+#define MODEL_HPP_
 
 #include "color.hpp"
 #include "triangle.hpp"
@@ -9,7 +9,7 @@
 #include <GL/glew.h>
 #include <glm/glm.hpp>
 
-class Geometry
+class Model
 {
 private:
 	GLuint arrayId_;
@@ -19,8 +19,8 @@ private:
 	std::vector<Triangle> triangles_;
 	glm::mat4 transformationMatrix;
 public:
-	Geometry(char *textureFileName);
-	~Geometry();
+	Model(char *textureFileName);
+	~Model();
 
 	void Render(int programId);
 	void AddTriangle(Triangle &triangle);
@@ -29,4 +29,4 @@ public:
 	void Translate(glm::vec3 offset);
 };
 
-#endif  // GEOMETRY_HPP_
+#endif  // MODEL_HPP_

@@ -1,8 +1,8 @@
 #include "application.hpp"
 
-Geometry *CreateTetraeder()
+Model *CreateTetraeder()
 {
-	Geometry *tetraeder = new Geometry("../img/random_shit.png");
+	Model *tetraeder = new Model("../img/random_shit.png");
 
 	glm::vec3 p0(-0.6f, -0.6f, 0.39f);
 	glm::vec3 p1(0.6f, -0.6f, 0.39f);
@@ -17,9 +17,9 @@ Geometry *CreateTetraeder()
 	return tetraeder;
 }
 
-Geometry *CreateChess()
+Model *CreateChess()
 {
-	Geometry *chessBoard = new Geometry("../img/chess_board.png");
+	Model *chessBoard = new Model("../img/chess_board.png");
 
 	glm::vec3 p1 = glm::vec3(-25, -3, -25);
 	glm::vec3 p2 = glm::vec3(25, -3, -25);
@@ -43,9 +43,9 @@ Geometry *CreateChess()
 	return chessBoard;
 }
 
-Geometry *CreateLight()
+Model *CreateLight()
 {
-	Geometry *tetraeder = new Geometry("../img/random_shit.png");
+	Model *tetraeder = new Model("../img/random_shit.png");
 
 	glm::vec3 p0(9, 9, 9);
 	glm::vec3 p1(11, 9, 9);
@@ -66,13 +66,13 @@ int Application::Run()
 {
 	SDL_Event event;
 
-	Geometry *tetraeder = CreateTetraeder();
+	Model *tetraeder = CreateTetraeder();
 
-	renderer_.AddGeometry(tetraeder);
+	renderer_.AddModel(tetraeder);
 
-	renderer_.AddGeometry(CreateChess());
+	renderer_.AddModel(CreateChess());
 
-	renderer_.AddGeometry(CreateLight());
+	renderer_.AddModel(CreateLight());
 
 	glm::vec2 cameraMovement = glm::vec2();
 

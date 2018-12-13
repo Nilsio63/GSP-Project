@@ -6,7 +6,7 @@ int Application::Run()
 {
 	SDL_Event event;
 
-	Model *donut = new Model("../models/Donut/Donut.obj");
+	Model *donut = new Model("../models/nanosuit/scene.fbx");
 
 	renderer_.AddModel(donut);
 

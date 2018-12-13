@@ -11,6 +11,7 @@
 unsigned int TextureFromFile(const char *path, const std::string &directory)
 {
 	std::string filename = std::string(path);
+	filename = filename.substr(filename.find_last_of('\\') + 1, filename.length());
 	filename = directory + '/' + filename;
 
 	unsigned int textureID;

@@ -40,9 +40,6 @@ add_executable(main
 
   src/SkyboxFSCode.glsl
   src/SkyboxVSCode.glsl
-
-  img/chess_board.png
-  img/random_shit.png
   )
 
 find_package(GLEW REQUIRED)

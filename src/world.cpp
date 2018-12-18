@@ -20,8 +20,8 @@ void LogShader(int shaderId, char *shaderName)
 	delete(buffer);
 }
 
-World::World(Color ambientColor) : camera_(glm::vec3(0, 0, -3), glm::vec3(0, 0, 1)),
-	ambientColor_(ambientColor), ambientStrength_(0.1), defaultProgram_("../src/VertexShaderCode.glsl", "../src/FragmentShaderCode.glsl"),
+World::World(Color ambientColor) : camera_(glm::vec3(0, 14, -3), glm::vec3(0, 0, 1)),
+	defaultProgram_("../src/VertexShaderCode.glsl", "../src/FragmentShaderCode.glsl"),
 	skyboxProgram_("../src/SkyboxVSCode.glsl", "../src/SkyboxFSCode.glsl")
 {
 	
@@ -37,9 +37,6 @@ void World::Render()
 
 
 	defaultProgram_.Use();
-	
-	defaultProgram_.SetUniform("ambientStrength", ambientStrength_);
-	defaultProgram_.SetUniform("ambientColor", (float)ambientColor_.r / 255, (float)ambientColor_.g / 255, (float)ambientColor_.b / 255);
 
 	defaultProgram_.SetUniform("dirLight.direction", 1, -1, -1);
 	defaultProgram_.SetUniform("dirLight.ambient", 0.0f, 0.1f, 0.0f);

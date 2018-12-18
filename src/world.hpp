@@ -21,9 +21,6 @@ private:
 	Skybox skybox_;
 
 	std::vector<Model *> models_;
-
-	Color ambientColor_;
-	float ambientStrength_;
 public:
 	World(Color ambientColor);
 	~World();

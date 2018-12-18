@@ -1,6 +1,6 @@
 #include "application.hpp"
 
-Application::Application() : window_(1024, 768), renderer_(Color(255, 255, 255)) {}
+Application::Application() : window_(1024, 768), world_(Color(255, 255, 255)) {}
 
 int Application::Run()
 {
@@ -8,8 +8,7 @@ int Application::Run()
 
 	Model *donut = new Model("../models/nanosuit/scene.fbx");
 
-
-	renderer_.AddModel(donut);
+	world_.AddModel(donut);
 
 	glm::vec2 cameraMovement = glm::vec2();
 
@@ -32,7 +31,7 @@ int Application::Run()
 				SDL_GetRelativeMouseState(&x, &y);
 
 				if (!SDL_GetKeyboardState(nullptr)[SDL_SCANCODE_LCTRL] && !SDL_GetKeyboardState(nullptr)[SDL_SCANCODE_RCTRL])
-					renderer_.GetCamera()->Rotate(x, -y);
+					world_.GetCamera()->Rotate(x, -y);
 			}
 			else if (event.key.type == SDL_KEYDOWN)
 			{
@@ -41,7 +40,7 @@ int Application::Run()
 				switch (event.key.keysym.sym)
 				{
 				case SDLK_t:
-					renderer_.ToggleFlashLight();
+					world_.ToggleFlashLight();
 					break;
 				case SDLK_w:
 					cameraMovement.y = 1;
@@ -113,7 +112,7 @@ int Application::Run()
 		}
 
 		//TODO WEG!!!
-		renderer_.GetCamera()->Move(cameraMovement.x, cameraMovement.y);
+		world_.GetCamera()->Move(cameraMovement.x, cameraMovement.y);
 
 		donut->Translate(glm::vec3(donutMovement, 0));
 		donut->Rotate(donutRotation.x, glm::vec3(1, 0, 0));
@@ -122,7 +121,7 @@ int Application::Run()
 		
 		window_.Clear();
 
-		renderer_.Render();
+		world_.Render();
 
 		window_.Swap();
 	}

@@ -1,4 +1,4 @@
-#include "renderer.hpp"
+#include "world.hpp"
 
 #include <iostream>
 #include "stb_image.h"
@@ -20,19 +20,19 @@ void LogShader(int shaderId, char *shaderName)
 	delete(buffer);
 }
 
-Renderer::Renderer(Color ambientColor) : camera_(glm::vec3(0, 0, -3), glm::vec3(0, 0, 1)),
+World::World(Color ambientColor) : camera_(glm::vec3(0, 0, -3), glm::vec3(0, 0, 1)),
 	ambientColor_(ambientColor), ambientStrength_(0.1), defaultProgram_("../src/VertexShaderCode.glsl", "../src/FragmentShaderCode.glsl"),
 	skyboxProgram_("../src/SkyboxVSCode.glsl", "../src/SkyboxFSCode.glsl")
 {
 	
 }
 
-Renderer::~Renderer()
+World::~World()
 {
 	defaultProgram_.~ShaderProgram();
 }
 
-void Renderer::Render()
+void World::Render()
 {
 
 
@@ -92,7 +92,7 @@ void Renderer::Render()
 	LogShader(defaultProgram_.GetFragmentShader().GetShaderId(), "Fragment Shader");
 }
 
-void Renderer::AddModel(Model *model)
+void World::AddModel(Model *model)
 {
 	models_.insert(models_.end(), model);
 }

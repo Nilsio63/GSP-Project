@@ -1,7 +1,7 @@
 #ifndef APPLICATION_HPP_
 #define APPLICATION_HPP_
 
-#include "renderer.hpp"
+#include "world.hpp"
 #include "window.hpp"
 
 
@@ -9,7 +9,7 @@ class Application
 {
 private:
 	Window window_;
-	Renderer renderer_;
+	World world_;
 
 public:
 	Application();

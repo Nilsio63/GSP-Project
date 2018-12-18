@@ -1,17 +1,17 @@
-#ifndef RENDERER_HPP_
-#define RENDERER_HPP_
+#ifndef WORLD_HPP_
+#define WORLD_HPP_
 
 #include "camera.hpp"
 #include "color.hpp"
 #include "model.hpp"
 #include "shaderProgram.hpp"
 #include "skybox.hpp"
-#include <vector>
 
+#include <vector>
 
 #include <GL/glew.h>
 
-class Renderer
+class World
 {
 private:
 	bool flashLightOn = true;
@@ -20,14 +20,13 @@ private:
 	ShaderProgram skyboxProgram_;
 	Skybox skybox_;
 
-
 	std::vector<Model *> models_;
 
 	Color ambientColor_;
 	float ambientStrength_;
 public:
-	Renderer(Color ambientColor);
-	~Renderer();
+	World(Color ambientColor);
+	~World();
 
 	Camera *GetCamera() { return &camera_; }
 	void ToggleFlashLight() { flashLightOn = !flashLightOn; }
@@ -35,4 +34,4 @@ public:
 	void AddModel(Model *model);
 };
 
-#endif  // RENDERER_HPP_
+#endif  // WORLD_HPP_

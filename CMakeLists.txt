@@ -17,8 +17,6 @@ add_executable(main
   src/mesh.hpp
   src/model.cpp
   src/model.hpp
-  src/renderer.cpp
-  src/renderer.hpp
   src/shader.cpp
   src/shader.hpp
   src/shaderProgram.cpp
@@ -32,6 +30,8 @@ add_executable(main
   src/vertex.hpp
   src/window.cpp
   src/window.hpp
+  src/world.cpp
+  src/world.hpp
 
   src/stb_image.h
 

@@ -23,6 +23,8 @@ add_executable(main
   src/shader.hpp
   src/shaderProgram.cpp
   src/shaderProgram.hpp
+  src/skybox.cpp
+  src/skybox.hpp
   src/stb_image.hpp
   src/texture.hpp
   src/triangle.hpp

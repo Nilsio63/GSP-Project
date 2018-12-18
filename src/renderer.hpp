@@ -5,7 +5,7 @@
 #include "color.hpp"
 #include "model.hpp"
 #include "shaderProgram.hpp"
-
+#include "skybox.hpp"
 #include <vector>
 
 
@@ -18,6 +18,7 @@ private:
 	Camera camera_;
 	ShaderProgram defaultProgram_;
 	ShaderProgram skyboxProgram_;
+	Skybox skybox_;
 
 
 	std::vector<Model *> models_;

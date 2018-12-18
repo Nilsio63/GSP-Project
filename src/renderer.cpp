@@ -46,13 +46,13 @@ void Renderer::Render()
 	glUniform3f(glGetUniformLocation(programId_, "dirLight.diffuse"), 0.0f, 0.2f, 0.0f);
 	glUniform3f(glGetUniformLocation(programId_, "dirLight.specular"), 0.0f, 0.4f, 0.0f);
 
-	glUniform3f(glGetUniformLocation(programId_, "pointLight.position"), 10, 10, 10);
+	glUniform3f(glGetUniformLocation(programId_, "pointLight.position"), 3, -10, 2);
 	glUniform3f(glGetUniformLocation(programId_, "pointLight.ambient"), 0.1f, 0.0f, 0.0f);
 	glUniform3f(glGetUniformLocation(programId_, "pointLight.diffuse"), 0.5f, 0.0f, 0.0f);
 	glUniform3f(glGetUniformLocation(programId_, "pointLight.specular"), 0.75f, 0.0f, 0.0f);
 	glUniform1f(glGetUniformLocation(programId_, "pointLight.constant"), 0.1f);
-	glUniform1f(glGetUniformLocation(programId_, "pointLight.linear"), 0.0045f);
-	glUniform1f(glGetUniformLocation(programId_, "pointLight.quadratic"), 0.00075f);
+	glUniform1f(glGetUniformLocation(programId_, "pointLight.linear"), 0.045f);
+	glUniform1f(glGetUniformLocation(programId_, "pointLight.quadratic"), 0.0075f);
 
 	if (flashLightOn)
 	{
@@ -79,16 +79,16 @@ void Renderer::Render()
 
 	camera_.ApplyCamera(programId_);
 
-	for (int i = 0; i < geometries_.size(); i++)
+	for (int i = 0; i < models_.size(); i++)
 	{
-		geometries_[i]->Render(programId_);
+		models_[i]->Render(programId_);
 	}
 
 	LogShader(vertexShader_.GetShaderId(), "Vertex Shader");
 	LogShader(fragmentShader_.GetShaderId(), "Fragment Shader");
 }
 
-void Renderer::AddGeometry(Geometry *geometry)
+void Renderer::AddModel(Model *model)
 {
-	geometries_.insert(geometries_.end(), geometry);
+	models_.insert(models_.end(), model);
 }

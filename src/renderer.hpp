@@ -3,7 +3,7 @@
 
 #include "camera.hpp"
 #include "color.hpp"
-#include "geometry.hpp"
+#include "model.hpp"
 #include "shader.hpp"
 
 #include <vector>
@@ -19,7 +19,7 @@ private:
 	Shader fragmentShader_;
 	GLuint programId_;
 
-	std::vector<Geometry *> geometries_;
+	std::vector<Model *> models_;
 
 	Color ambientColor_;
 	float ambientStrength_;
@@ -30,7 +30,7 @@ public:
 	Camera *GetCamera() { return &camera_; }
 	void ToggleFlashLight() { flashLightOn = !flashLightOn; }
 	void Render();
-	void AddGeometry(Geometry *geometry);
+	void AddModel(Model *model);
 };
 
 #endif  // RENDERER_HPP_

@@ -13,14 +13,11 @@ std::string ReadCodeFromFile(const char *fileName)
 		std::istreambuf_iterator<char>());
 }
 
-Shader::Shader(GLenum shaderType)
+Shader::Shader(GLenum shaderType, const char* path)
 {
 	std::string code;
 
-	if (shaderType == GL_VERTEX_SHADER)
-		code = ReadCodeFromFile("../src/VertexShaderCode.glsl");
-	else
-		code = ReadCodeFromFile("../src/FragmentShaderCode.glsl");
+	code = ReadCodeFromFile(path);
 
 	shaderId_ = glCreateShader(shaderType);
 

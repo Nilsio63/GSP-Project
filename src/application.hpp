@@ -4,6 +4,7 @@
 #include "renderer.hpp"
 #include "window.hpp"
 
+
 class Application
 {
 private:

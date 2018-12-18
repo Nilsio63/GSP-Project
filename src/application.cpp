@@ -8,6 +8,7 @@ int Application::Run()
 
 	Model *donut = new Model("../models/nanosuit/scene.fbx");
 
+
 	renderer_.AddModel(donut);
 
 	glm::vec2 cameraMovement = glm::vec2();
@@ -17,6 +18,7 @@ int Application::Run()
 
 	while (true)
 	{
+		//TODO Controller erstellen der die Interaktionen verarbeitet
 		while (SDL_PollEvent(&event))
 		{
 			if (event.quit.type == SDL_QUIT)
@@ -110,12 +112,14 @@ int Application::Run()
 			}
 		}
 
+		//TODO WEG!!!
 		renderer_.GetCamera()->Move(cameraMovement.x, cameraMovement.y);
 
 		donut->Translate(glm::vec3(donutMovement, 0));
 		donut->Rotate(donutRotation.x, glm::vec3(1, 0, 0));
 		donut->Rotate(donutRotation.y, glm::vec3(0, 1, 0));
 
+		
 		window_.Clear();
 
 		renderer_.Render();

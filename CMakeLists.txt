@@ -21,6 +21,10 @@ add_executable(main
   src/renderer.hpp
   src/shader.cpp
   src/shader.hpp
+  src/shaderProgram.cpp
+  src/shaderProgram.hpp
+  src/skybox.cpp
+  src/skybox.hpp
   src/stb_image.hpp
   src/texture.hpp
   src/triangle.hpp
@@ -33,6 +37,9 @@ add_executable(main
 
   src/FragmentShaderCode.glsl
   src/VertexShaderCode.glsl
+
+  src/SkyboxFSCode.glsl
+  src/SkyboxVSCode.glsl
 
   img/chess_board.png
   img/random_shit.png

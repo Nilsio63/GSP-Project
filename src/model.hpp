@@ -2,6 +2,7 @@
 #define MODEL_HPP_
 
 #include "mesh.hpp"
+#include "shaderProgram.hpp"
 
 #include <string>
 #include <vector>
@@ -26,7 +27,7 @@ private:
 public:
 	Model(const std::string modelPath);
 
-	void Render(int programId);
+	void Render(ShaderProgram *program);
 
 	void Rotate(float degree, glm::vec3 rotationAxis);
 	void Translate(glm::vec3 offset);

@@ -3,10 +3,12 @@
 
 #include <GL/glew.h>
 #include <glm/glm.hpp>
+#include "shaderProgram.hpp"
 
 class Camera
 {
 private:
+	//TODO Toggel zwischen Fliegen und laufen
 	glm::vec3 position; // e
 	glm::vec3 target; // c
 	glm::vec3 cameraUp; // u
@@ -26,8 +28,10 @@ public:
 
 	glm::vec3 GetPosition() { return position; }
 	glm::vec3 GetTarget() { return target; }
+	glm::mat4 GetView() { return view; }
+	glm::mat4 GetProjektion() { return projection; }
 
-	void ApplyCamera(int programId);
+	void ApplyCamera(ShaderProgram *program);
 	void Rotate(int x, int y);
 	void Move(float sideways, float forward);
 };

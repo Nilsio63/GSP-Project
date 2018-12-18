@@ -27,15 +27,16 @@ Camera::Camera(glm::vec3 pos, glm::vec3 targ)
 	Recalculate();
 }
 
-void Camera::ApplyCamera(int programId)
+void Camera::ApplyCamera(ShaderProgram *program )
 {
 	float currentFrame = (float)SDL_GetTicks() / 1000;
 	deltaTime = currentFrame - lastFrame;
 	lastFrame = currentFrame;
 
-	glUniformMatrix4fv(glGetUniformLocation(programId, "viewMatrix"), 1, GL_FALSE, &view[0][0]);
-	glUniformMatrix4fv(glGetUniformLocation(programId, "projectionMatrix"), 1, GL_FALSE, &projection[0][0]);
-	glUniform3f(glGetUniformLocation(programId, "cameraPos"), position.x, position.y, position.z);
+	program->SetUniform("viewMatrix", &view);
+	program->SetUniform("projectionMatrix", &projection);
+	program->SetUniform("cameraPos", position.x, position.y, position.z);
+
 }
 
 void Camera::Rotate(int x, int y)

@@ -192,16 +192,15 @@ Model::Model(const std::string modelPath)
 	LoadModel(modelPath);
 }
 
-void Model::Render(int programId)
+void Model::Render(ShaderProgram *program)
 {
 	if (meshes_.empty())
 		return;
-
-	glUniformMatrix4fv(glGetUniformLocation(programId, "transformationMatrix"), 1, GL_FALSE, &transformationMatrix[0][0]);
+	program->SetUniform("transformationMatrix", &transformationMatrix);
 
 	for (int i = 0; i < meshes_.size(); i++)
 	{
-		meshes_[i].Draw(programId);
+		meshes_[i].Draw(program);
 	}
 }
 

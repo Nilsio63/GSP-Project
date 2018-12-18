@@ -4,9 +4,10 @@
 #include "camera.hpp"
 #include "color.hpp"
 #include "model.hpp"
-#include "shader.hpp"
+#include "shaderProgram.hpp"
 
 #include <vector>
+
 
 #include <GL/glew.h>
 
@@ -15,9 +16,9 @@ class Renderer
 private:
 	bool flashLightOn = true;
 	Camera camera_;
-	Shader vertexShader_;
-	Shader fragmentShader_;
-	GLuint programId_;
+	ShaderProgram defaultProgram_;
+	ShaderProgram skyboxProgram_;
+
 
 	std::vector<Model *> models_;
 

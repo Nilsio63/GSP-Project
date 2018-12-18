@@ -3,6 +3,7 @@
 
 #include "texture.hpp"
 #include "vertex.hpp"
+#include "shaderProgram.hpp"
 
 #include <string>
 #include <vector>
@@ -22,7 +23,7 @@ public:
 
 	Mesh(std::vector<Vertex> vertices, std::vector<unsigned int> indices, std::vector<Texture> textures);
 
-	void Draw(int programId);
+	void Draw(ShaderProgram *program);
 };
 
 #endif  // MESH_HPP_

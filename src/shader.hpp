@@ -8,7 +8,7 @@ class Shader
 private:
 	GLuint shaderId_;
 public:
-	Shader(GLenum shaderType);
+	Shader(GLenum shaderType, const char * path);
 	~Shader();
 
 	GLuint GetShaderId() { return shaderId_; }

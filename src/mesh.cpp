@@ -11,7 +11,7 @@ Mesh::Mesh(std::vector<Vertex> vertices, std::vector<unsigned int> indices, std:
 	SetupMesh();
 }
 
-void Mesh::Draw(int programId)
+void Mesh::Draw(ShaderProgram *program)
 {
 	unsigned int diffuseNr = 1;
 	unsigned int specularNr = 1;
@@ -32,7 +32,8 @@ void Mesh::Draw(int programId)
 		else if (name == "texture_height")
 			number = std::to_string(heightNr++);
 
-		glUniform1i(glGetUniformLocation(programId, (name + number).c_str()), i);
+		program->SetUniform((name + number).c_str(), (int)i);
+	
 		glBindTexture(GL_TEXTURE_2D, textures[i].id);
 	}
 

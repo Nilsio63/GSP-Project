@@ -17,12 +17,11 @@ void Camera::Recalculate()
 	view = glm::lookAt(position, position + target, cameraUp);
 }
 
-Camera::Camera(glm::vec3 pos, glm::vec3 targ)
+Camera::Camera(glm::vec3 pos, float pitch, float yaw) : pitch(pitch), yaw(yaw)
 {
-	projection = glm::perspective(glm::radians(45.0f), (float)1024 / 768, 0.1f, 100.0f);
+	projection = glm::perspective(glm::radians(45.0f), (float)1024 / 768, 0.1f, 500.0f);
 
 	position = pos;
-	target = targ;
 
 	Recalculate();
 }

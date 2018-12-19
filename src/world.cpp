@@ -20,7 +20,7 @@ void LogShader(int shaderId, char *shaderName)
 	delete(buffer);
 }
 
-World::World(Color ambientColor) : camera_(glm::vec3(0, 14, -3), glm::vec3(0, 0, 1)),
+World::World(Color ambientColor) : camera_(glm::vec3(0, 10, 20), 0, -90),
 	defaultProgram_("../src/VertexShaderCode.glsl", "../src/FragmentShaderCode.glsl"),
 	skyboxProgram_("../src/SkyboxVSCode.glsl", "../src/SkyboxFSCode.glsl")
 {

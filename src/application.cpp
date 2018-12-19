@@ -6,10 +6,10 @@
 
 Application::Application() : window_(1024, 768), world_(Color(255, 255, 255)) {}
 
-float RandF(int min, int max)
+float RandF(float minF, float maxF)
 {
-	min *= 100;
-	max *= 100;
+	int min = (int)(minF * 100.0f);
+	int max = (int)(maxF * 100.0f);
 
 	return (rand() % (max - min + 1) + min) / 100.0f;
 }
@@ -24,6 +24,7 @@ void AddDonuts(World *world)
 
 		m->Translate(glm::vec3(RandF(-20, 20), RandF(-20, 20), RandF(-20, 20)));
 		m->Rotate(RandF(0, 360), glm::vec3(RandF(-1, 1), RandF(-1, 1), RandF(-1, 1)));
+		m->Scale(RandF(0.25f, 3));
 
 		world->AddModel(m);
 	}

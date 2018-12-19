@@ -4,6 +4,7 @@
 #include "camera.hpp"
 #include "color.hpp"
 #include "model.hpp"
+#include "player.hpp"
 #include "shaderProgram.hpp"
 #include "skybox.hpp"
 
@@ -14,19 +15,18 @@
 class World
 {
 private:
-	bool flashLightOn = true;
-	Camera camera_;
+	Player player_;
 	ShaderProgram defaultProgram_;
 	ShaderProgram skyboxProgram_;
 	Skybox skybox_;
 
 	std::vector<Model *> models_;
 public:
-	World(Color ambientColor);
+	World() : defaultProgram_("../src/VertexShaderCode.glsl", "../src/FragmentShaderCode.glsl"), skyboxProgram_("../src/SkyboxVSCode.glsl", "../src/SkyboxFSCode.glsl") {}
 	~World();
 
-	Camera *GetCamera() { return &camera_; }
-	void ToggleFlashLight() { flashLightOn = !flashLightOn; }
+	Camera *GetCamera() { return player_.GetCamera(); }
+	void ToggleFlashLight() { player_.ToggleFlashLight(); }
 	void Render();
 	void AddModel(Model *model);
 };

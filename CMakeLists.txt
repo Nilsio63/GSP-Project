@@ -17,6 +17,8 @@ add_executable(main
   src/mesh.hpp
   src/model.cpp
   src/model.hpp
+  src/player.cpp
+  src/player.hpp
   src/shader.cpp
   src/shader.hpp
   src/shaderProgram.cpp

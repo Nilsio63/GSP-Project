@@ -4,7 +4,7 @@
 #include <stdlib.h>
 #include <time.h>
 
-Application::Application() : window_(1024, 768), world_(Color(255, 255, 255)) {}
+Application::Application() : window_(1024, 768) {}
 
 float RandF(float minF, float maxF)
 {

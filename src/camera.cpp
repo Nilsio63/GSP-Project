@@ -70,7 +70,11 @@ void Camera::Move(float sideways, float forward)
 
 	if (forward != 0)
 	{
-		position += target * camSpeed * forward;
+		glm::vec3 t(target);
+		t.y = 0;
+		t = glm::normalize(t);
+
+		position += t * camSpeed * forward;
 	}
 
 	Recalculate();

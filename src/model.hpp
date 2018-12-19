@@ -31,6 +31,7 @@ public:
 
 	void Rotate(float degree, glm::vec3 rotationAxis);
 	void Translate(glm::vec3 offset);
+	void Scale(float factor);
 };
 
 #endif  // MODEL_HPP_

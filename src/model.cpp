@@ -219,3 +219,11 @@ void Model::Translate(glm::vec3 offset)
 
 	transformationMatrix = glm::translate(transformationMatrix, offset);
 }
+
+void Model::Scale(float factor)
+{
+	if (factor == 0)
+		return;
+
+	transformationMatrix = glm::scale(transformationMatrix, glm::vec3(factor, factor, factor));
+}

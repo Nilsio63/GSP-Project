@@ -34,14 +34,12 @@ World::~World()
 
 void World::Render()
 {
-
-
 	defaultProgram_.Use();
 
 	defaultProgram_.SetUniform("dirLight.direction", 1, -1, -1);
-	defaultProgram_.SetUniform("dirLight.ambient", 0.0f, 0.1f, 0.0f);
-	defaultProgram_.SetUniform("dirLight.diffuse", 0.0f, 0.2f, 0.0f);
-	defaultProgram_.SetUniform("dirLight.specular", 0.0f, 0.4f, 0.0f);
+	defaultProgram_.SetUniform("dirLight.ambient", 0.1f, 0.1f, 0.1f);
+	defaultProgram_.SetUniform("dirLight.diffuse", 0.3f, 0.3f, 0.3f);
+	defaultProgram_.SetUniform("dirLight.specular", 0.6f, 0.6f, 0.6f);
 
 	defaultProgram_.SetUniform("pointLight.position", 3, -10, 2);
 	defaultProgram_.SetUniform("pointLight.ambient", 0.1f, 0.0f, 0.0f);

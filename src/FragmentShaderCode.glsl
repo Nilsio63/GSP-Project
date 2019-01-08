@@ -43,12 +43,15 @@ layout(location = 0) out vec4 color;
 in vec3 transformedPos;
 in vec3 transformedNormal;
 in vec2 textureCoord;
+in float visibility;
 
 uniform sampler2D objectTexture;
 
 uniform DirLight dirLight;
 uniform PointLight pointLight;
 uniform SpotLight spotLight;
+
+uniform vec3 skyColor;
 
 uniform vec3 cameraPos;
 
@@ -134,5 +137,6 @@ void main()
 
 	// Complete
 	color = texture(objectTexture, textureCoord) * vec4(lightColor, 1);
+	color = mix(vec4(skyColor,1.0),color, visibility);
 	//color = vec4(transformedNormal, 1);
 };

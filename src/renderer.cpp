@@ -38,6 +38,7 @@ void Renderer::Render()
 
 	defaultProgram_.Use();
 	
+	defaultProgram_.SetUniform("skyColor", 0.5f, 0.5f, 0.5f);
 	defaultProgram_.SetUniform("ambientStrength", ambientStrength_);
 	defaultProgram_.SetUniform("ambientColor", (float)ambientColor_.r / 255, (float)ambientColor_.g / 255, (float)ambientColor_.b / 255);
 

@@ -19,7 +19,7 @@ void Camera::Recalculate()
 
 Camera::Camera(glm::vec3 pos, glm::vec3 targ)
 {
-	projection = glm::perspective(glm::radians(45.0f), (float)1024 / 768, 0.1f, 100.0f);
+	projection = glm::perspective(glm::radians(45.0f), (float)1024 / 768, 0.1f, 1000.0f);
 
 	position = pos;
 	target = targ;

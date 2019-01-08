@@ -29,7 +29,9 @@ void World::Render()
 {
 	defaultProgram_.Use();
 
-	defaultProgram_.SetUniform("skyColor", 0.5f, 0.5f, 0.5f);
+	glm::vec3 skyColor = glm::vec3(0.5f, 0.5f, 0.5f);
+
+	defaultProgram_.SetUniform("skyColor", skyColor.x, skyColor.y, skyColor.z);
 	defaultProgram_.SetUniform("dirLight.direction", 1, -1, -1);
 	defaultProgram_.SetUniform("dirLight.ambient", 0.1f, 0.1f, 0.1f);
 	defaultProgram_.SetUniform("dirLight.diffuse", 0.3f, 0.3f, 0.3f);
@@ -51,7 +53,7 @@ void World::Render()
 	}
 	
 	glm::mat4 skyview = glm::mat4(glm::mat3(GetCamera()->GetView()));
-	skybox_.Render(&skyboxProgram_, skyview, GetCamera()->GetProjektion());
+	skybox_.Render(&skyboxProgram_, skyview, GetCamera()->GetProjektion(), skyColor);
 
 	LogShader(defaultProgram_.GetVertexShader().GetShaderId(), "Vertex Shader");
 	LogShader(defaultProgram_.GetFragmentShader().GetShaderId(), "Fragment Shader");

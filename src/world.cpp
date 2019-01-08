@@ -29,6 +29,7 @@ void World::Render()
 {
 	defaultProgram_.Use();
 
+	defaultProgram_.SetUniform("skyColor", 0.5f, 0.5f, 0.5f);
 	defaultProgram_.SetUniform("dirLight.direction", 1, -1, -1);
 	defaultProgram_.SetUniform("dirLight.ambient", 0.1f, 0.1f, 0.1f);
 	defaultProgram_.SetUniform("dirLight.diffuse", 0.3f, 0.3f, 0.3f);

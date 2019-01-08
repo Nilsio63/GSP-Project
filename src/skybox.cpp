@@ -75,7 +75,7 @@ Skybox::~Skybox() {
 
 }
 
-void Skybox::Render(ShaderProgram *program, glm::mat4 view,glm::mat4 projektion)
+void Skybox::Render(ShaderProgram *program, glm::mat4 view,glm::mat4 projektion, glm::vec3 skyColor)
 {
 	program->SetUniform("skybox", 0);
 	
@@ -83,6 +83,7 @@ void Skybox::Render(ShaderProgram *program, glm::mat4 view,glm::mat4 projektion)
 	program->Use();
 	program->SetUniform("view", &view);
 	program->SetUniform("projection", &projektion);
+	program->SetUniform("skyColor", skyColor.x, skyColor.y, skyColor.z);
 
 	// skybox cube
 	glBindVertexArray(skyboxVAO);

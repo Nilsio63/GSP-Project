@@ -1,5 +1,5 @@
 #ifndef SKYBOX_HPP_
-#define SKYBOX_HP
+#define SKYBOX_HPP_
 
 #include <GL/glew.h>
 #include <glm/glm.hpp>

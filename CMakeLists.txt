@@ -17,8 +17,8 @@ add_executable(main
   src/mesh.hpp
   src/model.cpp
   src/model.hpp
-  src/renderer.cpp
-  src/renderer.hpp
+  src/player.cpp
+  src/player.hpp
   src/shader.cpp
   src/shader.hpp
   src/shaderProgram.cpp
@@ -32,6 +32,8 @@ add_executable(main
   src/vertex.hpp
   src/window.cpp
   src/window.hpp
+  src/world.cpp
+  src/world.hpp
 
   src/stb_image.h
 
@@ -40,9 +42,6 @@ add_executable(main
 
   src/SkyboxFSCode.glsl
   src/SkyboxVSCode.glsl
-
-  img/chess_board.png
-  img/random_shit.png
   )
 
 find_package(GLEW REQUIRED)

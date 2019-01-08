@@ -1,20 +1,49 @@
 #include "application.hpp"
 
-Application::Application() : window_(1024, 768), renderer_(Color(255, 255, 255)) {}
+#include <stdio.h>
+#include <stdlib.h>
+#include <time.h>
+
+Application::Application() : window_(1024, 768) {}
+
+float RandF(float minF, float maxF)
+{
+	int min = (int)(minF * 100.0f);
+	int max = (int)(maxF * 100.0f);
+
+	return (rand() % (max - min + 1) + min) / 100.0f;
+}
+
+void AddDonuts(World *world)
+{
+	srand(time(NULL));
+
+	for (int i = 0; i < 10; i++)
+	{
+		Model *m = new Model("../models/Donut/Donut.obj");
+
+		m->Translate(glm::vec3(RandF(-20, 20), RandF(-20, 20), RandF(-20, 20)));
+		m->Rotate(RandF(0, 360), glm::vec3(RandF(-1, 1), RandF(-1, 1), RandF(-1, 1)));
+		m->Scale(RandF(0.25f, 3));
+
+		world->AddModel(m);
+	}
+}
 
 int Application::Run()
 {
 	SDL_Event event;
 
-	Model *donut = new Model("../models/nanosuit/scene.fbx");
+	Model *controlModel = new Model("../models/nanosuit/scene.fbx");
 
+	world_.AddModel(controlModel);
 
-	renderer_.AddModel(donut);
+	AddDonuts(&world_);
 
 	glm::vec2 cameraMovement = glm::vec2();
 
-	glm::vec2 donutMovement = glm::vec2();
-	glm::vec2 donutRotation = glm::vec2();
+	glm::vec2 modelMovement = glm::vec2();
+	glm::vec2 modelRotation = glm::vec2();
 
 	while (true)
 	{
@@ -32,7 +61,7 @@ int Application::Run()
 				SDL_GetRelativeMouseState(&x, &y);
 
 				if (!SDL_GetKeyboardState(nullptr)[SDL_SCANCODE_LCTRL] && !SDL_GetKeyboardState(nullptr)[SDL_SCANCODE_RCTRL])
-					renderer_.GetCamera()->Rotate(x, -y);
+					world_.GetCamera()->Rotate(x, -y);
 			}
 			else if (event.key.type == SDL_KEYDOWN)
 			{
@@ -41,7 +70,7 @@ int Application::Run()
 				switch (event.key.keysym.sym)
 				{
 				case SDLK_t:
-					renderer_.ToggleFlashLight();
+					world_.ToggleFlashLight();
 					break;
 				case SDLK_w:
 					cameraMovement.y = 1;
@@ -56,32 +85,32 @@ int Application::Run()
 					cameraMovement.x = 1;
 					break;
 				case SDLK_KP_8:
-					donutMovement.y = 0.02f;
+					modelMovement.y = 0.02f;
 					break;
 				case SDLK_KP_4:
-					donutMovement.x = -0.02f;
+					modelMovement.x = -0.02f;
 					break;
 				case SDLK_KP_2:
-					donutMovement.y = -0.02f;
+					modelMovement.y = -0.02f;
 					break;
 				case SDLK_KP_6:
-					donutMovement.x = 0.02f;
+					modelMovement.x = 0.02f;
 					break;
 				case SDLK_LEFT:
-					donutRotation.y += 0.25f;
+					modelRotation.y += 0.25f;
 					break;
 				case SDLK_RIGHT:
-					donutRotation.y -= 0.25f;
+					modelRotation.y -= 0.25f;
 					break;
 				case SDLK_UP:
-					donutRotation.x -= 0.25f;
+					modelRotation.x -= 0.25f;
 					break;
 				case SDLK_DOWN:
-					donutRotation.x += 0.25f;
+					modelRotation.x += 0.25f;
 					break;
 				case SDLK_r:
-					donutRotation.x = 0;
-					donutRotation.y = 0;
+					modelRotation.x = 0;
+					modelRotation.y = 0;
 					break;
 				}
 
@@ -102,27 +131,27 @@ int Application::Run()
 					break;
 				case SDLK_KP_8:
 				case SDLK_KP_2:
-					donutMovement.y = 0;
+					modelMovement.y = 0;
 					break;
 				case SDLK_KP_4:
 				case SDLK_KP_6:
-					donutMovement.x = 0;
+					modelMovement.x = 0;
 					break;
 				}
 			}
 		}
 
 		//TODO WEG!!!
-		renderer_.GetCamera()->Move(cameraMovement.x, cameraMovement.y);
+		world_.GetCamera()->Move(cameraMovement.x, cameraMovement.y);
 
-		donut->Translate(glm::vec3(donutMovement, 0));
-		donut->Rotate(donutRotation.x, glm::vec3(1, 0, 0));
-		donut->Rotate(donutRotation.y, glm::vec3(0, 1, 0));
+		controlModel->Translate(glm::vec3(modelMovement, 0));
+		controlModel->Rotate(modelRotation.x, glm::vec3(1, 0, 0));
+		controlModel->Rotate(modelRotation.y, glm::vec3(0, 1, 0));
 
 		
 		window_.Clear();
 
-		renderer_.Render();
+		world_.Render();
 
 		window_.Swap();
 	}

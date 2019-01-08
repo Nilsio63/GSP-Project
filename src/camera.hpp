@@ -8,7 +8,6 @@
 class Camera
 {
 private:
-	//TODO Toggel zwischen Fliegen und laufen
 	glm::vec3 position; // e
 	glm::vec3 target; // c
 	glm::vec3 cameraUp; // u
@@ -19,12 +18,12 @@ private:
 	float deltaTime = 0.0f;
 	float lastFrame = 0.0f;
 
-	float pitch = 0.0f;
-	float yaw = 90.0f;
+	float pitch;
+	float yaw;
 
 	void Recalculate();
 public:
-	Camera(glm::vec3 pos, glm::vec3 targ);
+	Camera(glm::vec3 pos, float pitch, float yaw);
 
 	glm::vec3 GetPosition() { return position; }
 	glm::vec3 GetTarget() { return target; }

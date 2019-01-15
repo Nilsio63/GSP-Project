@@ -16,6 +16,10 @@ Window::Window(unsigned int width, unsigned int height)
 	SDL_GL_SetAttribute(SDL_GL_DOUBLEBUFFER, 1);
 	SDL_GL_CreateContext(window_);
 
+	//Fogg 2.0
+	glClearColor(0.5, 0.5, 0.5, 1);
+	glClearDepth(1);
+
 	glEnable(GL_DEPTH_TEST);
 
 	glewExperimental = GL_TRUE;

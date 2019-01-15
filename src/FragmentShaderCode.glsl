@@ -43,7 +43,7 @@ layout(location = 0) out vec4 color;
 in vec3 transformedPos;
 in vec3 transformedNormal;
 in vec2 textureCoord;
-in float visibility;
+in vec4 viewSpace;
 
 uniform sampler2D objectTexture;
 
@@ -54,6 +54,9 @@ uniform SpotLight spotLight;
 uniform vec3 skyColor;
 
 uniform vec3 cameraPos;
+
+const vec3 fogColor = vec3(0.5,0.5,0.5);
+const float FogDensity = 0.03;
 
 vec3 CalcDirLight(DirLight light, vec3 norm, vec3 view)
 {
@@ -134,9 +137,20 @@ void main()
 	vec3 lightColor = CalcDirLight(dirLight, norm, view);
 	lightColor += CalcPointLight(pointLight, norm, view);
 	lightColor += CalcSpotLight(spotLight, norm, view);
+	//fog
+
+	float dist = 0;
+	float fogFactor = 0;
+
+	//rangebased 
+	dist = length(viewSpace);
+
+	//expo fog 2
+	fogFactor = 1.0/exp((dist*FogDensity)*(dist*FogDensity));
+	fogFactor = clamp(fogFactor,0.0, 1.0);
 
 	// Complete
 	color = texture(objectTexture, textureCoord) * vec4(lightColor, 1);
-	color = mix(vec4(skyColor,1.0),color, visibility);
+	color = mix(vec4(fogColor,1.0),color, fogFactor);
 	//color = vec4(transformedNormal, 1);
 };

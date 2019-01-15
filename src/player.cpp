@@ -1,5 +1,15 @@
 #include "player.hpp"
 
+void Player::Move(float sideways, float forward)
+{
+	camera_.Move(sideways, forward);
+}
+
+void Player::Rotate(int x, int y)
+{
+	camera_.Rotate(x, y);
+}
+
 void Player::Render(ShaderProgram * program)
 {
 	if (flashLightOn)

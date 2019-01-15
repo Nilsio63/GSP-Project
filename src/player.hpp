@@ -14,6 +14,8 @@ public:
 
 	Camera *GetCamera() { return &camera_; }
 	void ToggleFlashLight() { flashLightOn = !flashLightOn; }
+	void Move(float sideways, float forward);
+	void Rotate(int x, int y);
 	void Render(ShaderProgram *program);
 };
 

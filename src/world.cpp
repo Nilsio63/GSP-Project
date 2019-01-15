@@ -52,8 +52,8 @@ void World::Render()
 		models_[i]->Render(&defaultProgram_);
 	}
 	
-	glm::mat4 skyview = glm::mat4(glm::mat3(GetCamera()->GetView()));
-	skybox_.Render(&skyboxProgram_, skyview, GetCamera()->GetProjektion(), skyColor);
+	glm::mat4 skyview = glm::mat4(glm::mat3(player_.GetCamera()->GetView()));
+	skybox_.Render(&skyboxProgram_, skyview, player_.GetCamera()->GetProjektion(), skyColor);
 
 	LogShader(defaultProgram_.GetVertexShader().GetShaderId(), "Vertex Shader");
 	LogShader(defaultProgram_.GetFragmentShader().GetShaderId(), "Fragment Shader");

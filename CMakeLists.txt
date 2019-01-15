@@ -16,6 +16,9 @@ add_executable(main
   src/mesh.hpp
   src/model.cpp
   src/model.hpp
+  src/navCell.hpp
+  src/navMesh.hpp
+  src/navMesh.cpp
   src/player.cpp
   src/player.hpp
   src/shader.cpp

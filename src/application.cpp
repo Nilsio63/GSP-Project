@@ -61,7 +61,7 @@ int Application::Run()
 				SDL_GetRelativeMouseState(&x, &y);
 
 				if (!SDL_GetKeyboardState(nullptr)[SDL_SCANCODE_LCTRL] && !SDL_GetKeyboardState(nullptr)[SDL_SCANCODE_RCTRL])
-					world_.GetCamera()->Rotate(x, -y);
+					world_.GetPlayer()->Rotate(x, -y);
 			}
 			else if (event.key.type == SDL_KEYDOWN)
 			{
@@ -136,8 +136,7 @@ int Application::Run()
 			}
 		}
 
-		//TODO WEG!!!
-		world_.GetCamera()->Move(cameraMovement.x, cameraMovement.y);
+		world_.GetPlayer()->Move(cameraMovement.x, cameraMovement.y);
 
 		controlModel->Translate(glm::vec3(modelMovement, 0));
 		controlModel->Rotate(modelRotation.x, glm::vec3(1, 0, 0));

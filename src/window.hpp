@@ -1,8 +1,6 @@
 #ifndef WINDOW_HPP_
 #define WINDOW_HPP_
 
-#include "color.hpp"
-
 #include <SDL.h>
 
 class Window
@@ -15,7 +13,6 @@ public:
 
 	void Clear();
 	void Swap();
-	void SetBackground(Color &color);
 };
 
 #endif  // WINDOW_HPP_

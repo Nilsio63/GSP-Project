@@ -65,8 +65,6 @@ int Application::Run()
 			}
 			else if (event.key.type == SDL_KEYDOWN)
 			{
-				Color *color = nullptr;
-
 				switch (event.key.keysym.sym)
 				{
 				case SDLK_t:
@@ -113,9 +111,6 @@ int Application::Run()
 					modelRotation.y = 0;
 					break;
 				}
-
-				if (color != nullptr)
-					window_.SetBackground(*color);
 			}
 			else if (event.key.type == SDL_KEYUP)
 			{

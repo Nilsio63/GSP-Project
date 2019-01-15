@@ -11,7 +11,6 @@ add_executable(main
   src/application.hpp
   src/camera.cpp
   src/camera.hpp
-  src/color.hpp
   src/main.cpp
   src/mesh.cpp
   src/mesh.hpp

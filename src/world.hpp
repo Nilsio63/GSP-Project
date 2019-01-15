@@ -2,7 +2,6 @@
 #define WORLD_HPP_
 
 #include "camera.hpp"
-#include "color.hpp"
 #include "model.hpp"
 #include "player.hpp"
 #include "shaderProgram.hpp"

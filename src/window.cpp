@@ -21,7 +21,7 @@ Window::Window(unsigned int width, unsigned int height)
 	glewExperimental = GL_TRUE;
 	glewInit();
 
-	SetBackground(Color(50, 50, 50));
+	glClearColor(0.2, 0.2, 0.2, 1);
 }
 
 void Window::Clear()
@@ -32,9 +32,4 @@ void Window::Clear()
 void Window::Swap()
 {
 	SDL_GL_SwapWindow(window_);
-}
-
-void Window::SetBackground(Color &color)
-{
-	glClearColor((float)color.r / 255, (float)color.g / 255, (float)color.b / 255, (float)color.a / 255);
 }

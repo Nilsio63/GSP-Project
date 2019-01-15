@@ -9,7 +9,7 @@ Window::Window()
 
 	window_ =
 		SDL_CreateWindow("gsp", SDL_WINDOWPOS_UNDEFINED, SDL_WINDOWPOS_UNDEFINED,
-			1, 1, SDL_WINDOW_OPENGL | SDL_WINDOW_FULLSCREEN);
+			0, 0, SDL_WINDOW_OPENGL | SDL_WINDOW_FULLSCREEN);
 
 	SDL_ShowCursor(SDL_DISABLE);
 	SDL_SetRelativeMouseMode(SDL_TRUE);
@@ -19,10 +19,6 @@ Window::Window()
 	SDL_GL_SetAttribute(SDL_GL_CONTEXT_MINOR_VERSION, 1);
 	SDL_GL_SetAttribute(SDL_GL_DOUBLEBUFFER, 1);
 	SDL_GL_CreateContext(window_);
-
-	//Fogg 2.0
-	glClearColor(0.5, 0.5, 0.5, 1);
-	glClearDepth(1);
 
 	glEnable(GL_DEPTH_TEST);
 

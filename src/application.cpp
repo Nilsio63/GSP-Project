@@ -4,8 +4,6 @@
 #include <stdlib.h>
 #include <time.h>
 
-Application::Application() : window_(1024, 768) {}
-
 float RandF(float minF, float maxF)
 {
 	int min = (int)(minF * 100.0f);
@@ -55,13 +53,8 @@ int Application::Run()
 
 			if (event.key.type == SDL_MOUSEMOTION)
 			{
-				int x;
-				int y;
-
-				SDL_GetRelativeMouseState(&x, &y);
-
 				if (!SDL_GetKeyboardState(nullptr)[SDL_SCANCODE_LCTRL] && !SDL_GetKeyboardState(nullptr)[SDL_SCANCODE_RCTRL])
-					world_.GetPlayer()->Rotate(x, -y);
+					world_.GetPlayer()->Rotate(event.motion.xrel, -event.motion.yrel);
 			}
 			else if (event.key.type == SDL_KEYDOWN)
 			{

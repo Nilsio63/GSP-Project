@@ -1,14 +1,18 @@
 #include "window.hpp"
 
 #include <GL/glew.h>
+#include <SDL_mouse.h>
 
-Window::Window(unsigned int width, unsigned int height)
+Window::Window()
 {
 	SDL_Init(SDL_INIT_VIDEO);
 
 	window_ =
 		SDL_CreateWindow("gsp", SDL_WINDOWPOS_UNDEFINED, SDL_WINDOWPOS_UNDEFINED,
-			width, height, SDL_WINDOW_OPENGL);
+			1, 1, SDL_WINDOW_OPENGL | SDL_WINDOW_FULLSCREEN);
+
+	SDL_ShowCursor(SDL_DISABLE);
+	SDL_SetRelativeMouseMode(SDL_TRUE);
 
 	SDL_GL_SetAttribute(SDL_GL_CONTEXT_PROFILE_MASK, SDL_GL_CONTEXT_PROFILE_CORE);
 	SDL_GL_SetAttribute(SDL_GL_CONTEXT_MAJOR_VERSION, 4);

@@ -9,7 +9,7 @@ private:
 	SDL_Window* window_ = nullptr;
 
 public:
-	Window(unsigned int width, unsigned int height);
+	Window();
 
 	void Clear();
 	void Swap();

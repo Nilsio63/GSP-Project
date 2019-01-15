@@ -12,7 +12,6 @@ private:
 	World world_;
 
 public:
-	Application();
 	int Run();
 };
 

@@ -27,8 +27,6 @@ add_executable(main
   src/skybox.hpp
   src/stb_image.hpp
   src/texture.hpp
-  src/triangle.hpp
-  src/triangle.cpp
   src/vertex.hpp
   src/window.cpp
   src/window.hpp

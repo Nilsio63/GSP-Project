@@ -10,7 +10,7 @@ private:
 	bool flashLightOn = true;
 	Camera camera_;
 public:
-	Player() : camera_(glm::vec3(0, 10, 20), 0, -90) {}
+	Player() : camera_(glm::vec3(0, 1.5f, 20), 0, -90) {}
 
 	Camera *GetCamera() { return &camera_; }
 	void ToggleFlashLight() { flashLightOn = !flashLightOn; }

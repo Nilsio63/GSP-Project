@@ -38,9 +38,9 @@ int Application::Run()
 
 	world_.AddModel(controlModel);
 
-	Model *control1Model = new Model("../models/Map/Map.obj");
+	//Model *control1Model = new Model("../models/Map/Map.obj");
 
-	world_.AddModel(control1Model);
+	//world_.AddModel(control1Model);
 
 	//AddDonuts(&world_);
 

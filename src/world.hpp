@@ -9,6 +9,7 @@
 #include "skybox.hpp"
 #include "worldloader.hpp"
 
+
 #include <vector>
 
 #include <GL/glew.h>
@@ -20,17 +21,19 @@ private:
 	ShaderProgram defaultProgram_;
 	ShaderProgram skyboxProgram_;
 	Skybox skybox_;
-	WorldLoader test;
+	WorldLoader worldLoader_;
+	
 
 
 	std::vector<Model *> models_;
 public:
-	World() : defaultProgram_("../src/VertexShaderCode.glsl", "../src/FragmentShaderCode.glsl"), skyboxProgram_("../src/SkyboxVSCode.glsl", "../src/SkyboxFSCode.glsl") {}
+	World() : defaultProgram_("../src/VertexShaderCode.glsl", "../src/FragmentShaderCode.glsl"), skyboxProgram_("../src/SkyboxVSCode.glsl", "../src/SkyboxFSCode.glsl") { worldLoader_.LoadMap("../map/Map_klein.csv"); worldLoader_.AddMap(); BuildMap(); worldLoader_.~WorldLoader();}
 	~World();
 
 	Camera *GetCamera() { return player_.GetCamera(); }
 	void ToggleFlashLight() { player_.ToggleFlashLight(); }
 	void Render();
+	void BuildMap();
 	void AddModel(Model *model);
 };
 

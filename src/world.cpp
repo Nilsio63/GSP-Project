@@ -25,6 +25,13 @@ World::~World()
 	defaultProgram_.~ShaderProgram();
 }
 
+void World::BuildMap()
+{
+	for (int i = 0; i < worldLoader_.mapModels_.size(); i++)
+	{
+		AddModel(worldLoader_.mapModels_[i]);
+	}
+}
 
 void World::Render()
 {

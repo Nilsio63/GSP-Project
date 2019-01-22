@@ -1,17 +1,18 @@
 #ifndef CAMERA_HPP_
 #define CAMERA_HPP_
 
+#include "shaderProgram.hpp"
+
 #include <GL/glew.h>
 #include <glm/glm.hpp>
-#include "shaderProgram.hpp"
 
 class Camera
 {
 private:
-	glm::vec3 position; // e
-	glm::vec3 target; // c
-	glm::vec3 cameraUp; // u
-	glm::vec3 cameraRight; // s
+	glm::vec3 position;
+	glm::vec3 target;
+	glm::vec3 cameraUp;
+	glm::vec3 cameraRight;
 	glm::mat4 view;
 	glm::mat4 projection;
 
@@ -21,18 +22,21 @@ private:
 	float pitch;
 	float yaw;
 
-	void Recalculate();
+	float height_ = 2;
 public:
-	Camera(glm::vec3 pos, float pitch, float yaw);
+	Camera();
 
 	glm::vec3 GetPosition() { return position; }
 	glm::vec3 GetTarget() { return target; }
 	glm::mat4 GetView() { return view; }
 	glm::mat4 GetProjektion() { return projection; }
 
+	void SetPosition(glm::vec2 pos) { position = glm::vec3(pos.x, height_, pos.y); }
+	void SetRotation(float pitch, float yaw) { this->pitch = pitch; this->yaw = yaw; }
+
 	void ApplyCamera(ShaderProgram *program);
-	void Rotate(int x, int y);
-	void Move(float sideways, float forward);
+
+	void Recalculate();
 };
 
 #endif  // CAMERA_HPP_

@@ -23,7 +23,7 @@ private:
 
 	std::vector<Model *> models_;
 public:
-	World() : defaultProgram_("../src/VertexShaderCode.glsl", "../src/FragmentShaderCode.glsl"), skyboxProgram_("../src/SkyboxVSCode.glsl", "../src/SkyboxFSCode.glsl") {}
+	World() : defaultProgram_("../src/VertexShaderCode.glsl", "../src/FragmentShaderCode.glsl"), skyboxProgram_("../src/SkyboxVSCode.glsl", "../src/SkyboxFSCode.glsl"), player_(&navMesh_) {}
 	~World();
 
 	Player *GetPlayer() { return &player_; }

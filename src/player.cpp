@@ -1,17 +1,63 @@
 #include "player.hpp"
 
+#include <iostream>
+
+#include <SDL_timer.h>
+
+Player::Player(NavMesh *navMesh) : position(0, 20)
+{
+	navMesh_ = navMesh;
+
+	camera_.SetPosition(position);
+	camera_.SetRotation(pitch, yaw);
+
+	camera_.Recalculate();
+}
+
 void Player::Move(float sideways, float forward)
 {
-	camera_.Move(sideways, forward);
+	if (sideways == 0 && forward == 0)
+		return;
+
+	float speed = 10.0f * deltaTime;
+
+	position.x += speed * (forward * glm::cos(glm::radians(yaw)) - sideways * glm::sin(glm::radians(yaw)));
+	position.y += speed * (forward * glm::sin(glm::radians(yaw)) + sideways * glm::cos(glm::radians(yaw)));
+
+	camera_.SetPosition(position);
+
+	camera_.Recalculate();
 }
 
 void Player::Rotate(int x, int y)
 {
-	camera_.Rotate(x, y);
+	if (x == 0 && y == 0)
+		return;
+
+	float sensitivity = 0.2f;
+
+	float xOff = (float)x * sensitivity;
+	float yOff = (float)y * sensitivity;
+
+	yaw += xOff;
+	pitch += yOff;
+
+	if (pitch > 89)
+		pitch = 89;
+	else if (pitch < -89)
+		pitch = -89;
+
+	camera_.SetRotation(pitch, yaw);
+
+	camera_.Recalculate();
 }
 
 void Player::Render(ShaderProgram * program)
 {
+	float currentFrame = (float)SDL_GetTicks() / 1000;
+	deltaTime = currentFrame - lastFrame;
+	lastFrame = currentFrame;
+
 	if (flashLightOn)
 	{
 		program->SetUniform("spotLight.position", camera_.GetPosition().x - 0.5f, camera_.GetPosition().y, camera_.GetPosition().z);

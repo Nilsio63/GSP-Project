@@ -19,7 +19,7 @@ void Camera::Recalculate()
 
 Camera::Camera(glm::vec3 pos, float pitch, float yaw) : pitch(pitch), yaw(yaw)
 {
-	projection = glm::perspective(glm::radians(45.0f), (float)1024 / 768, 0.1f, 1000.0f);
+	projection = glm::perspective(glm::radians(45.0f), (float)1024 / 768, 0.8f, 500.0f);
 
 	position = pos;
 

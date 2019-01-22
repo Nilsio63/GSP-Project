@@ -25,6 +25,7 @@ World::~World()
 	defaultProgram_.~ShaderProgram();
 }
 
+
 void World::Render()
 {
 	defaultProgram_.Use();
@@ -37,8 +38,8 @@ void World::Render()
 	defaultProgram_.SetUniform("dirLight.diffuse", 0.3f, 0.3f, 0.3f);
 	defaultProgram_.SetUniform("dirLight.specular", 0.6f, 0.6f, 0.6f);
 
-	defaultProgram_.SetUniform("pointLight.position", 3, -10, 2);
-	defaultProgram_.SetUniform("pointLight.ambient", 0.1f, 0.0f, 0.0f);
+	defaultProgram_.SetUniform("pointLight.position",5 , 5, 20);
+	defaultProgram_.SetUniform("pointLight.ambient", 0.2f, 0.2f, 0.2f);
 	defaultProgram_.SetUniform("pointLight.diffuse", 0.5f, 0.0f, 0.0f);
 	defaultProgram_.SetUniform("pointLight.specular", 0.75f, 0.0f, 0.0f);
 	defaultProgram_.SetUniform("pointLight.constant", 0.1f);

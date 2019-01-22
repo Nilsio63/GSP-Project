@@ -34,7 +34,9 @@ add_executable(main
   src/window.hpp
   src/world.cpp
   src/world.hpp
-
+  src/worldloader.cpp
+  src/worldloader.hpp
+  
   src/stb_image.h
 
   src/FragmentShaderCode.glsl

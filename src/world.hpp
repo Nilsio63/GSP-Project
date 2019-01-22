@@ -7,6 +7,7 @@
 #include "player.hpp"
 #include "shaderProgram.hpp"
 #include "skybox.hpp"
+#include "worldloader.hpp"
 
 #include <vector>
 
@@ -19,6 +20,8 @@ private:
 	ShaderProgram defaultProgram_;
 	ShaderProgram skyboxProgram_;
 	Skybox skybox_;
+	WorldLoader test;
+
 
 	std::vector<Model *> models_;
 public:

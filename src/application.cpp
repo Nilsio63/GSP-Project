@@ -38,7 +38,11 @@ int Application::Run()
 
 	world_.AddModel(controlModel);
 
-	AddDonuts(&world_);
+	Model *control1Model = new Model("../models/Map/Map.obj");
+
+	world_.AddModel(control1Model);
+
+	//AddDonuts(&world_);
 
 	glm::vec2 cameraMovement = glm::vec2();
 

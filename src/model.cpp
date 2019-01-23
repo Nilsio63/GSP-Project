@@ -209,7 +209,7 @@ void Model::Rotate(float degree, glm::vec3 rotationAxis)
 	if (degree == 0)
 		return;
 
-	transformationMatrix = glm::rotate(transformationMatrix, degree / 360.0f, rotationAxis);
+	transformationMatrix = glm::rotate(transformationMatrix, glm::radians(degree), rotationAxis);
 }
 
 void Model::Translate(glm::vec3 offset)

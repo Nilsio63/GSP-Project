@@ -55,8 +55,9 @@ uniform vec3 skyColor;
 
 uniform vec3 cameraPos;
 
+
 const vec3 fogColor = vec3(0.5,0.5,0.5);
-const float FogDensity = 0.008;
+const float FogDensity = 0.05;
 
 vec3 CalcDirLight(DirLight light, vec3 norm, vec3 view)
 {
@@ -134,23 +135,20 @@ void main()
 	vec3 norm = normalize(transformedNormal);
 	vec3 view = normalize(cameraPos - transformedPos);
 
+	//light
 	vec3 lightColor = CalcDirLight(dirLight, norm, view);
 	lightColor += CalcPointLight(pointLight, norm, view);
 	lightColor += CalcSpotLight(spotLight, norm, view);
-	//fog
 
+	//fog
 	float dist = 0;
 	float fogFactor = 0;
-
-	//rangebased 
 	dist = length(viewSpace);
-
-	//expo fog 2
 	fogFactor = 1.0/exp((dist*FogDensity)*(dist*FogDensity));
 	fogFactor = clamp(fogFactor,0.0, 1.0);
-
+	
 	// Complete
 	color = texture(objectTexture, textureCoord) * vec4(lightColor, 1);
 	color = mix(vec4(fogColor,1.0),color, fogFactor);
-	//color = vec4(transformedNormal, 1);
+
 };

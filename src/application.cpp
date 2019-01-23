@@ -34,16 +34,6 @@ int Application::Run()
 {
 	SDL_Event event;
 
-	Model *controlModel = new Model("../models/nanosuit/scene.fbx");
-
-	world_.AddModel(controlModel);
-
-	//Model *control1Model = new Model("../models/Map/Map.obj");
-
-	//world_.AddModel(control1Model);
-
-	//AddDonuts(&world_);
-
 	glm::vec2 cameraMovement = glm::vec2();
 
 	glm::vec2 modelMovement = glm::vec2();
@@ -147,11 +137,6 @@ int Application::Run()
 
 		//TODO WEG!!!
 		world_.GetCamera()->Move(cameraMovement.x, cameraMovement.y);
-
-		controlModel->Translate(glm::vec3(modelMovement, 0));
-		controlModel->Rotate(modelRotation.x, glm::vec3(1, 0, 0));
-		controlModel->Rotate(modelRotation.y, glm::vec3(0, 1, 0));
-
 		
 		window_.Clear();
 

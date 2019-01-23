@@ -63,42 +63,6 @@ Ka 0.00 0.00 0.00
 Tf 1.00 1.00 1.00
 map_Kd boden_pflaster_texture.jpg
 Ni 1.00
-newmtl Boden2:pasted__lambert9SG2
-illum 4
-Kd 0.00 0.00 0.00
-Ka 0.00 0.00 0.00
-Tf 1.00 1.00 1.00
-map_Kd rasen_echt_textur.JPG
-bump rasen_echt_textur.JPG -bm 1
-Ni 1.00
-newmtl Boden2:pasted__pasted__pasted__pasted__lambert8SG3
-illum 4
-Kd 0.00 0.00 0.00
-Ka 0.00 0.00 0.00
-Tf 1.00 1.00 1.00
-map_Kd boden_pflaster_texture.jpg
-Ni 1.00
-newmtl Boden2:pasted__pasted__pasted__pasted__pasted__lambert8SG3
-illum 4
-Kd 0.00 0.00 0.00
-Ka 0.00 0.00 0.00
-Tf 1.00 1.00 1.00
-map_Kd boden_pflaster_texture.jpg
-Ni 1.00
-newmtl Boden2:pasted__pasted__pasted__pasted__pasted__lambert8SG4
-illum 4
-Kd 0.00 0.00 0.00
-Ka 0.00 0.00 0.00
-Tf 1.00 1.00 1.00
-map_Kd boden_pflaster_texture.jpg
-Ni 1.00
-newmtl Boden2:pasted__pasted__pasted__pasted__pasted__pasted__lambert8SG3
-illum 4
-Kd 0.00 0.00 0.00
-Ka 0.00 0.00 0.00
-Tf 1.00 1.00 1.00
-map_Kd boden_pflaster_texture.jpg
-Ni 1.00
 newmtl Boden_Ecke:pasted__lambert9SG1
 illum 4
 Kd 0.00 0.00 0.00
@@ -232,54 +196,6 @@ map_Kd brick-wall-textures.jpg
 bump brick-wall-textures.jpg -bm 1
 Ni 1.00
 newmtl Stein_Ecke:pasted__pasted__lambert2SG2
-illum 4
-Kd 0.00 0.00 0.00
-Ka 0.00 0.00 0.00
-Tf 1.00 1.00 1.00
-map_Kd brick-wall-textures.jpg
-bump brick-wall-textures.jpg -bm 1
-Ni 1.00
-newmtl Stein_Ecke1:pasted__lambert2SG2
-illum 4
-Kd 0.00 0.00 0.00
-Ka 0.00 0.00 0.00
-Tf 1.00 1.00 1.00
-map_Kd brick-wall-textures.jpg
-bump brick-wall-textures.jpg -bm 1
-Ni 1.00
-newmtl Stein_Ecke1:pasted__pasted__lambert2SG2
-illum 4
-Kd 0.00 0.00 0.00
-Ka 0.00 0.00 0.00
-Tf 1.00 1.00 1.00
-map_Kd brick-wall-textures.jpg
-bump brick-wall-textures.jpg -bm 1
-Ni 1.00
-newmtl Stein_Ecke2:pasted__lambert2SG4
-illum 4
-Kd 0.00 0.00 0.00
-Ka 0.00 0.00 0.00
-Tf 1.00 1.00 1.00
-map_Kd brick-wall-textures.jpg
-bump brick-wall-textures.jpg -bm 1
-Ni 1.00
-newmtl Stein_Ecke2:pasted__lambert2SG5
-illum 4
-Kd 0.00 0.00 0.00
-Ka 0.00 0.00 0.00
-Tf 1.00 1.00 1.00
-map_Kd brick-wall-textures.jpg
-bump brick-wall-textures.jpg -bm 1
-Ni 1.00
-newmtl Stein_Ecke_Einzel:pasted__lambert2SG6
-illum 4
-Kd 0.00 0.00 0.00
-Ka 0.00 0.00 0.00
-Tf 1.00 1.00 1.00
-map_Kd brick-wall-textures.jpg
-bump brick-wall-textures.jpg -bm 1
-Ni 1.00
-newmtl Stein_Ecke_Einzel:pasted__pasted__lambert2SG6
 illum 4
 Kd 0.00 0.00 0.00
 Ka 0.00 0.00 0.00

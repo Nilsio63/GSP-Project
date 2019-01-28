@@ -37,7 +37,7 @@ void WorldLoader::AddMap()
 
 			m->Translate(glm::vec3(5 * i, 0, 5 * j));
 
-			this->mapModels_.insert(mapModels_.end(), m);
+			//this->mapModels_.insert(mapModels_.end(), m);
 		}
 	}
 }

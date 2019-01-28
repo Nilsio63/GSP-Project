@@ -12,11 +12,11 @@
 class WorldLoader
 {
 private:
-	std::string map[5][5];
+
 	
 
 public:
-	std::vector<Model *> mapModels_;
+	std::string map[5][5];
 	void LoadMap(std::string mapUrl);
 	void AddMap();
 };

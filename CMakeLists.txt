@@ -39,8 +39,11 @@ add_executable(main
   
   src/stb_image.h
 
-  src/FragmentShaderCode.glsl
-  src/VertexShaderCode.glsl
+  src/ModelFSCode.glsl
+  src/ModelVSCode.glsl
+
+  src/InstanceFSCode.glsl
+  src/InstanceVSCode.glsl
 
   src/SkyboxFSCode.glsl
   src/SkyboxVSCode.glsl

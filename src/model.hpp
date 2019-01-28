@@ -14,11 +14,6 @@
 class Model
 {
 private:
-	std::string directory_;
-
-	std::vector<Texture> loadedTextures_;
-	std::vector<Mesh> meshes_;
-	glm::mat4 transformationMatrix;
 
 	void LoadModel(const std::string modelPath);
 	void ProcessNode(aiNode *node, const aiScene *scene);
@@ -26,6 +21,11 @@ private:
 	std::vector<Texture> LoadMaterialTextures(aiMaterial *mat, aiTextureType type, std::string typeName);
 public:
 	Model(const std::string modelPath);
+	std::string directory_;
+
+	std::vector<Texture> loadedTextures_;
+	std::vector<Mesh> meshes_;
+	glm::mat4 transformationMatrix;
 
 	void Render(ShaderProgram *program);
 

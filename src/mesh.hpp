@@ -13,10 +13,11 @@
 class Mesh
 {
 private:
-	GLuint VAO, VBO, EBO;
+	GLuint VBO, EBO;
 
 	void SetupMesh();
 public:
+	GLuint VAO;
 	std::vector<Vertex> vertices;
 	std::vector<unsigned int> indices;
 	std::vector<Texture> textures;

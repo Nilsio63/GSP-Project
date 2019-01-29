@@ -7,9 +7,11 @@
 
 class NavMesh
 {
-public:
+private:
 	std::vector<NavCell> cells_;
 
+	void RecalculateCells();
+public:
 	NavMesh();
 };
 

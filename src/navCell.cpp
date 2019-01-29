@@ -20,6 +20,11 @@ bool IsClose(glm::vec2 a, glm::vec2 b)
 	return glm::length(a - b) < 0.05f;
 }
 
+float Angle(glm::vec2 a, glm::vec2 b)
+{
+	return glm::acos(glm::dot(glm::normalize(a), glm::normalize(b)));
+}
+
 void NavCell::CheckNeighbor(NavCell *cell)
 {
 	if (IsClose(p1, cell->p1)
@@ -41,4 +46,48 @@ bool NavCell::IsPointInside(glm::vec2 p)
 	return SameSide(p, p1, p2, p3)
 		&& SameSide(p, p2, p1, p3)
 		&& SameSide(p, p3, p1, p2);
+}
+
+glm::vec2 GetEdgePoint(glm::vec2 p, glm::vec2 p1, glm::vec2 p2)
+{
+	glm::vec2 edge = p2 - p1;
+
+	glm::vec2 p_edge = p1 + cos(Angle(p1, p)) * glm::length(p - p1);
+
+	p_edge.x = glm::max(p_edge.x, glm::min(p1.x, p2.x));
+	p_edge.x = glm::min(p_edge.x, glm::max(p1.x, p2.x));
+
+	p_edge.y = glm::max(p_edge.y, glm::min(p1.y, p2.y));
+	p_edge.y = glm::min(p_edge.y, glm::max(p1.y, p2.y));
+
+	return p_edge;
+}
+
+glm::vec2 NavCell::GetClosestPoint(glm::vec2 p)
+{
+	glm::vec2 p_edge_1 = GetEdgePoint(p, p1, p2);
+	glm::vec2 p_edge_2 = GetEdgePoint(p, p1, p3);
+	glm::vec2 p_edge_3 = GetEdgePoint(p, p2, p1);
+	glm::vec2 p_edge_4 = GetEdgePoint(p, p2, p3);
+	glm::vec2 p_edge_5 = GetEdgePoint(p, p3, p1);
+	glm::vec2 p_edge_6 = GetEdgePoint(p, p3, p2);
+
+	glm::vec2 *min = &p_edge_1;
+
+	if (glm::length(p_edge_2 - p) < glm::length(*min - p))
+		min = &p_edge_2;
+
+	if (glm::length(p_edge_3 - p) < glm::length(*min - p))
+		min = &p_edge_3;
+
+	if (glm::length(p_edge_4 - p) < glm::length(*min - p))
+		min = &p_edge_4;
+
+	if (glm::length(p_edge_5 - p) < glm::length(*min - p))
+		min = &p_edge_5;
+
+	if (glm::length(p_edge_6 - p) < glm::length(*min - p))
+		min = &p_edge_6;
+	
+	return *min;
 }

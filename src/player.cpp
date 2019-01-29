@@ -4,7 +4,7 @@
 
 #include <SDL_timer.h>
 
-Player::Player(NavMesh *navMesh) : position(0, 20)
+Player::Player(NavMesh *navMesh) : position(0, 0)
 {
 	navMesh_ = navMesh;
 
@@ -21,8 +21,14 @@ void Player::Move(float sideways, float forward)
 
 	float speed = 10.0f * deltaTime;
 
-	position.x += speed * (forward * glm::cos(glm::radians(yaw)) - sideways * glm::sin(glm::radians(yaw)));
-	position.y += speed * (forward * glm::sin(glm::radians(yaw)) + sideways * glm::cos(glm::radians(yaw)));
+	glm::vec2 newPos = glm::vec2(position);
+
+	newPos.x += speed * (forward * glm::cos(glm::radians(yaw)) - sideways * glm::sin(glm::radians(yaw)));
+	newPos.y += speed * (forward * glm::sin(glm::radians(yaw)) + sideways * glm::cos(glm::radians(yaw)));
+
+	position = navMesh_->CheckMove(newPos);
+
+	std::cout << position.x << " ; " << position.y << std::endl;
 
 	camera_.SetPosition(position);
 

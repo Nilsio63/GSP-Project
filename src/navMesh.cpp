@@ -1,7 +1,5 @@
 #include "navMesh.hpp"
 
-#include <iostream>
-
 void NavMesh::RecalculateCells()
 {
 	for (int i = 0; i < cells_.size(); i++)
@@ -78,7 +76,6 @@ glm::vec2 NavMesh::CheckMove(glm::vec2 newPos)
 			if (cell->IsPointInside(newPos))
 			{
 				lastCell_ = cell;
-				std::cout << "point in new cell!" << std::endl;
 				return newPos;
 			}
 		}
@@ -101,8 +98,6 @@ glm::vec2 NavMesh::CheckMove(glm::vec2 newPos)
 			}
 
 			newPos = closestPoint;
-
-			std::cout << "adjusted point" << std::endl;
 		}
 	}
 

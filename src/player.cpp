@@ -1,7 +1,5 @@
 #include "player.hpp"
 
-#include <iostream>
-
 #include <SDL_timer.h>
 
 Player::Player(NavMesh *navMesh) : position(0, 0)
@@ -27,8 +25,6 @@ void Player::Move(float sideways, float forward)
 	newPos.y += speed * (forward * glm::sin(glm::radians(yaw)) + sideways * glm::cos(glm::radians(yaw)));
 
 	position = navMesh_->CheckMove(newPos);
-
-	std::cout << position.x << " ; " << position.y << std::endl;
 
 	camera_.SetPosition(position);
 

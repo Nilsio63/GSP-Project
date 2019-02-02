@@ -9,7 +9,7 @@ Window::Window()
 
 	window_ =
 		SDL_CreateWindow("gsp", SDL_WINDOWPOS_UNDEFINED, SDL_WINDOWPOS_UNDEFINED,
-			0, 0, SDL_WINDOW_OPENGL | SDL_WINDOW_FULLSCREEN);
+			1024, 768, SDL_WINDOW_OPENGL);
 
 	SDL_ShowCursor(SDL_DISABLE);
 	SDL_SetRelativeMouseMode(SDL_TRUE);

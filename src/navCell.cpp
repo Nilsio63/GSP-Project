@@ -48,19 +48,21 @@ bool NavCell::IsPointInside(glm::vec2 p)
 		&& SameSide(p, p3, p1, p2);
 }
 
-glm::vec2 GetEdgePoint(glm::vec2 p, glm::vec2 p1, glm::vec2 p2)
+glm::vec2 GetEdgePoint(glm::vec2 p, glm::vec2 a, glm::vec2 b)
 {
-	glm::vec2 edge = p2 - p1;
+	glm::vec2 AP = p - a;
+	glm::vec2 AB = b - a;
 
-	glm::vec2 p_edge = p1 + cos(Angle(p1, p)) * glm::length(p - p1);
+	float magnitude = glm::pow(glm::length(AB), 2);
+	float ABAPproduct = glm::dot(AP, AB);
+	float distance = ABAPproduct / magnitude;
 
-	p_edge.x = glm::max(p_edge.x, glm::min(p1.x, p2.x));
-	p_edge.x = glm::min(p_edge.x, glm::max(p1.x, p2.x));
-
-	p_edge.y = glm::max(p_edge.y, glm::min(p1.y, p2.y));
-	p_edge.y = glm::min(p_edge.y, glm::max(p1.y, p2.y));
-
-	return p_edge;
+	if (distance < 0)
+		return a;
+	else if (distance > 1)
+		return b;
+	else
+		return a + AB * distance;
 }
 
 glm::vec2 NavCell::GetClosestPoint(glm::vec2 p)

@@ -2,17 +2,13 @@
 
 #include <glm/vec2.hpp>
 
-glm::vec3 Cross(glm::vec2 a, glm::vec2 b)
+bool SameSide(glm::vec2 a1, glm::vec2 a2, glm::vec2 b1, glm::vec2 b2)
 {
-	return glm::cross(glm::vec3(a, 0), glm::vec3(b, 0));
-}
+	glm::vec2 p1 = b2 - b1;
+	glm::vec2 p2 = a1 - b1;
+	glm::vec2 p3 = a2 - b1;
 
-bool SameSide(glm::vec2 p1, glm::vec2 p2, glm::vec2 a, glm::vec2 b)
-{
-	glm::vec3 cp1 = Cross(b - a, p1 - a);
-	glm::vec3 cp2 = Cross(b - a, p2 - a);
-
-	return glm::dot(cp1, cp2) >= 0;
+	return ((p1.x * p2.y - p2.x * p1.y) * (p1.x * p3.y - p3.x * p1.y)) >= 0;
 }
 
 bool IsClose(glm::vec2 a, glm::vec2 b)
@@ -69,10 +65,7 @@ glm::vec2 NavCell::GetClosestPoint(glm::vec2 p)
 {
 	glm::vec2 p_edge_1 = GetEdgePoint(p, p1, p2);
 	glm::vec2 p_edge_2 = GetEdgePoint(p, p1, p3);
-	glm::vec2 p_edge_3 = GetEdgePoint(p, p2, p1);
-	glm::vec2 p_edge_4 = GetEdgePoint(p, p2, p3);
-	glm::vec2 p_edge_5 = GetEdgePoint(p, p3, p1);
-	glm::vec2 p_edge_6 = GetEdgePoint(p, p3, p2);
+	glm::vec2 p_edge_3 = GetEdgePoint(p, p2, p3);
 
 	glm::vec2 *min = &p_edge_1;
 
@@ -81,15 +74,6 @@ glm::vec2 NavCell::GetClosestPoint(glm::vec2 p)
 
 	if (glm::length(p_edge_3 - p) < glm::length(*min - p))
 		min = &p_edge_3;
-
-	if (glm::length(p_edge_4 - p) < glm::length(*min - p))
-		min = &p_edge_4;
-
-	if (glm::length(p_edge_5 - p) < glm::length(*min - p))
-		min = &p_edge_5;
-
-	if (glm::length(p_edge_6 - p) < glm::length(*min - p))
-		min = &p_edge_6;
 	
 	return *min;
 }

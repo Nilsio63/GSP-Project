@@ -11,6 +11,8 @@ add_executable(main
   src/application.hpp
   src/camera.cpp
   src/camera.hpp
+  src/enemy.cpp
+  src/enemy.hpp
   src/main.cpp
   src/mesh.cpp
   src/mesh.hpp

@@ -1,7 +1,7 @@
 #include "world.hpp"
+#include "stb_image.h"
 
 #include <iostream>
-#include "stb_image.h"
 
 void LogShader(int shaderId, char *shaderName)
 {
@@ -46,6 +46,7 @@ void World::Render()
 	defaultProgram_.SetUniform("pointLight.quadratic", 0.0075f);
 
 	player_.Render(&defaultProgram_);
+	enemy_.Render(&defaultProgram_);
 
 	for (int i = 0; i < models_.size(); i++)
 	{

@@ -10,15 +10,14 @@
 class Player
 {
 private:
-	float deltaTime = 0.0f;
-	float lastFrame = 0.0f;
+	bool flashLightOn_ = true;
 
-	bool flashLightOn = true;
+	glm::vec2 position_;
 
-	glm::vec2 position;
+	float pitch_ = 0;
+	float yaw_ = -90;
 
-	float pitch = 0;
-	float yaw = -90;
+	float speed_ = 10.0f;
 
 	Camera camera_;
 
@@ -27,7 +26,8 @@ public:
 	Player(NavMesh *navMesh);
 
 	Camera *GetCamera() { return &camera_; }
-	void ToggleFlashLight() { flashLightOn = !flashLightOn; }
+	glm::vec2 GetPosition() { return position_; }
+	void ToggleFlashLight() { flashLightOn_ = !flashLightOn_; }
 	void Move(float sideways, float forward);
 	void Rotate(int x, int y);
 	void Render(ShaderProgram *program);

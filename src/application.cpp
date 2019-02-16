@@ -4,6 +4,8 @@
 #include <stdlib.h>
 #include <time.h>
 
+#include <SDL_timer.h>
+
 float RandF(float minF, float maxF)
 {
 	int min = (int)(minF * 100.0f);
@@ -32,11 +34,14 @@ int Application::Run()
 {
 	SDL_Event event;
 
+	float deltaTime = 0.0f;
+	float lastFrame = 0.0f;
+
 	Model *controlModel = new Model("../models/nanosuit/scene.fbx");
 
 	world_.AddModel(controlModel);
 
-	AddDonuts(&world_);
+	//AddDonuts(&world_);
 
 	glm::vec2 cameraMovement = glm::vec2();
 
@@ -129,7 +134,12 @@ int Application::Run()
 			}
 		}
 
-		world_.GetPlayer()->Move(cameraMovement.x, cameraMovement.y);
+		float currentFrame = (float)SDL_GetTicks() / 1000;
+		deltaTime = currentFrame - lastFrame;
+		lastFrame = currentFrame;
+
+		world_.GetPlayer()->Move(cameraMovement.x * deltaTime, cameraMovement.y * deltaTime);
+		world_.GetEnemy()->Hunt(world_.GetPlayer()->GetPosition());
 
 		controlModel->Translate(glm::vec3(modelMovement, 0));
 		controlModel->Rotate(modelRotation.x, glm::vec3(1, 0, 0));

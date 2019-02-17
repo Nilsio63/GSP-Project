@@ -56,7 +56,8 @@ uniform vec3 skyColor;
 uniform vec3 cameraPos;
 
 const vec3 fogColor = vec3(0.5,0.5,0.5);
-const float FogDensity = 0.03;
+//Todo 0.03
+const float FogDensity = 0.04;
 
 vec3 CalcDirLight(DirLight light, vec3 norm, vec3 view)
 {
@@ -145,6 +146,7 @@ void main()
 	//rangebased 
 	dist = length(viewSpace);
 
+	
 	//expo fog 2
 	fogFactor = 1.0/exp((dist*FogDensity)*(dist*FogDensity));
 	fogFactor = clamp(fogFactor,0.0, 1.0);

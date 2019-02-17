@@ -16,7 +16,7 @@ private:
 
 
 public:
-	std::string map[5][5];
+	std::string map[21][21];
 	void LoadMap(std::string mapUrl);
 	void AddMap();
 };

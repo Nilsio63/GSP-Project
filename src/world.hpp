@@ -27,7 +27,7 @@ private:
 	std::map<std::string, Model *> models_;
 	std::vector<Instance *> instances_;
 public:
-	World() : defaultProgram_("../src/VertexShaderCode.glsl", "../src/FragmentShaderCode.glsl"), skyboxProgram_("../src/SkyboxVSCode.glsl", "../src/SkyboxFSCode.glsl") { worldLoader_.LoadMap("../map/Map_klein.csv"); LoadModel(); CreateInstances(); }
+	World() : defaultProgram_("../src/VertexShaderCode.glsl", "../src/FragmentShaderCode.glsl"), skyboxProgram_("../src/SkyboxVSCode.glsl", "../src/SkyboxFSCode.glsl") { worldLoader_.LoadMap("../map/Map_mittel.csv"); LoadModel(); CreateInstances(); }
 	~World();
 
 	Camera *GetCamera() { return player_.GetCamera(); }

@@ -16,7 +16,7 @@ private:
 
 	NavMesh *navMesh_;
 public:
-	Enemy(NavMesh *navMesh) : model_("../models/Donut/Donut.obj"), navMesh_(navMesh), position_(0, 0) { model_.Translate(glm::vec3(0, 1.5f, 0)); }
+	Enemy(NavMesh *navMesh) : model_("../models/Donut/Donut.obj"), navMesh_(navMesh), position_(0, -10) { model_.Translate(glm::vec3(0, 1.5f, 0)); }
 
 	void Render(ShaderProgram *program);
 	void Hunt(glm::vec2 playerPosition);

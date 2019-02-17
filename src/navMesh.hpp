@@ -11,13 +11,15 @@ class NavMesh
 {
 private:
 	std::vector<NavCell> cells_;
-	NavCell *lastCell_ = nullptr;
+	NavCell *lastPlayerCell_ = nullptr;
+	NavCell *lastEnemyCell_ = nullptr;
 
 	void RecalculateCells();
 public:
 	NavMesh();
 
 	glm::vec2 CheckMove(glm::vec2 newPos);
+	glm::vec2 *GetNextPathPoint(glm::vec2 playerPosition, glm::vec2 enemyPosition);
 };
 
 #endif // NAV_MESH_HPP_

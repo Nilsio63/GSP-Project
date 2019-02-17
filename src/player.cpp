@@ -1,6 +1,6 @@
 #include "player.hpp"
 
-Player::Player(NavMesh *navMesh) : position_(0, 0)
+Player::Player(NavMesh *navMesh) : position_(0, 10)
 {
 	navMesh_ = navMesh;
 

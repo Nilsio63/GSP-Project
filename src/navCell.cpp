@@ -13,7 +13,7 @@ bool SameSide(glm::vec2 a1, glm::vec2 a2, glm::vec2 b1, glm::vec2 b2)
 
 bool IsClose(glm::vec2 a, glm::vec2 b)
 {
-	return glm::length(a - b) < 0.05f;
+	return glm::length(a - b) < 0.01f;
 }
 
 float Angle(glm::vec2 a, glm::vec2 b)
@@ -35,6 +35,13 @@ void NavCell::CheckNeighbor(NavCell *cell)
 	{
 		neighbors_.push_back(cell);
 	}
+}
+
+bool NavCell::IsNeighboringPoint(glm::vec2 p)
+{
+	return IsClose(p1, p)
+		|| IsClose(p2, p)
+		|| IsClose(p3, p);
 }
 
 bool NavCell::IsPointInside(glm::vec2 p)

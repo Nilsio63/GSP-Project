@@ -11,8 +11,8 @@ void Enemy::Hunt(glm::vec2 playerPosition)
 {
 	model_.Translate(glm::vec3(-position_.x, 0, -position_.y));
 
-	glm::vec2 diff = playerPosition - position_;
+	glm::vec2 *nextPathPoint = navMesh_->GetNextPathPoint(playerPosition, position_);
 
-	if (glm::length(diff) > 0.1f)
-		position_ += glm::normalize(diff) * 0.01f;
+	if (nextPathPoint != nullptr)
+		position_ += glm::normalize(*nextPathPoint - position_) * 0.003f;
 }

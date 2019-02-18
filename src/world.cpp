@@ -20,6 +20,16 @@ void LogShader(int shaderId, char *shaderName)
 	delete(buffer);
 }
 
+World::World() : defaultProgram_("../src/VertexShaderCode.glsl", "../src/FragmentShaderCode.glsl"),
+	skyboxProgram_("../src/SkyboxVSCode.glsl", "../src/SkyboxFSCode.glsl"),
+	player_(&navMesh_),
+	enemy_(&navMesh_)
+{
+	worldLoader_.LoadMap("../map/Map_mittel.csv");
+	LoadModel();
+	CreateInstances();
+}
+
 World::~World()
 {
 	defaultProgram_.~ShaderProgram();

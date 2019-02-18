@@ -13,7 +13,6 @@ add_executable(main
   src/camera.hpp
   src/enemy.cpp
   src/enemy.hpp
-  src/color.hpp
   src/instance.cpp
   src/instance.hpp
   src/main.cpp

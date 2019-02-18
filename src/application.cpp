@@ -22,9 +22,9 @@ int Application::Run()
 	float deltaTime = 0.0f;
 	float lastFrame = 0.0f;
 
-	Model *controlModel = new Model("../models/nanosuit/scene.fbx");
+	//Model *controlModel = new Model("../models/nanosuit/scene.fbx");
 
-	world_.AddModel(controlModel);
+	//world_.AddModel(controlModel);
 
 	//AddDonuts(&world_);
 
@@ -126,9 +126,9 @@ int Application::Run()
 		world_.GetPlayer()->Move(cameraMovement.x * deltaTime, cameraMovement.y * deltaTime);
 		world_.GetEnemy()->Hunt(world_.GetPlayer()->GetPosition());
 
-		controlModel->Translate(glm::vec3(modelMovement, 0));
-		controlModel->Rotate(modelRotation.x, glm::vec3(1, 0, 0));
-		controlModel->Rotate(modelRotation.y, glm::vec3(0, 1, 0));
+		//controlModel->Translate(glm::vec3(modelMovement, 0));
+		//controlModel->Rotate(modelRotation.x, glm::vec3(1, 0, 0));
+		//controlModel->Rotate(modelRotation.y, glm::vec3(0, 1, 0));
 
 		
 		window_.Clear();

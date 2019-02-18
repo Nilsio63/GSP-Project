@@ -155,13 +155,14 @@ std::vector<glm::vec2> Backtrack(std::map<glm::vec2, glm::vec2, bool(*)(glm::vec
 			break;
 
 		endPosition = cameFrom[endPosition];
+		//path.insert(path.end(), endPosition);
 		path.push_back(endPosition);
 	}
 
 	return path;
 }
 
-glm::vec2 *NavMesh::GetNextPathPoint(glm::vec2 playerPosition, glm::vec2 enemyPosition)
+glm::vec2 NavMesh::GetNextPathPoint(glm::vec2 playerPosition, glm::vec2 enemyPosition)
 {
 	for (int i = 0; i < cells_.size(); i++)
 	{
@@ -197,7 +198,7 @@ glm::vec2 *NavMesh::GetNextPathPoint(glm::vec2 playerPosition, glm::vec2 enemyPo
 			if (currentCell->IsPointInside(playerPosition))
 			{
 				std::vector<glm::vec2> path = Backtrack(cameFrom, current);
-				return &path[0];
+				return path.at(0);
 			}
 
 			openSet.erase(openSet.begin() + currentIndex);
@@ -214,40 +215,38 @@ glm::vec2 *NavMesh::GetNextPathPoint(glm::vec2 playerPosition, glm::vec2 enemyPo
 				if (!neighborCell->IsNeighboringPoint(current))
 					continue;
 
-				if (!currentCell->IsNeighboringPoint(neighborCell->GetP1()))
+				if (!currentCell->IsNeighboringPoint(neighborCell->GetP1()) && std::find(neighborPoints.begin(), neighborPoints.end(), neighborCell->GetP1()) == neighborPoints.end())
 				{
 					neighborPoints.push_back(neighborCell->GetP1());
 					pointCellMap[neighborCell->GetP1()] = neighborCell;
 				}
-				if (!currentCell->IsNeighboringPoint(neighborCell->GetP2()))
+				if (!currentCell->IsNeighboringPoint(neighborCell->GetP2()) && std::find(neighborPoints.begin(), neighborPoints.end(), neighborCell->GetP2()) == neighborPoints.end())
 				{
 					neighborPoints.push_back(neighborCell->GetP2());
 					pointCellMap[neighborCell->GetP2()] = neighborCell;
 				}
-				if (!currentCell->IsNeighboringPoint(neighborCell->GetP3()))
+				if (!currentCell->IsNeighboringPoint(neighborCell->GetP3()) && std::find(neighborPoints.begin(), neighborPoints.end(), neighborCell->GetP3()) == neighborPoints.end())
 				{
 					neighborPoints.push_back(neighborCell->GetP3());
 					pointCellMap[neighborCell->GetP3()] = neighborCell;
 				}
-
-				//std::vector<glm::vec2> neighborPoints_temp;
-
-				//neighborPoints_temp.push_back(neighborCell->GetP1());
-				//neighborPoints_temp.push_back(neighborCell->GetP2());
-				//neighborPoints_temp.push_back(neighborCell->GetP3());
-
-				//pointCellMap[neighborCell->GetP1()] = neighborCell;
-				//pointCellMap[neighborCell->GetP2()] = neighborCell;
-				//pointCellMap[neighborCell->GetP3()] = neighborCell;
 			}
 
-			neighborPoints.push_back(currentCell->GetP1());
-			neighborPoints.push_back(currentCell->GetP2());
-			neighborPoints.push_back(currentCell->GetP3());
-
-			pointCellMap[currentCell->GetP1()] = currentCell;
-			pointCellMap[currentCell->GetP2()] = currentCell;
-			pointCellMap[currentCell->GetP3()] = currentCell;
+			if (std::find(neighborPoints.begin(), neighborPoints.end(), currentCell->GetP1()) == neighborPoints.end())
+			{
+				neighborPoints.push_back(currentCell->GetP1());
+				pointCellMap[currentCell->GetP1()] = currentCell;
+			}
+			if (std::find(neighborPoints.begin(), neighborPoints.end(), currentCell->GetP2()) == neighborPoints.end())
+			{
+				neighborPoints.push_back(currentCell->GetP2());
+				pointCellMap[currentCell->GetP2()] = currentCell;
+			}
+			if (std::find(neighborPoints.begin(), neighborPoints.end(), currentCell->GetP3()) == neighborPoints.end())
+			{
+				neighborPoints.push_back(currentCell->GetP3());
+				pointCellMap[currentCell->GetP3()] = currentCell;
+			}
 
 			for (int j = 0; j < neighborPoints.size(); j++)
 			{
@@ -258,9 +257,7 @@ glm::vec2 *NavMesh::GetNextPathPoint(glm::vec2 playerPosition, glm::vec2 enemyPo
 					float tentative_gScore = gScore[current] + heuristic(current, neighbor);
 
 					if (std::find(openSet.begin(), openSet.end(), neighbor) == openSet.end())
-					{
 						openSet.push_back(neighbor);
-					}
 					else if (tentative_gScore >= gScore[neighbor])
 						continue;
 
@@ -272,5 +269,5 @@ glm::vec2 *NavMesh::GetNextPathPoint(glm::vec2 playerPosition, glm::vec2 enemyPo
 		}
 	}
 
-	return nullptr;
+	return enemyPosition;
 }

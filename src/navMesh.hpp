@@ -19,7 +19,7 @@ public:
 	NavMesh();
 
 	glm::vec2 CheckMove(glm::vec2 newPos);
-	glm::vec2 *GetNextPathPoint(glm::vec2 playerPosition, glm::vec2 enemyPosition);
+	glm::vec2 GetNextPathPoint(glm::vec2 playerPosition, glm::vec2 enemyPosition);
 };
 
 #endif // NAV_MESH_HPP_

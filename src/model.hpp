@@ -32,6 +32,10 @@ public:
 	void Rotate(float degree, glm::vec3 rotationAxis);
 	void Translate(glm::vec3 offset);
 	void Scale(float factor);
+
+	std::string getDir() { return directory_; };
+	std::vector<Texture> getTexture() { return loadedTextures_; };
+	std::vector<Mesh> getMesh() { return meshes_; };
 };
 
 #endif  // MODEL_HPP_

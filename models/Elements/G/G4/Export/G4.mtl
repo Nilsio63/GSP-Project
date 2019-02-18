@@ -1,0 +1,162 @@
+newmtl Boden:pasted__lambert9SG2
+illum 4
+Kd 0.00 0.00 0.00
+Ka 0.00 0.00 0.00
+Tf 1.00 1.00 1.00
+map_Kd rasen_echt_textur.JPG
+bump rasen_echt_textur.JPG -bm 1
+Ni 1.00
+newmtl Boden:pasted__pasted__pasted__pasted__lambert8SG3
+illum 4
+Kd 0.00 0.00 0.00
+Ka 0.00 0.00 0.00
+Tf 1.00 1.00 1.00
+map_Kd boden_pflaster_texture.jpg
+Ni 1.00
+newmtl Boden:pasted__pasted__pasted__pasted__pasted__lambert8SG3
+illum 4
+Kd 0.00 0.00 0.00
+Ka 0.00 0.00 0.00
+Tf 1.00 1.00 1.00
+map_Kd boden_pflaster_texture.jpg
+Ni 1.00
+newmtl Boden:pasted__pasted__pasted__pasted__pasted__lambert8SG4
+illum 4
+Kd 0.00 0.00 0.00
+Ka 0.00 0.00 0.00
+Tf 1.00 1.00 1.00
+map_Kd boden_pflaster_texture.jpg
+Ni 1.00
+newmtl Boden:pasted__pasted__pasted__pasted__pasted__pasted__lambert8SG3
+illum 4
+Kd 0.00 0.00 0.00
+Ka 0.00 0.00 0.00
+Tf 1.00 1.00 1.00
+map_Kd boden_pflaster_texture.jpg
+Ni 1.00
+newmtl Hecke_Rund:pasted__lambert2SG
+illum 4
+Kd 0.00 0.00 0.00
+Ka 0.00 0.00 0.00
+Tf 1.00 1.00 1.00
+map_Kd green-leaf-bush-texture.jpg
+bump green-leaf-bush-texture.jpg -bm 1
+Ni 1.00
+newmtl Hecke_Rund:pasted__lambert3SG
+illum 4
+Kd 0.00 0.00 0.00
+Ka 0.00 0.00 0.00
+Tf 1.00 1.00 1.00
+map_Kd Boden-Erde-texture.JPG
+Ni 1.00
+newmtl Hecke_Rund:pasted__lambert4SG
+illum 4
+Kd 0.00 0.00 0.00
+Ka 0.00 0.00 0.00
+Tf 1.00 1.00 1.00
+map_Kd Baum-Rinde-texture.jpg
+bump Baum-Rinde-texture.jpg -bm 1
+Ni 1.00
+newmtl Hecke_Rund:pasted__lambert5SG
+illum 4
+Kd 0.00 0.00 0.00
+Ka 0.00 0.00 0.00
+Tf 1.00 1.00 1.00
+map_Kd Baum-querschnitt-texture.jpg
+Ni 1.00
+newmtl Hecke_Rund:pasted__pasted__lambert4SG
+illum 4
+Kd 0.00 0.00 0.00
+Ka 0.00 0.00 0.00
+Tf 1.00 1.00 1.00
+map_Kd Baum-Rinde-texture.jpg
+bump Baum-Rinde-texture.jpg -bm 1
+Ni 1.00
+newmtl Hecke_Rund:pasted__pasted__lambert5SG
+illum 4
+Kd 0.00 0.00 0.00
+Ka 0.00 0.00 0.00
+Tf 1.00 1.00 1.00
+map_Kd Baum-querschnitt-texture.jpg
+Ni 1.00
+newmtl Hecke_Rund:pasted__pasted__pasted__lambert4SG
+illum 4
+Kd 0.00 0.00 0.00
+Ka 0.00 0.00 0.00
+Tf 1.00 1.00 1.00
+map_Kd Baum-Rinde-texture.jpg
+bump Baum-Rinde-texture.jpg -bm 1
+Ni 1.00
+newmtl Hecke_Rund:pasted__pasted__pasted__lambert5SG
+illum 4
+Kd 0.00 0.00 0.00
+Ka 0.00 0.00 0.00
+Tf 1.00 1.00 1.00
+map_Kd Baum-querschnitt-texture.jpg
+Ni 1.00
+newmtl Hecke_Rund1:pasted__lambert2SG
+illum 4
+Kd 0.00 0.00 0.00
+Ka 0.00 0.00 0.00
+Tf 1.00 1.00 1.00
+map_Kd green-leaf-bush-texture.jpg
+bump green-leaf-bush-texture.jpg -bm 1
+Ni 1.00
+newmtl Hecke_Rund1:pasted__lambert3SG
+illum 4
+Kd 0.00 0.00 0.00
+Ka 0.00 0.00 0.00
+Tf 1.00 1.00 1.00
+map_Kd Boden-Erde-texture.JPG
+Ni 1.00
+newmtl Hecke_Rund1:pasted__lambert4SG
+illum 4
+Kd 0.00 0.00 0.00
+Ka 0.00 0.00 0.00
+Tf 1.00 1.00 1.00
+map_Kd Baum-Rinde-texture.jpg
+bump Baum-Rinde-texture.jpg -bm 1
+Ni 1.00
+newmtl Hecke_Rund1:pasted__lambert5SG
+illum 4
+Kd 0.00 0.00 0.00
+Ka 0.00 0.00 0.00
+Tf 1.00 1.00 1.00
+map_Kd Baum-querschnitt-texture.jpg
+Ni 1.00
+newmtl Hecke_Rund1:pasted__pasted__lambert4SG
+illum 4
+Kd 0.00 0.00 0.00
+Ka 0.00 0.00 0.00
+Tf 1.00 1.00 1.00
+map_Kd Baum-Rinde-texture.jpg
+bump Baum-Rinde-texture.jpg -bm 1
+Ni 1.00
+newmtl Hecke_Rund1:pasted__pasted__lambert5SG
+illum 4
+Kd 0.00 0.00 0.00
+Ka 0.00 0.00 0.00
+Tf 1.00 1.00 1.00
+map_Kd Baum-querschnitt-texture.jpg
+Ni 1.00
+newmtl Hecke_Rund1:pasted__pasted__pasted__lambert4SG
+illum 4
+Kd 0.00 0.00 0.00
+Ka 0.00 0.00 0.00
+Tf 1.00 1.00 1.00
+map_Kd Baum-Rinde-texture.jpg
+bump Baum-Rinde-texture.jpg -bm 1
+Ni 1.00
+newmtl Hecke_Rund1:pasted__pasted__pasted__lambert5SG
+illum 4
+Kd 0.00 0.00 0.00
+Ka 0.00 0.00 0.00
+Tf 1.00 1.00 1.00
+map_Kd Baum-querschnitt-texture.jpg
+Ni 1.00
+newmtl initialShadingGroup
+illum 4
+Kd 0.50 0.50 0.50
+Ka 0.00 0.00 0.00
+Tf 1.00 1.00 1.00
+Ni 1.00

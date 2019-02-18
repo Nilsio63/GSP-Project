@@ -1,0 +1,226 @@
+newmtl E1:Boden:pasted__lambert9SG2
+illum 4
+Kd 0.00 0.00 0.00
+Ka 0.00 0.00 0.00
+Tf 1.00 1.00 1.00
+map_Kd rasen_echt_textur.JPG
+bump rasen_echt_textur.JPG -bm 1
+Ni 1.00
+newmtl E1:Boden:pasted__pasted__pasted__pasted__lambert8SG3
+illum 4
+Kd 0.00 0.00 0.00
+Ka 0.00 0.00 0.00
+Tf 1.00 1.00 1.00
+map_Kd boden_pflaster_texture.jpg
+Ni 1.00
+newmtl E1:Boden:pasted__pasted__pasted__pasted__pasted__lambert8SG3
+illum 4
+Kd 0.00 0.00 0.00
+Ka 0.00 0.00 0.00
+Tf 1.00 1.00 1.00
+map_Kd boden_pflaster_texture.jpg
+Ni 1.00
+newmtl E1:Boden:pasted__pasted__pasted__pasted__pasted__lambert8SG4
+illum 4
+Kd 0.00 0.00 0.00
+Ka 0.00 0.00 0.00
+Tf 1.00 1.00 1.00
+map_Kd boden_pflaster_texture.jpg
+Ni 1.00
+newmtl E1:Boden:pasted__pasted__pasted__pasted__pasted__pasted__lambert8SG3
+illum 4
+Kd 0.00 0.00 0.00
+Ka 0.00 0.00 0.00
+Tf 1.00 1.00 1.00
+map_Kd boden_pflaster_texture.jpg
+Ni 1.00
+newmtl E1:Stein_Ecke:pasted__lambert2SG4
+illum 4
+Kd 0.00 0.00 0.00
+Ka 0.00 0.00 0.00
+Tf 1.00 1.00 1.00
+map_Kd brick-wall-textures.jpg
+bump brick-wall-textures.jpg -bm 1
+Ni 1.00
+newmtl E1:Stein_Ecke:pasted__lambert2SG5
+illum 4
+Kd 0.00 0.00 0.00
+Ka 0.00 0.00 0.00
+Tf 1.00 1.00 1.00
+map_Kd brick-wall-textures.jpg
+bump brick-wall-textures.jpg -bm 1
+Ni 1.00
+newmtl E1:Stein_Ecke_Einzel:pasted__lambert2SG6
+illum 4
+Kd 0.00 0.00 0.00
+Ka 0.00 0.00 0.00
+Tf 1.00 1.00 1.00
+map_Kd brick-wall-textures.jpg
+bump brick-wall-textures.jpg -bm 1
+Ni 1.00
+newmtl E1:Stein_Ecke_Einzel:pasted__pasted__lambert2SG6
+illum 4
+Kd 0.00 0.00 0.00
+Ka 0.00 0.00 0.00
+Tf 1.00 1.00 1.00
+map_Kd brick-wall-textures.jpg
+bump brick-wall-textures.jpg -bm 1
+Ni 1.00
+newmtl Straﬂenlaterne_Kerze:Kerze:lambert8SG
+illum 4
+Kd 0.81 0.81 0.80
+Ka 0.00 0.00 0.00
+Tf 1.00 1.00 1.00
+Ni 1.00
+newmtl Straﬂenlaterne_Kerze:Kerze:lambert9SG
+illum 4
+Kd 0.00 0.00 0.00
+Ka 0.00 0.00 0.00
+Tf 1.00 1.00 1.00
+Ni 1.00
+newmtl Straﬂenlaterne_Kerze:Laterne:lambert10SG
+illum 4
+Kd 0.00 0.00 0.00
+Ka 0.00 0.00 0.00
+Tf 1.00 1.00 1.00
+map_Kd Metall_texture.jpg
+Ni 1.00
+newmtl Straﬂenlaterne_Kerze:Laterne:lambert11SG
+illum 4
+Kd 0.00 0.00 0.00
+Ka 0.00 0.00 0.00
+Tf 1.00 1.00 1.00
+map_Kd Metall_texture.jpg
+Ni 1.00
+newmtl Straﬂenlaterne_Kerze:Laterne:lambert14SG
+illum 4
+Kd 0.00 0.00 0.00
+Ka 0.00 0.00 0.00
+Tf 1.00 1.00 1.00
+map_Kd Holz_texture.jpg
+Ni 1.00
+newmtl Straﬂenlaterne_Kerze:Laterne:lambert15SG
+illum 4
+Kd 0.00 0.00 0.00
+Ka 0.00 0.00 0.00
+Tf 1.00 1.00 1.00
+map_Kd Holz_texture.jpg
+Ni 1.00
+newmtl Straﬂenlaterne_Kerze:Laterne:lambert16SG
+illum 4
+Kd 0.00 0.00 0.00
+Ka 0.00 0.00 0.00
+Tf 1.00 1.00 1.00
+map_Kd Holz_texture.jpg
+Ni 1.00
+newmtl Straﬂenlaterne_Kerze:Laterne:lambert23SG
+illum 4
+Kd 0.00 0.00 0.00
+Ka 0.00 0.00 0.00
+Tf 1.00 1.00 1.00
+map_Kd Metall_texture.jpg
+Ni 1.00
+newmtl Straﬂenlaterne_Kerze:Laterne:lambert24SG
+illum 4
+Kd 0.00 0.00 0.00
+Ka 0.00 0.00 0.00
+Tf 1.00 1.00 1.00
+map_Kd Metall_texture.jpg
+Ni 1.00
+newmtl Straﬂenlaterne_Kerze:Laterne:lambert25SG
+illum 4
+Kd 0.00 0.00 0.00
+Ka 0.00 0.00 0.00
+Tf 1.00 1.00 1.00
+map_Kd Holz_texture.jpg
+Ni 1.00
+newmtl Straﬂenlaterne_Kerze:Laterne:lambert26SG
+illum 4
+Kd 0.00 0.00 0.00
+Ka 0.00 0.00 0.00
+Tf 1.00 1.00 1.00
+map_Kd Holz_texture.jpg
+Ni 1.00
+newmtl Straﬂenlaterne_Kerze:Laterne:lambert27SG
+illum 4
+Kd 0.00 0.00 0.00
+Ka 0.00 0.00 0.00
+Tf 1.00 1.00 1.00
+map_Kd Metall_texture.jpg
+Ni 1.00
+newmtl Straﬂenlaterne_Kerze:Laterne:lambert28SG
+illum 4
+Kd 0.00 0.00 0.00
+Ka 0.00 0.00 0.00
+Tf 1.00 1.00 1.00
+map_Kd Metall_texture.jpg
+Ni 1.00
+newmtl Straﬂenlaterne_Kerze:Laterne:lambert29SG
+illum 4
+Kd 0.00 0.00 0.00
+Ka 0.00 0.00 0.00
+Tf 1.00 1.00 1.00
+map_Kd Holz_texture.jpg
+Ni 1.00
+newmtl Straﬂenlaterne_Kerze:Laterne:lambert30SG
+illum 4
+Kd 0.00 0.00 0.00
+Ka 0.00 0.00 0.00
+Tf 1.00 1.00 1.00
+map_Kd Holz_texture.jpg
+Ni 1.00
+newmtl Straﬂenlaterne_Kerze:Laterne:lambert33SG
+illum 4
+Kd 0.00 0.00 0.00
+Ka 0.00 0.00 0.00
+Tf 1.00 1.00 1.00
+map_Kd Metall_texture.jpg
+Ni 1.00
+newmtl Straﬂenlaterne_Kerze:Laterne:lambert34SG
+illum 4
+Kd 0.00 0.00 0.00
+Ka 0.00 0.00 0.00
+Tf 1.00 1.00 1.00
+map_Kd Metall_texture.jpg
+Ni 1.00
+newmtl Straﬂenlaterne_Kerze:Laterne:lambert35SG
+illum 4
+Kd 0.00 0.00 0.00
+Ka 0.00 0.00 0.00
+Tf 1.00 1.00 1.00
+map_Kd Metall_texture.jpg
+Ni 1.00
+newmtl Straﬂenlaterne_Kerze:Laterne:lambert36SG
+illum 4
+Kd 0.00 0.00 0.00
+Ka 0.00 0.00 0.00
+Tf 1.00 1.00 1.00
+map_Kd Metall_texture.jpg
+Ni 1.00
+newmtl Straﬂenlaterne_Kerze:Straﬂenlaterne:lambert41SG
+illum 4
+Kd 0.00 0.00 0.00
+Ka 0.00 0.00 0.00
+Tf 1.00 1.00 1.00
+map_Kd wood.jpg
+Ni 1.00
+newmtl Straﬂenlaterne_Kerze:Straﬂenlaterne:pasted__lambert10SG
+illum 4
+Kd 0.00 0.00 0.00
+Ka 0.00 0.00 0.00
+Tf 1.00 1.00 1.00
+map_Kd Metall_texture.jpg
+Ni 1.00
+newmtl Straﬂenlaterne_Kerze:lambert2SG
+illum 4
+Kd 0.00 0.00 0.00
+Ka 0.00 0.00 0.00
+Tf 1.00 1.00 1.00
+map_Kd Holz_texture.jpg
+Ni 1.00
+newmtl initialShadingGroup
+illum 4
+Kd 0.50 0.50 0.50
+Ka 0.00 0.00 0.00
+Tf 1.00 1.00 1.00
+Ni 1.00

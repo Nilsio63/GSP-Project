@@ -10,7 +10,7 @@ uniform vec3 skyColor;
 
 void main()
 {
-	float visibility = clamp(cos(max(transformedPos.y, 0)), 0.0f, 1.0f);
+	float visibility = clamp(cos(max(transformedPos.y, 0)), 0.0f, 0.0f);
 
     FragColor = mix(texture(skybox, TexCoords), vec4(skyColor, 1.0f), visibility);
 }

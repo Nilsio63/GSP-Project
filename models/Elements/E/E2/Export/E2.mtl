@@ -1,0 +1,74 @@
+newmtl Boden:pasted__lambert9SG2
+illum 4
+Kd 0.00 0.00 0.00
+Ka 0.00 0.00 0.00
+Tf 1.00 1.00 1.00
+map_Kd rasen_echt_textur.JPG
+bump rasen_echt_textur.JPG -bm 1
+Ni 1.00
+newmtl Boden:pasted__pasted__pasted__pasted__lambert8SG3
+illum 4
+Kd 0.00 0.00 0.00
+Ka 0.00 0.00 0.00
+Tf 1.00 1.00 1.00
+map_Kd boden_pflaster_texture.jpg
+Ni 1.00
+newmtl Boden:pasted__pasted__pasted__pasted__pasted__lambert8SG3
+illum 4
+Kd 0.00 0.00 0.00
+Ka 0.00 0.00 0.00
+Tf 1.00 1.00 1.00
+map_Kd boden_pflaster_texture.jpg
+Ni 1.00
+newmtl Boden:pasted__pasted__pasted__pasted__pasted__lambert8SG4
+illum 4
+Kd 0.00 0.00 0.00
+Ka 0.00 0.00 0.00
+Tf 1.00 1.00 1.00
+map_Kd boden_pflaster_texture.jpg
+Ni 1.00
+newmtl Boden:pasted__pasted__pasted__pasted__pasted__pasted__lambert8SG3
+illum 4
+Kd 0.00 0.00 0.00
+Ka 0.00 0.00 0.00
+Tf 1.00 1.00 1.00
+map_Kd boden_pflaster_texture.jpg
+Ni 1.00
+newmtl Holz_Ecke:pasted__pasted__pasted__lambert2SG8
+illum 4
+Kd 0.00 0.00 0.00
+Ka 0.00 0.00 0.00
+Tf 1.00 1.00 1.00
+map_Kd Holz_Zaun_texture.jpg
+bump Holz_Zaun_texture.jpg -bm 1
+Ni 1.00
+newmtl Holz_Ecke:pasted__pasted__pasted__lambert2SG9
+illum 4
+Kd 0.00 0.00 0.00
+Ka 0.00 0.00 0.00
+Tf 1.00 1.00 1.00
+map_Kd Holz_Zaun_texture.jpg
+bump Holz_Zaun_texture.jpg -bm 1
+Ni 1.00
+newmtl Holz_Ecke:pasted__pasted__pasted__pasted__lambert2SG7
+illum 4
+Kd 0.00 0.00 0.00
+Ka 0.00 0.00 0.00
+Tf 1.00 1.00 1.00
+map_Kd Holz_Zaun_texture.jpg
+bump Holz_Zaun_texture.jpg -bm 1
+Ni 1.00
+newmtl Holz_Ecke:pasted__pasted__pasted__pasted__lambert2SG8
+illum 4
+Kd 0.00 0.00 0.00
+Ka 0.00 0.00 0.00
+Tf 1.00 1.00 1.00
+map_Kd Holz_Zaun_texture.jpg
+bump Holz_Zaun_texture.jpg -bm 1
+Ni 1.00
+newmtl initialShadingGroup
+illum 4
+Kd 0.50 0.50 0.50
+Ka 0.00 0.00 0.00
+Tf 1.00 1.00 1.00
+Ni 1.00

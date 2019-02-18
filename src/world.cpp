@@ -28,6 +28,7 @@ World::World() : defaultProgram_("../src/VertexShaderCode.glsl", "../src/Fragmen
 	worldLoader_.LoadMap("../map/Map_mittel.csv");
 	LoadModel();
 	CreateInstances();
+	navMesh_.LoadInstances(navinstances_);
 }
 
 World::~World()
@@ -192,6 +193,25 @@ void World::LoadModel()
 	AddModel("NK4", NK4);
 
 }
+
+void RecalculateNeighbors(std::vector<NavCell> &lhs, std::vector<NavCell> &rhs)
+{
+	for (int i = 0; i < lhs.size(); i++)
+	{
+		NavCell *cell = &lhs[i];
+
+		for (int j = 0; j < rhs.size(); j++)
+		{
+			if (i == j)
+				continue;
+
+			NavCell *other = &rhs[j];
+
+			cell->CheckNeighbor(other);
+		}
+	}
+}
+
 void World::CreateInstances()
 {
 	for (int i = 0; i <10; i++)
@@ -219,6 +239,59 @@ void World::CreateInstances()
 			n->Rotate(90 * ausrichtung, glm::vec3(0, 1, 0));
 
 			AddNavInstance(n);
+
+			for (int l = 0; l < n->meshes_.size(); l++)
+			{
+				Mesh *mesh = &n->meshes_[l];
+
+				for (int k = 0; k < mesh->indices.size() - 2; k += 3)
+				{
+					glm::vec3 v1 = glm::vec3(n->transformationMatrix * glm::vec4(mesh->vertices[mesh->indices[k]].Position, 1));
+					glm::vec3 v2 = glm::vec3(n->transformationMatrix * glm::vec4(mesh->vertices[mesh->indices[k + 1]].Position, 1));
+					glm::vec3 v3 = glm::vec3(n->transformationMatrix * glm::vec4(mesh->vertices[mesh->indices[k + 2]].Position, 1));
+
+					cells[i][j].push_back(NavCell(glm::vec2(v1.x, v1.z), glm::vec2(v2.x, v2.z), glm::vec2(v3.x, v3.z)));
+				}
+			}
+
+			RecalculateNeighbors(cells[i][j], cells[i][j]);
+		}
+	}
+
+	for (int i = 0; i < 10; i++)
+	{
+		for (int j = 0; j < 10; j++)
+		{
+			if (i == j)
+				continue;
+
+			if (i > 0)
+				RecalculateNeighbors(cells[i][j], cells[i - 1][j]);
+			if (i > 0 && j < 9)
+				RecalculateNeighbors(cells[i][j], cells[i - 1][j + 1]);
+			if (j < 9)
+				RecalculateNeighbors(cells[i][j], cells[i][j + 1]);
+			if (i < 9 && j < 9)
+				RecalculateNeighbors(cells[i][j], cells[i + 1][j + 1]);
+			if (i < 9)
+				RecalculateNeighbors(cells[i][j], cells[i + 1][j]);
+			if (i < 9 && j > 0)
+				RecalculateNeighbors(cells[i][j], cells[i + 1][j - 1]);
+			if (j > 0)
+				RecalculateNeighbors(cells[i][j], cells[i][j - 1]);
+			if (i > 0 && j > 0)
+				RecalculateNeighbors(cells[i][j], cells[i - 1][j - 1]);
+		}
+	}
+
+	for (int i = 0; i < 10; i++)
+	{
+		for (int j = 0; j < 10; j++)
+		{
+			for (int k = 0; k < cells[i][j].size(); k++)
+			{
+				navMesh_.cells_.push_back(&cells[i][j][k]);
+			}
 		}
 	}
 }

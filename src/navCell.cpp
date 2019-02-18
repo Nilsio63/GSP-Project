@@ -11,7 +11,7 @@ bool SameSide(glm::vec2 a1, glm::vec2 a2, glm::vec2 b1, glm::vec2 b2)
 	return ((p1.x * p2.y - p2.x * p1.y) * (p1.x * p3.y - p3.x * p1.y)) >= 0;
 }
 
-bool IsClose(glm::vec2 a, glm::vec2 b)
+bool IsClose(glm::vec2 &a, glm::vec2 &b)
 {
 	return glm::length(a - b) < 0.01f;
 }

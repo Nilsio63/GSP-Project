@@ -9,39 +9,63 @@ bool VecCompare(glm::vec2 left, glm::vec2 right)
 
 void NavMesh::RecalculateCells()
 {
-	for (int i = 0; i < cells_.size(); i++)
-	{
-		NavCell *cell = &cells_[i];
+	//for (int i = 0; i < cells_.size(); i++)
+	//{
+	//	NavCell *cell = &cells_[i];
 
-		for (int j = 0; j < cells_.size(); j++)
-		{
-			if (i == j)
-				continue;
+	//	for (int j = 0; j < cells_.size(); j++)
+	//	{
+	//		if (i == j)
+	//			continue;
 
-			NavCell *other = &cells_[j];
+	//		NavCell *other = &cells_[j];
 
-			cell->CheckNeighbor(other);
-		}
-	}
+	//		cell->CheckNeighbor(other);
+	//	}
+	//}
 }
 
 NavMesh::NavMesh()
 {
-	//cells_.push_back(NavCell(glm::vec2(-10, -10), glm::vec2(-10, 10), glm::vec2(10, 10)));
-	//cells_.push_back(NavCell(glm::vec2(-10, -10), glm::vec2(10, -10), glm::vec2(10, 10)));
-	//cells_.push_back(NavCell(glm::vec2(-10, 10), glm::vec2(10, 10), glm::vec2(10, 20)));
-	//cells_.push_back(NavCell(glm::vec2(-10, 10), glm::vec2(-10, 20), glm::vec2(10, 20)));
+	////cells_.push_back(NavCell(glm::vec2(-10, -10), glm::vec2(-10, 10), glm::vec2(10, 10)));
+	////cells_.push_back(NavCell(glm::vec2(-10, -10), glm::vec2(10, -10), glm::vec2(10, 10)));
+	////cells_.push_back(NavCell(glm::vec2(-10, 10), glm::vec2(10, 10), glm::vec2(10, 20)));
+	////cells_.push_back(NavCell(glm::vec2(-10, 10), glm::vec2(-10, 20), glm::vec2(10, 20)));
 
-	for (int i = -5; i < 5; i++)
-	{
-		for (int j = -10; j < 10; j++)
-		{
-			cells_.push_back(NavCell(glm::vec2(i, j), glm::vec2(i + 1, j), glm::vec2(i, j + 1)));
-			cells_.push_back(NavCell(glm::vec2(i + 1, j + 1), glm::vec2(i + 1, j), glm::vec2(i, j + 1)));
-		}
-	}
+	//for (int i = -5; i < 5; i++)
+	//{
+	//	for (int j = -10; j < 10; j++)
+	//	{
+	//		cells_.push_back(NavCell(glm::vec2(i, j), glm::vec2(i + 1, j), glm::vec2(i, j + 1)));
+	//		cells_.push_back(NavCell(glm::vec2(i + 1, j + 1), glm::vec2(i + 1, j), glm::vec2(i, j + 1)));
+	//	}
+	//}
 
-	RecalculateCells();
+	//RecalculateCells();
+}
+
+void NavMesh::LoadInstances(std::vector<Instance*> &instances)
+{
+	//for (int i = 0; i < 1 /*instances.size()*/; i++)
+	//{
+	//	Instance *instance = instances[i];
+
+	//	for (int j = 0; j < instance->meshes_.size(); j++)
+	//	{
+	//		Mesh *mesh = &instance->meshes_[j];
+
+	//		for (int k = 0; k < mesh->indices.size() - 2; k += 3)
+	//		{
+	//			Vertex v1 = mesh->vertices[mesh->indices[k]];
+	//			Vertex v2 = mesh->vertices[mesh->indices[k + 1]];
+	//			Vertex v3 = mesh->vertices[mesh->indices[k + 2]];
+
+	//			cells_.push_back(NavCell(glm::vec2(v1.Position.x, v1.Position.z), glm::vec2(v2.Position.x, v2.Position.z), glm::vec2(v3.Position.x, v3.Position.z)));
+	//		}
+	//	}
+	//}
+
+	//RecalculateCells();
 }
 
 glm::vec2 NavMesh::CheckMove(glm::vec2 newPos)
@@ -53,9 +77,9 @@ glm::vec2 NavMesh::CheckMove(glm::vec2 newPos)
 	{
 		for (int i = 0; i < cells_.size(); i++)
 		{
-			if (cells_[i].IsPointInside(newPos))
+			if (cells_[i]->IsPointInside(newPos))
 			{
-				lastPlayerCell_ = &cells_[i];
+				lastPlayerCell_ = cells_[i];
 				return newPos;
 			}
 		}
@@ -67,12 +91,12 @@ glm::vec2 NavMesh::CheckMove(glm::vec2 newPos)
 
 			for (int i = 0; i < cells_.size(); i++)
 			{
-				closestPoint = cells_[i].GetClosestPoint(newPos);
+				closestPoint = cells_[i]->GetClosestPoint(newPos);
 				float dist = glm::length(closestPoint - newPos);
 
 				if (lastPlayerCell_ == nullptr || dist < minDistance)
 				{
-					lastPlayerCell_ = &cells_[i];
+					lastPlayerCell_ = cells_[i];
 					minDistance = dist;
 				}
 			}
@@ -164,110 +188,110 @@ std::vector<glm::vec2> Backtrack(std::map<glm::vec2, glm::vec2, bool(*)(glm::vec
 
 glm::vec2 NavMesh::GetNextPathPoint(glm::vec2 playerPosition, glm::vec2 enemyPosition)
 {
-	for (int i = 0; i < cells_.size(); i++)
-	{
-		if (cells_[i].IsPointInside(enemyPosition))
-		{
-			lastEnemyCell_ = &cells_[i];
-			break;
-		}
-	}
+	//for (int i = 0; i < cells_.size(); i++)
+	//{
+	//	if (cells_[i].IsPointInside(enemyPosition))
+	//	{
+	//		lastEnemyCell_ = &cells_[i];
+	//		break;
+	//	}
+	//}
 
-	if (lastEnemyCell_ != nullptr && lastPlayerCell_ != nullptr)
-	{
-		std::vector<glm::vec2> closedSet;
-		std::vector<glm::vec2> openSet;
-		openSet.push_back(enemyPosition);
+	//if (lastEnemyCell_ != nullptr && lastPlayerCell_ != nullptr)
+	//{
+	//	std::vector<glm::vec2> closedSet;
+	//	std::vector<glm::vec2> openSet;
+	//	openSet.push_back(enemyPosition);
 
-		std::map<glm::vec2, NavCell *, bool(*)(glm::vec2, glm::vec2)> pointCellMap(VecCompare);
-		pointCellMap[enemyPosition] = lastEnemyCell_;
+	//	std::map<glm::vec2, NavCell *, bool(*)(glm::vec2, glm::vec2)> pointCellMap(VecCompare);
+	//	pointCellMap[enemyPosition] = lastEnemyCell_;
 
-		std::map<glm::vec2, glm::vec2, bool(*)(glm::vec2, glm::vec2)> cameFrom(VecCompare);
+	//	std::map<glm::vec2, glm::vec2, bool(*)(glm::vec2, glm::vec2)> cameFrom(VecCompare);
 
-		std::map<glm::vec2, float, bool(*)(glm::vec2, glm::vec2)> gScore(VecCompare);
-		gScore[enemyPosition] = 0;
+	//	std::map<glm::vec2, float, bool(*)(glm::vec2, glm::vec2)> gScore(VecCompare);
+	//	gScore[enemyPosition] = 0;
 
-		std::map<glm::vec2, float, bool(*)(glm::vec2, glm::vec2)> fScore(VecCompare);
+	//	std::map<glm::vec2, float, bool(*)(glm::vec2, glm::vec2)> fScore(VecCompare);
 
-		while (!openSet.empty())
-		{
-			int currentIndex = findBest(openSet, fScore);
-			glm::vec2 current = openSet[currentIndex];
-			NavCell *currentCell = pointCellMap[current];
+	//	while (!openSet.empty())
+	//	{
+	//		int currentIndex = findBest(openSet, fScore);
+	//		glm::vec2 current = openSet[currentIndex];
+	//		NavCell *currentCell = pointCellMap[current];
 
-			if (currentCell->IsPointInside(playerPosition))
-			{
-				std::vector<glm::vec2> path = Backtrack(cameFrom, current);
-				return path.at(0);
-			}
+	//		if (currentCell->IsPointInside(playerPosition))
+	//		{
+	//			std::vector<glm::vec2> path = Backtrack(cameFrom, current);
+	//			return path.at(0);
+	//		}
 
-			openSet.erase(openSet.begin() + currentIndex);
-			closedSet.push_back(current);
+	//		openSet.erase(openSet.begin() + currentIndex);
+	//		closedSet.push_back(current);
 
-			std::vector<glm::vec2> neighborPoints;
+	//		std::vector<glm::vec2> neighborPoints;
 
-			std::vector<NavCell *> *neighbors = currentCell->GetNeighbors();
+	//		std::vector<NavCell *> *neighbors = currentCell->GetNeighbors();
 
-			for (int i = 0; i < neighbors->size(); i++)
-			{
-				NavCell *neighborCell = neighbors->at(i);
+	//		for (int i = 0; i < neighbors->size(); i++)
+	//		{
+	//			NavCell *neighborCell = neighbors->at(i);
 
-				if (!neighborCell->IsNeighboringPoint(current))
-					continue;
+	//			if (!neighborCell->IsNeighboringPoint(current))
+	//				continue;
 
-				if (!currentCell->IsNeighboringPoint(neighborCell->GetP1()) && std::find(neighborPoints.begin(), neighborPoints.end(), neighborCell->GetP1()) == neighborPoints.end())
-				{
-					neighborPoints.push_back(neighborCell->GetP1());
-					pointCellMap[neighborCell->GetP1()] = neighborCell;
-				}
-				if (!currentCell->IsNeighboringPoint(neighborCell->GetP2()) && std::find(neighborPoints.begin(), neighborPoints.end(), neighborCell->GetP2()) == neighborPoints.end())
-				{
-					neighborPoints.push_back(neighborCell->GetP2());
-					pointCellMap[neighborCell->GetP2()] = neighborCell;
-				}
-				if (!currentCell->IsNeighboringPoint(neighborCell->GetP3()) && std::find(neighborPoints.begin(), neighborPoints.end(), neighborCell->GetP3()) == neighborPoints.end())
-				{
-					neighborPoints.push_back(neighborCell->GetP3());
-					pointCellMap[neighborCell->GetP3()] = neighborCell;
-				}
-			}
+	//			if (!currentCell->IsNeighboringPoint(neighborCell->GetP1()) && std::find(neighborPoints.begin(), neighborPoints.end(), neighborCell->GetP1()) == neighborPoints.end())
+	//			{
+	//				neighborPoints.push_back(neighborCell->GetP1());
+	//				pointCellMap[neighborCell->GetP1()] = neighborCell;
+	//			}
+	//			if (!currentCell->IsNeighboringPoint(neighborCell->GetP2()) && std::find(neighborPoints.begin(), neighborPoints.end(), neighborCell->GetP2()) == neighborPoints.end())
+	//			{
+	//				neighborPoints.push_back(neighborCell->GetP2());
+	//				pointCellMap[neighborCell->GetP2()] = neighborCell;
+	//			}
+	//			if (!currentCell->IsNeighboringPoint(neighborCell->GetP3()) && std::find(neighborPoints.begin(), neighborPoints.end(), neighborCell->GetP3()) == neighborPoints.end())
+	//			{
+	//				neighborPoints.push_back(neighborCell->GetP3());
+	//				pointCellMap[neighborCell->GetP3()] = neighborCell;
+	//			}
+	//		}
 
-			if (std::find(neighborPoints.begin(), neighborPoints.end(), currentCell->GetP1()) == neighborPoints.end())
-			{
-				neighborPoints.push_back(currentCell->GetP1());
-				pointCellMap[currentCell->GetP1()] = currentCell;
-			}
-			if (std::find(neighborPoints.begin(), neighborPoints.end(), currentCell->GetP2()) == neighborPoints.end())
-			{
-				neighborPoints.push_back(currentCell->GetP2());
-				pointCellMap[currentCell->GetP2()] = currentCell;
-			}
-			if (std::find(neighborPoints.begin(), neighborPoints.end(), currentCell->GetP3()) == neighborPoints.end())
-			{
-				neighborPoints.push_back(currentCell->GetP3());
-				pointCellMap[currentCell->GetP3()] = currentCell;
-			}
+	//		if (std::find(neighborPoints.begin(), neighborPoints.end(), currentCell->GetP1()) == neighborPoints.end())
+	//		{
+	//			neighborPoints.push_back(currentCell->GetP1());
+	//			pointCellMap[currentCell->GetP1()] = currentCell;
+	//		}
+	//		if (std::find(neighborPoints.begin(), neighborPoints.end(), currentCell->GetP2()) == neighborPoints.end())
+	//		{
+	//			neighborPoints.push_back(currentCell->GetP2());
+	//			pointCellMap[currentCell->GetP2()] = currentCell;
+	//		}
+	//		if (std::find(neighborPoints.begin(), neighborPoints.end(), currentCell->GetP3()) == neighborPoints.end())
+	//		{
+	//			neighborPoints.push_back(currentCell->GetP3());
+	//			pointCellMap[currentCell->GetP3()] = currentCell;
+	//		}
 
-			for (int j = 0; j < neighborPoints.size(); j++)
-			{
-				glm::vec2 neighbor = neighborPoints[j];
+	//		for (int j = 0; j < neighborPoints.size(); j++)
+	//		{
+	//			glm::vec2 neighbor = neighborPoints[j];
 
-				if (neighbor != current && std::find(closedSet.begin(), closedSet.end(), neighbor) == closedSet.end())
-				{
-					float tentative_gScore = gScore[current] + heuristic(current, neighbor);
+	//			if (neighbor != current && std::find(closedSet.begin(), closedSet.end(), neighbor) == closedSet.end())
+	//			{
+	//				float tentative_gScore = gScore[current] + heuristic(current, neighbor);
 
-					if (std::find(openSet.begin(), openSet.end(), neighbor) == openSet.end())
-						openSet.push_back(neighbor);
-					else if (tentative_gScore >= gScore[neighbor])
-						continue;
+	//				if (std::find(openSet.begin(), openSet.end(), neighbor) == openSet.end())
+	//					openSet.push_back(neighbor);
+	//				else if (tentative_gScore >= gScore[neighbor])
+	//					continue;
 
-					cameFrom[neighbor] = current;
-					gScore[neighbor] = tentative_gScore;
-					fScore[neighbor] = gScore[neighbor] + heuristic(neighbor, playerPosition);
-				}
-			}
-		}
-	}
+	//				cameFrom[neighbor] = current;
+	//				gScore[neighbor] = tentative_gScore;
+	//				fScore[neighbor] = gScore[neighbor] + heuristic(neighbor, playerPosition);
+	//			}
+	//		}
+	//	}
+	//}
 
 	return enemyPosition;
 }

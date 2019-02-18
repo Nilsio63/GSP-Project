@@ -19,6 +19,8 @@
 class World
 {
 private:
+	std::vector<NavCell> cells[10][10];
+
 	Player player_;
 	Enemy enemy_;
 	ShaderProgram defaultProgram_;

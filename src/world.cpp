@@ -29,6 +29,7 @@ World::World() : defaultProgram_("../src/VertexShaderCode.glsl", "../src/Fragmen
 	LoadModel();
 	CreateInstances();
 	navMesh_.LoadInstances(navinstances_);
+	player_.SetPosition(glm::vec2(start_.x, start_.z));
 }
 
 void World::LoadLight()
@@ -51,6 +52,19 @@ World::~World()
 	defaultProgram_.~ShaderProgram();
 }
 
+void World::CheckLightCollision()
+{
+	for (int i = 0; i < 6; i++)
+	{
+		Light *l = &lights_[i];
+
+		if (glm::length(glm::vec2(l->position.x, l->position.z) - player_.GetPosition()) < 1)
+		{
+			l->lightOn = l->lightOn >= 1 ? 0 : 1;
+		}
+	}
+}
+
 void World::Render()
 {
 	defaultProgram_.Use();
@@ -63,9 +77,6 @@ void World::Render()
 	defaultProgram_.SetUniform("dirLight.ambient", 0.1f, 0.1f, 0.1f);
 	defaultProgram_.SetUniform("dirLight.diffuse", 0.3f, 0.3f, 0.3f);
 	defaultProgram_.SetUniform("dirLight.specular", 0.6f, 0.6f, 0.6f);
-
-	//Light anschalten
-	lights_[2].lightOn = 1;
 
 	LoadLight();
 	
@@ -243,9 +254,9 @@ void RecalculateNeighbors(std::vector<NavCell> &lhs, std::vector<NavCell> &rhs)
 void World::CreateInstances()
 {
 	int lightNr = 0;
-	for (int i = 0; i <10; i++)
+	for (int i = 0; i < 25; i++)
 	{
-		for (int j = 0; j < 10 ; j++)
+		for (int j = 0; j < 25 ; j++)
 		{
 			std::string typ = worldLoader_.map[i][j].substr(0, 2);
 			int ausrichtung = std::stoi(worldLoader_.map[i][j].substr(2, 1));
@@ -306,9 +317,9 @@ void World::CreateInstances()
 		}
 	}
 
-	for (int i = 0; i < 10; i++)
+	for (int i = 0; i < 25; i++)
 	{
-		for (int j = 0; j < 10; j++)
+		for (int j = 0; j < 25; j++)
 		{
 			for (int di = -1; di <= 1; di++)
 			{
@@ -320,7 +331,7 @@ void World::CreateInstances()
 					if (x == i && y == j)
 						continue;
 
-					if (x >= 0 && x < 10 && y >= 0 && y < 10)
+					if (x >= 0 && x < 25 && y >= 0 && y < 25)
 					{
 						RecalculateNeighbors(cells[i][j], cells[x][y]);
 					}
@@ -329,9 +340,9 @@ void World::CreateInstances()
 		}
 	}
 
-	for (int i = 0; i < 10; i++)
+	for (int i = 0; i < 25; i++)
 	{
-		for (int j = 0; j < 10; j++)
+		for (int j = 0; j < 25; j++)
 		{
 			for (int k = 0; k < cells[i][j].size(); k++)
 			{

@@ -53,6 +53,9 @@ int Application::Run()
 				case SDLK_t:
 					world_.ToggleFlashLight();
 					break;
+				case SDLK_l:
+					world_.CheckLightCollision();
+					break;
 				case SDLK_w:
 					cameraMovement.y = 1;
 					break;

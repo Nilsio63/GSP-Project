@@ -65,6 +65,21 @@ void World::CheckLightCollision()
 	}
 }
 
+bool World::CheckGoalReached()
+{
+	for (int i = 0; i < 6; i++)
+	{
+		Light *l = &lights_[i];
+
+		if (l->lightOn < 1)
+		{
+			return false;
+		}
+	}
+
+	return glm::length(glm::vec2(goal_.x, goal_.z) - player_.GetPosition()) < 1;
+}
+
 void World::Render()
 {
 	defaultProgram_.Use();

@@ -129,6 +129,12 @@ int Application::Run()
 		world_.GetPlayer()->Move(cameraMovement.x * deltaTime, cameraMovement.y * deltaTime);
 		world_.GetEnemy()->Hunt(world_.GetPlayer()->GetPosition());
 
+		if (world_.CheckGoalReached())
+		{
+			std::cout << "Game over! You won!" << std::endl;
+			return EXIT_SUCCESS;
+		}
+
 		//controlModel->Translate(glm::vec3(modelMovement, 0));
 		//controlModel->Rotate(modelRotation.x, glm::vec3(1, 0, 0));
 		//controlModel->Rotate(modelRotation.y, glm::vec3(0, 1, 0));

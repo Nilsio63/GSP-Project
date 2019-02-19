@@ -44,6 +44,7 @@ public:
 	Enemy *GetEnemy() { return &enemy_; }
 	void ToggleFlashLight() { player_.ToggleFlashLight(); }
 	void CheckLightCollision();
+	bool CheckGoalReached();
 	void Render();
 	void LoadModel();
 	void CreateInstances();

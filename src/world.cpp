@@ -97,7 +97,7 @@ void World::Render()
 	
 
 	player_.Render(&defaultProgram_);
-	enemy_.Render(&defaultProgram_);
+	//enemy_.Render(&defaultProgram_);
 
 	for (int i = 0; i < instances_.size(); i++)
 	{

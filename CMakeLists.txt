@@ -12,6 +12,9 @@ add_executable(main
   src/camera.cpp
   src/camera.hpp
   src/color.hpp
+  src/instance.cpp
+  src/instance.hpp
+  src/light.hpp
   src/main.cpp
   src/mesh.cpp
   src/mesh.hpp
@@ -34,6 +37,8 @@ add_executable(main
   src/window.hpp
   src/world.cpp
   src/world.hpp
+  src/worldloader.cpp
+  src/worldloader.hpp
 
   src/stb_image.h
 

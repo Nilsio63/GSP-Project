@@ -11,7 +11,8 @@ add_executable(main
   src/application.hpp
   src/camera.cpp
   src/camera.hpp
-  src/color.hpp
+  src/enemy.cpp
+  src/enemy.hpp
   src/instance.cpp
   src/instance.hpp
   src/light.hpp
@@ -20,6 +21,10 @@ add_executable(main
   src/mesh.hpp
   src/model.cpp
   src/model.hpp
+  src/navCell.cpp
+  src/navCell.hpp
+  src/navMesh.cpp
+  src/navMesh.hpp
   src/player.cpp
   src/player.hpp
   src/shader.cpp
@@ -30,8 +35,6 @@ add_executable(main
   src/skybox.hpp
   src/stb_image.hpp
   src/texture.hpp
-  src/triangle.hpp
-  src/triangle.cpp
   src/vertex.hpp
   src/window.cpp
   src/window.hpp

@@ -1,7 +1,7 @@
 #include "world.hpp"
+#include "stb_image.h"
 
 #include <iostream>
-#include "stb_image.h"
 
 void LogShader(int shaderId, char *shaderName)
 {
@@ -18,6 +18,18 @@ void LogShader(int shaderId, char *shaderName)
 	}
 
 	delete(buffer);
+}
+
+World::World() : defaultProgram_("../src/VertexShaderCode.glsl", "../src/FragmentShaderCode.glsl"),
+	skyboxProgram_("../src/SkyboxVSCode.glsl", "../src/SkyboxFSCode.glsl"),
+	player_(&navMesh_),
+	enemy_(&navMesh_)
+{
+	worldLoader_.LoadMap("../map/Map_V3.csv");
+	LoadModel();
+	CreateInstances();
+	navMesh_.LoadInstances(navinstances_);
+	player_.SetPosition(glm::vec2(start_.x, start_.z));
 }
 
 void World::LoadLight()
@@ -40,6 +52,34 @@ World::~World()
 	defaultProgram_.~ShaderProgram();
 }
 
+void World::CheckLightCollision()
+{
+	for (int i = 0; i < 6; i++)
+	{
+		Light *l = &lights_[i];
+
+		if (glm::length(glm::vec2(l->position.x, l->position.z) - player_.GetPosition()) < 1)
+		{
+			l->lightOn = l->lightOn >= 1 ? 0 : 1;
+		}
+	}
+}
+
+bool World::CheckGoalReached()
+{
+	for (int i = 0; i < 6; i++)
+	{
+		Light *l = &lights_[i];
+
+		if (l->lightOn < 1)
+		{
+			return false;
+		}
+	}
+
+	return glm::length(glm::vec2(goal_.x, goal_.z) - player_.GetPosition()) < 1;
+}
+
 void World::Render()
 {
 	defaultProgram_.Use();
@@ -53,21 +93,19 @@ void World::Render()
 	defaultProgram_.SetUniform("dirLight.diffuse", 0.3f, 0.3f, 0.3f);
 	defaultProgram_.SetUniform("dirLight.specular", 0.6f, 0.6f, 0.6f);
 
-	//Light anschalten
-	lights_[2].lightOn = 1;
-
 	LoadLight();
 	
 
 	player_.Render(&defaultProgram_);
+	enemy_.Render(&defaultProgram_);
 
 	for (int i = 0; i < instances_.size(); i++)
 	{
 		instances_[i]->Render(&defaultProgram_);
 	}
 	
-	glm::mat4 skyview = glm::mat4(glm::mat3(GetCamera()->GetView()));
-	skybox_.Render(&skyboxProgram_, skyview, GetCamera()->GetProjektion(), skyColor);
+	glm::mat4 skyview = glm::mat4(glm::mat3(player_.GetCamera()->GetView()));
+	skybox_.Render(&skyboxProgram_, skyview, player_.GetCamera()->GetProjektion(), skyColor);
 
 	LogShader(defaultProgram_.GetVertexShader().GetShaderId(), "Vertex Shader");
 	LogShader(defaultProgram_.GetFragmentShader().GetShaderId(), "Fragment Shader");
@@ -209,12 +247,31 @@ void World::CreateLight(int lightNr,glm::vec3 pos)
 	lights_[lightNr] = temp;
 }
 
+
+void RecalculateNeighbors(std::vector<NavCell> &lhs, std::vector<NavCell> &rhs)
+{
+	for (int i = 0; i < lhs.size(); i++)
+	{
+		NavCell *cell = &lhs[i];
+
+		for (int j = 0; j < rhs.size(); j++)
+		{
+			if (i == j)
+				continue;
+
+			NavCell *other = &rhs[j];
+
+			cell->CheckNeighbor(other);
+		}
+	}
+}
+
 void World::CreateInstances()
 {
 	int lightNr = 0;
-	for (int i = 0; i <20; i++)
+	for (int i = 0; i < 25; i++)
 	{
-		for (int j = 0; j < 20 ; j++)
+		for (int j = 0; j < 25 ; j++)
 		{
 			std::string typ = worldLoader_.map[i][j].substr(0, 2);
 			int ausrichtung = std::stoi(worldLoader_.map[i][j].substr(2, 1));
@@ -255,6 +312,56 @@ void World::CreateInstances()
 				n->Rotate(90 * ausrichtung, glm::vec3(0, 1, 0));
 
 				AddNavInstance(n);
+
+				for (int l = 0; l < n->meshes_.size(); l++)
+				{
+					Mesh *mesh = &n->meshes_[l];
+
+					for (int k = 0; k < mesh->indices.size() - 2; k += 3)
+					{
+						glm::vec3 v1 = glm::vec3(n->transformationMatrix * glm::vec4(mesh->vertices[mesh->indices[k]].Position, 1));
+						glm::vec3 v2 = glm::vec3(n->transformationMatrix * glm::vec4(mesh->vertices[mesh->indices[k + 1]].Position, 1));
+						glm::vec3 v3 = glm::vec3(n->transformationMatrix * glm::vec4(mesh->vertices[mesh->indices[k + 2]].Position, 1));
+
+						cells[i][j].push_back(NavCell(glm::vec2(v1.x, v1.z), glm::vec2(v2.x, v2.z), glm::vec2(v3.x, v3.z)));
+					}
+				}
+
+				RecalculateNeighbors(cells[i][j], cells[i][j]);
+			}
+		}
+	}
+
+	for (int i = 0; i < 25; i++)
+	{
+		for (int j = 0; j < 25; j++)
+		{
+			for (int di = -1; di <= 1; di++)
+			{
+				for (int dj = -1; dj <= 1; dj++)
+				{
+					int x = i + di;
+					int y = j + dj;
+
+					if (x == i && y == j)
+						continue;
+
+					if (x >= 0 && x < 25 && y >= 0 && y < 25)
+					{
+						RecalculateNeighbors(cells[i][j], cells[x][y]);
+					}
+				}
+			}
+		}
+	}
+
+	for (int i = 0; i < 25; i++)
+	{
+		for (int j = 0; j < 25; j++)
+		{
+			for (int k = 0; k < cells[i][j].size(); k++)
+			{
+				navMesh_.cells_.push_back(&cells[i][j][k]);
 			}
 		}
 	}

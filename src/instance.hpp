@@ -18,10 +18,10 @@ private:
 	std::string directory_;
 
 	std::vector<Texture> loadedTextures_;
-	std::vector<Mesh> meshes_;
-	glm::mat4 transformationMatrix;
-
 public:
+	glm::mat4 transformationMatrix;
+	std::vector<Mesh> meshes_;
+
 	Instance(Model *base);
 
 	void Render(ShaderProgram *program);

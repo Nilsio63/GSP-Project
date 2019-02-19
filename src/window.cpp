@@ -1,14 +1,18 @@
 #include "window.hpp"
 
 #include <GL/glew.h>
+#include <SDL_mouse.h>
 
-Window::Window(unsigned int width, unsigned int height)
+Window::Window()
 {
 	SDL_Init(SDL_INIT_VIDEO);
 
 	window_ =
 		SDL_CreateWindow("gsp", SDL_WINDOWPOS_UNDEFINED, SDL_WINDOWPOS_UNDEFINED,
-			width, height, SDL_WINDOW_OPENGL);
+			1024, 768, SDL_WINDOW_OPENGL);
+
+	SDL_ShowCursor(SDL_DISABLE);
+	SDL_SetRelativeMouseMode(SDL_TRUE);
 
 	SDL_ShowCursor(SDL_DISABLE);
 	SDL_SetRelativeMouseMode(SDL_TRUE);
@@ -19,16 +23,12 @@ Window::Window(unsigned int width, unsigned int height)
 	SDL_GL_SetAttribute(SDL_GL_DOUBLEBUFFER, 1);
 	SDL_GL_CreateContext(window_);
 
-	//Fogg 2.0
-	glClearColor(0.5, 0.5, 0.5, 1);
-	glClearDepth(1);
-
 	glEnable(GL_DEPTH_TEST);
 
 	glewExperimental = GL_TRUE;
 	glewInit();
 
-	SetBackground(Color(50, 50, 50));
+	glClearColor(0.2, 0.2, 0.2, 1);
 }
 
 void Window::Clear()
@@ -39,9 +39,4 @@ void Window::Clear()
 void Window::Swap()
 {
 	SDL_GL_SwapWindow(window_);
-}
-
-void Window::SetBackground(Color &color)
-{
-	glClearColor((float)color.r / 255, (float)color.g / 255, (float)color.b / 255, (float)color.a / 255);
 }

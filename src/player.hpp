@@ -2,18 +2,35 @@
 #define PLAYER_HPP_
 
 #include "camera.hpp"
+#include "navMesh.hpp"
 #include "shaderProgram.hpp"
+
+#include <glm/glm.hpp>
 
 class Player
 {
 private:
-	bool flashLightOn = true;
+	bool flashLightOn_ = true;
+
+	glm::vec2 position_;
+
+	float pitch_ = 0;
+	float yaw_ = -90;
+
+	float speed_ = 10.0f;
+
 	Camera camera_;
+
+	NavMesh *navMesh_;
 public:
-	Player() : camera_(glm::vec3(0, 10, 20), 0, -90) {}
+	Player(NavMesh *navMesh);
 
 	Camera *GetCamera() { return &camera_; }
-	void ToggleFlashLight() { flashLightOn = !flashLightOn; }
+	glm::vec2 GetPosition() { return position_; }
+	void SetPosition(glm::vec2 p) { position_ = p; }
+	void ToggleFlashLight() { flashLightOn_ = !flashLightOn_; }
+	void Move(float sideways, float forward);
+	void Rotate(int x, int y);
 	void Render(ShaderProgram *program);
 };
 

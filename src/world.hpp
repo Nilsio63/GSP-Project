@@ -2,9 +2,10 @@
 #define WORLD_HPP_
 
 #include "camera.hpp"
-#include "color.hpp"
+#include "enemy.hpp"
 #include "model.hpp"
 #include "instance.hpp"
+#include "navMesh.hpp"
 #include "player.hpp"
 #include "shaderProgram.hpp"
 #include "skybox.hpp"
@@ -18,11 +19,15 @@
 class World
 {
 private:
+	std::vector<NavCell> cells[10][10];
+
 	Player player_;
+	Enemy enemy_;
 	ShaderProgram defaultProgram_;
 	ShaderProgram skyboxProgram_;
 	Skybox skybox_;
 	WorldLoader worldLoader_;
+	NavMesh navMesh_;
 
 	std::map<std::string, Model *> models_;
 	std::vector<Instance *> instances_;
@@ -32,11 +37,14 @@ private:
 	glm::vec3 start_;
 
 public:
-	World() : defaultProgram_("../src/VertexShaderCode.glsl", "../src/FragmentShaderCode.glsl"), skyboxProgram_("../src/SkyboxVSCode.glsl", "../src/SkyboxFSCode.glsl") { worldLoader_.LoadMap("../map/Map_V3.csv"); LoadModel(); CreateInstances(); }
+	World();
 	~World();
 
-	Camera *GetCamera() { return player_.GetCamera(); }
+	Player *GetPlayer() { return &player_; }
+	Enemy *GetEnemy() { return &enemy_; }
 	void ToggleFlashLight() { player_.ToggleFlashLight(); }
+	void CheckLightCollision();
+	bool CheckGoalReached();
 	void Render();
 	void LoadModel();
 	void CreateInstances();

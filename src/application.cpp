@@ -4,7 +4,7 @@
 #include <stdlib.h>
 #include <time.h>
 
-Application::Application() : window_(1024, 768) {}
+#include <SDL_timer.h>
 
 float RandF(float minF, float maxF)
 {
@@ -19,6 +19,14 @@ int Application::Run()
 {
 	SDL_Event event;
 
+	float deltaTime = 0.0f;
+	float lastFrame = 0.0f;
+
+	//Model *controlModel = new Model("../models/nanosuit/scene.fbx");
+
+	//world_.AddModel(controlModel);
+
+	//AddDonuts(&world_);
 
 	glm::vec2 cameraMovement = glm::vec2();
 
@@ -35,22 +43,18 @@ int Application::Run()
 
 			if (event.key.type == SDL_MOUSEMOTION)
 			{
-				int x;
-				int y;
-
-				SDL_GetRelativeMouseState(&x, &y);
-
 				if (!SDL_GetKeyboardState(nullptr)[SDL_SCANCODE_LCTRL] && !SDL_GetKeyboardState(nullptr)[SDL_SCANCODE_RCTRL])
-					world_.GetCamera()->Rotate(x, -y);
+					world_.GetPlayer()->Rotate(event.motion.xrel, -event.motion.yrel);
 			}
 			else if (event.key.type == SDL_KEYDOWN)
 			{
-				Color *color = nullptr;
-
 				switch (event.key.keysym.sym)
 				{
 				case SDLK_t:
 					world_.ToggleFlashLight();
+					break;
+				case SDLK_l:
+					world_.CheckLightCollision();
 					break;
 				case SDLK_w:
 					cameraMovement.y = 1;
@@ -93,9 +97,6 @@ int Application::Run()
 					modelRotation.y = 0;
 					break;
 				}
-
-				if (color != nullptr)
-					window_.SetBackground(*color);
 			}
 			else if (event.key.type == SDL_KEYUP)
 			{
@@ -121,8 +122,23 @@ int Application::Run()
 			}
 		}
 
-		//TODO WEG!!!
-		world_.GetCamera()->Move(cameraMovement.x, cameraMovement.y);
+		float currentFrame = (float)SDL_GetTicks() / 1000;
+		deltaTime = currentFrame - lastFrame;
+		lastFrame = currentFrame;
+
+		world_.GetPlayer()->Move(cameraMovement.x * deltaTime, cameraMovement.y * deltaTime);
+		world_.GetEnemy()->Hunt(world_.GetPlayer()->GetPosition());
+
+		if (world_.CheckGoalReached())
+		{
+			std::cout << "Game over! You won!" << std::endl;
+			return EXIT_SUCCESS;
+		}
+
+		//controlModel->Translate(glm::vec3(modelMovement, 0));
+		//controlModel->Rotate(modelRotation.x, glm::vec3(1, 0, 0));
+		//controlModel->Rotate(modelRotation.y, glm::vec3(0, 1, 0));
+
 		
 		window_.Clear();
 

@@ -27,7 +27,7 @@ public:
 
 	Camera *GetCamera() { return &camera_; }
 	glm::vec2 GetPosition() { return position_; }
-	void SetPosition(glm::vec2 p) { position_ = p; }
+	void SetPosition(glm::vec2 p);
 	void ToggleFlashLight() { flashLightOn_ = !flashLightOn_; }
 	void Move(float sideways, float forward);
 	void Rotate(int x, int y);

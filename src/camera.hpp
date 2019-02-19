@@ -22,7 +22,7 @@ private:
 	float pitch;
 	float yaw;
 
-	float height_ = 2;
+	float height_ = 1.5f;
 public:
 	Camera();
 

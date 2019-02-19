@@ -10,6 +10,15 @@ Player::Player(NavMesh *navMesh) : position_(0, 10)
 	camera_.Recalculate();
 }
 
+void Player::SetPosition(glm::vec2 p)
+{
+	position_ = p;
+
+	camera_.SetPosition(position_);
+
+	camera_.Recalculate();
+}
+
 void Player::Move(float sideways, float forward)
 {
 	if (sideways == 0 && forward == 0)

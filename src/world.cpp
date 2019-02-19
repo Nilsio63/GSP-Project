@@ -25,7 +25,7 @@ World::World() : defaultProgram_("../src/VertexShaderCode.glsl", "../src/Fragmen
 	player_(&navMesh_),
 	enemy_(&navMesh_)
 {
-	worldLoader_.LoadMap("../map/Map_mittel.csv");
+	worldLoader_.LoadMap("../map/Map_V3.csv");
 	LoadModel();
 	CreateInstances();
 	navMesh_.LoadInstances(navinstances_);
@@ -243,9 +243,9 @@ void RecalculateNeighbors(std::vector<NavCell> &lhs, std::vector<NavCell> &rhs)
 void World::CreateInstances()
 {
 	int lightNr = 0;
-	for (int i = 0; i <20; i++)
+	for (int i = 0; i <10; i++)
 	{
-		for (int j = 0; j < 20 ; j++)
+		for (int j = 0; j < 10 ; j++)
 		{
 			std::string typ = worldLoader_.map[i][j].substr(0, 2);
 			int ausrichtung = std::stoi(worldLoader_.map[i][j].substr(2, 1));

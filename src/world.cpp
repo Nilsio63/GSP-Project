@@ -269,9 +269,9 @@ void RecalculateNeighbors(std::vector<NavCell> &lhs, std::vector<NavCell> &rhs)
 void World::CreateInstances()
 {
 	int lightNr = 0;
-	for (int i = 0; i < 25; i++)
+	for (int i = 0; i < 20; i++)
 	{
-		for (int j = 0; j < 25 ; j++)
+		for (int j = 0; j < 20 ; j++)
 		{
 			std::string typ = worldLoader_.map[i][j].substr(0, 2);
 			int ausrichtung = std::stoi(worldLoader_.map[i][j].substr(2, 1));
@@ -332,9 +332,9 @@ void World::CreateInstances()
 		}
 	}
 
-	for (int i = 0; i < 25; i++)
+	for (int i = 0; i < 20; i++)
 	{
-		for (int j = 0; j < 25; j++)
+		for (int j = 0; j < 20; j++)
 		{
 			for (int di = -1; di <= 1; di++)
 			{
@@ -346,7 +346,7 @@ void World::CreateInstances()
 					if (x == i && y == j)
 						continue;
 
-					if (x >= 0 && x < 25 && y >= 0 && y < 25)
+					if (x >= 0 && x < 20 && y >= 0 && y < 20)
 					{
 						RecalculateNeighbors(cells[i][j], cells[x][y]);
 					}
@@ -355,9 +355,9 @@ void World::CreateInstances()
 		}
 	}
 
-	for (int i = 0; i < 25; i++)
+	for (int i = 0; i < 20; i++)
 	{
-		for (int j = 0; j < 25; j++)
+		for (int j = 0; j < 20; j++)
 		{
 			for (int k = 0; k < cells[i][j].size(); k++)
 			{

@@ -19,7 +19,7 @@
 class World
 {
 private:
-	std::vector<NavCell> cells[10][10];
+	std::vector<NavCell> cells[20][20];
 
 	Player player_;
 	Enemy enemy_;

@@ -13,7 +13,7 @@ bool SameSide(glm::vec2 a1, glm::vec2 a2, glm::vec2 b1, glm::vec2 b2)
 
 bool IsClose(glm::vec2 &a, glm::vec2 &b)
 {
-	return glm::length(a - b) < 0.05f;
+	return glm::length(a - b) < 0.1f;
 }
 
 float Angle(glm::vec2 a, glm::vec2 b)

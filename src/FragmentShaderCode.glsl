@@ -12,6 +12,7 @@ struct DirLight
 struct PointLight
 {
     vec3 position;
+	float lightOn;
     
     float constant;
     float linear;
@@ -48,16 +49,18 @@ in vec4 viewSpace;
 uniform sampler2D objectTexture;
 
 uniform DirLight dirLight;
-uniform PointLight pointLight;
+#define AnzahlLight 6
+uniform PointLight pointLights[AnzahlLight];
 uniform SpotLight spotLight;
 
 uniform vec3 skyColor;
 
 uniform vec3 cameraPos;
 
+
 const vec3 fogColor = vec3(0.5,0.5,0.5);
 //Todo 0.03
-const float FogDensity = 0.04;
+const float FogDensity = 0.03;
 
 vec3 CalcDirLight(DirLight light, vec3 norm, vec3 view)
 {
@@ -76,24 +79,26 @@ vec3 CalcDirLight(DirLight light, vec3 norm, vec3 view)
 
 vec3 CalcPointLight(PointLight light, vec3 norm, vec3 view)
 {
-	vec3 lightDir = normalize(pointLight.position - transformedPos);
+if (light.lightOn !=0)
+	{
+	vec3 lightDir = normalize(light.position - transformedPos);
 
 	// Ambient
-	vec3 ambient = pointLight.ambient;
+	vec3 ambient = light.ambient;
 
 	// Diffuse
 	float diff = max(dot(norm, lightDir), 0.0f);
-	vec3 diffuse = diff * pointLight.diffuse;
+	vec3 diffuse = diff * light.diffuse;
 
 	vec3 r = -lightDir + 2 * (dot(norm, lightDir)) * norm;
-	vec3 specular = pointLight.specular * pow(max(dot(view, r), 0), 2);
+	vec3 specular = light.specular * pow(max(dot(view, r), 0), 2);
 
 	//vec3 h = normalize(view + lightDir);
-	//vec3 specular = pointLight.specular * pow(max(dot(view, h), 0), 2);
+	//vec3 specular = light.specular * pow(max(dot(view, h), 0), 2);
 
 	// Attenuation
-	float distance = length(pointLight.position - transformedPos);
-	float attenuation = 1.0f / (pointLight.constant + pointLight.linear * distance + pointLight.quadratic * (distance * distance));
+	float distance = length(light.position - transformedPos);
+	float attenuation = 1.0f / (light.constant + light.linear * distance + light.quadratic * (distance * distance));
 
 	ambient *= attenuation;
 	diffuse *= attenuation;
@@ -101,6 +106,9 @@ vec3 CalcPointLight(PointLight light, vec3 norm, vec3 view)
 
 	// Complete
 	return (ambient + diffuse + specular);
+	}
+	else
+	{return vec3(0.0f,0.0f,0.0f);}
 }
 
 vec3 CalcSpotLight(SpotLight light, vec3 norm, vec3 view)
@@ -136,7 +144,8 @@ void main()
 	vec3 view = normalize(cameraPos - transformedPos);
 
 	vec3 lightColor = CalcDirLight(dirLight, norm, view);
-	lightColor += CalcPointLight(pointLight, norm, view);
+	for(int i = 0; i < AnzahlLight;i++)
+		lightColor += CalcPointLight(pointLights[i], norm, view);
 	lightColor += CalcSpotLight(spotLight, norm, view);
 	//fog
 

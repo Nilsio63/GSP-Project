@@ -29,9 +29,9 @@ void WorldLoader::LoadMap(std::string mapUrl)
 
 void WorldLoader::AddMap()
 {
-	for (int i = 5; i > 0; i--)
+	for (int i = 20; i > 0; i--)
 	{
-		for (int j = 0; j < 5; j++)
+		for (int j = 0; j < 20; j++)
 		{
 			Model *m = new Model("../models/Elements/E1.obj");
 

@@ -15,6 +15,7 @@ add_executable(main
   src/enemy.hpp
   src/instance.cpp
   src/instance.hpp
+  src/light.hpp
   src/main.cpp
   src/mesh.cpp
   src/mesh.hpp

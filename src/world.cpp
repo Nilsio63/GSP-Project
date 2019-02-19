@@ -78,8 +78,8 @@ void World::Render()
 		instances_[i]->Render(&defaultProgram_);
 	}
 	
-	glm::mat4 skyview = glm::mat4(glm::mat3(GetCamera()->GetView()));
-	skybox_.Render(&skyboxProgram_, skyview, GetCamera()->GetProjektion(), skyColor);
+	glm::mat4 skyview = glm::mat4(glm::mat3(player_.GetCamera()->GetView()));
+	skybox_.Render(&skyboxProgram_, skyview, player_.GetCamera()->GetProjektion(), skyColor);
 
 	LogShader(defaultProgram_.GetVertexShader().GetShaderId(), "Vertex Shader");
 	LogShader(defaultProgram_.GetFragmentShader().GetShaderId(), "Fragment Shader");
@@ -286,24 +286,23 @@ void World::CreateInstances()
 				n->Rotate(90 * ausrichtung, glm::vec3(0, 1, 0));
 
 				AddNavInstance(n);
-			}
-			AddNavInstance(n);
 
-			for (int l = 0; l < n->meshes_.size(); l++)
-			{
-				Mesh *mesh = &n->meshes_[l];
-
-				for (int k = 0; k < mesh->indices.size() - 2; k += 3)
+				for (int l = 0; l < n->meshes_.size(); l++)
 				{
-					glm::vec3 v1 = glm::vec3(n->transformationMatrix * glm::vec4(mesh->vertices[mesh->indices[k]].Position, 1));
-					glm::vec3 v2 = glm::vec3(n->transformationMatrix * glm::vec4(mesh->vertices[mesh->indices[k + 1]].Position, 1));
-					glm::vec3 v3 = glm::vec3(n->transformationMatrix * glm::vec4(mesh->vertices[mesh->indices[k + 2]].Position, 1));
+					Mesh *mesh = &n->meshes_[l];
 
-					cells[i][j].push_back(NavCell(glm::vec2(v1.x, v1.z), glm::vec2(v2.x, v2.z), glm::vec2(v3.x, v3.z)));
+					for (int k = 0; k < mesh->indices.size() - 2; k += 3)
+					{
+						glm::vec3 v1 = glm::vec3(n->transformationMatrix * glm::vec4(mesh->vertices[mesh->indices[k]].Position, 1));
+						glm::vec3 v2 = glm::vec3(n->transformationMatrix * glm::vec4(mesh->vertices[mesh->indices[k + 1]].Position, 1));
+						glm::vec3 v3 = glm::vec3(n->transformationMatrix * glm::vec4(mesh->vertices[mesh->indices[k + 2]].Position, 1));
+
+						cells[i][j].push_back(NavCell(glm::vec2(v1.x, v1.z), glm::vec2(v2.x, v2.z), glm::vec2(v3.x, v3.z)));
+					}
 				}
-			}
 
-			RecalculateNeighbors(cells[i][j], cells[i][j]);
+				RecalculateNeighbors(cells[i][j], cells[i][j]);
+			}
 		}
 	}
 

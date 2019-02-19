@@ -262,25 +262,22 @@ void World::CreateInstances()
 	{
 		for (int j = 0; j < 10; j++)
 		{
-			if (i == j)
-				continue;
+			for (int di = -1; di <= 1; di++)
+			{
+				for (int dj = -1; dj <= 1; dj++)
+				{
+					int x = i + di;
+					int y = j + dj;
 
-			if (i > 0)
-				RecalculateNeighbors(cells[i][j], cells[i - 1][j]);
-			if (i > 0 && j < 9)
-				RecalculateNeighbors(cells[i][j], cells[i - 1][j + 1]);
-			if (j < 9)
-				RecalculateNeighbors(cells[i][j], cells[i][j + 1]);
-			if (i < 9 && j < 9)
-				RecalculateNeighbors(cells[i][j], cells[i + 1][j + 1]);
-			if (i < 9)
-				RecalculateNeighbors(cells[i][j], cells[i + 1][j]);
-			if (i < 9 && j > 0)
-				RecalculateNeighbors(cells[i][j], cells[i + 1][j - 1]);
-			if (j > 0)
-				RecalculateNeighbors(cells[i][j], cells[i][j - 1]);
-			if (i > 0 && j > 0)
-				RecalculateNeighbors(cells[i][j], cells[i - 1][j - 1]);
+					if (x == i && y == j)
+						continue;
+
+					if (x >= 0 && x < 10 && y >= 0 && y < 10)
+					{
+						RecalculateNeighbors(cells[i][j], cells[x][y]);
+					}
+				}
+			}
 		}
 	}
 

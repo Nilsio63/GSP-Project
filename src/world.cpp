@@ -58,7 +58,7 @@ void World::CheckLightCollision()
 	{
 		Light *l = &lights_[i];
 
-		if (glm::length(glm::vec2(l->position.x, l->position.z) - player_.GetPosition()) < 1)
+		if (glm::length(glm::vec2(l->position.x, l->position.z) - player_.GetPosition()) < 2)
 		{
 			l->lightOn = l->lightOn >= 1 ? 0 : 1;
 		}

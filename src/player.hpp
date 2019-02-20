@@ -15,7 +15,7 @@ private:
 	glm::vec2 position_;
 
 	float pitch_ = 0;
-	float yaw_ = -90;
+	float yaw_ = 180;
 
 	float speed_ = 10.0f;
 
